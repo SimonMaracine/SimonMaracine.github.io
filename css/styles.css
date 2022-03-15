@@ -1,0 +1,14 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    /* text-align: center; */
+}
+
+h1 {
+    font-family: "Dancing Script", cursive;
+    font-size: 3.7rem;
+}
+
+#navigation-bar {
+    background-color: aliceblue;
+    opacity: 75%;
+}
