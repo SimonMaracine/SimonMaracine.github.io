@@ -8,7 +8,16 @@ h1 {
     font-size: 3.7rem;
 }
 
-#navigation-bar {
-    background-color: aliceblue;
-    opacity: 75%;
+nav {
+    padding-left: 30px;
+    padding-right: 30px;
+}
+
+.self-description {
+    margin: 200px 0 200px 200px;
+}
+
+.self-description h2 {
+    font-size: 3rem;
+    font-weight: bold;
 }
