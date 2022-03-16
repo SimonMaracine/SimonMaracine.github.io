@@ -8,16 +8,49 @@ h1 {
     font-size: 3.7rem;
 }
 
+/* Navigation Bar */
+
 nav {
     padding-left: 30px;
-    padding-right: 30px;
+    padding-right: 60px;
+    opacity: 90%;
+}
+
+@media (max-width: 535px) {
+    nav {
+        padding-right: 20px;
+    }
+}
+
+.nav-item {
+    font-size: 1.3rem;
+    margin: 0 5px;
+}
+
+/* First Page Content */
+
+#first-page {
+    overflow: auto;
+    background-image: url("../images/page1_background.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
 }
 
 .self-description {
-    margin: 200px 0 200px 200px;
+    margin: 200px 0 400px 250px;
+    opacity: 70%;
 }
 
 .self-description h2 {
     font-size: 3rem;
     font-weight: bold;
+}
+
+.self-description .self1 {
+    margin-bottom: 25px;
+}
+
+.self-description .self2 {
+    min-width: 300px;
 }
