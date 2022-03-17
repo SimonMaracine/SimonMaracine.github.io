@@ -54,3 +54,30 @@ nav {
 .self-description .self2 {
     min-width: 300px;
 }
+
+/* Projects Section */
+
+#projects {
+    background-color: rgb(235, 240, 245);
+}
+
+.carousel-item {
+    padding: 10% 15%;
+    text-align: center;
+}
+
+.carousel-item h2 {
+    font-weight: bold;
+    color: rgb(50, 50, 50);
+}
+
+.carousel-item p {
+    font-style: italic;
+    font-size: 1.4rem;
+    color: rgb(40, 40, 40);
+}
+
+.item-link {
+    text-decoration: inherit;
+    color: inherit;
+}
