@@ -1,6 +1,5 @@
 body {
     font-family: "Montserrat", sans-serif;
-    /* text-align: center; */
 }
 
 h1 {
@@ -16,12 +15,6 @@ nav {
     opacity: 90%;
 }
 
-@media (max-width: 535px) {
-    nav {
-        padding-right: 20px;
-    }
-}
-
 .nav-item {
     font-size: 1.3rem;
     margin: 0 5px;
@@ -34,12 +27,17 @@ nav {
     background-image: url("../images/page1_background.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: cover;
+    background-size: auto;
+}
+
+.first-page-content {
+    text-align: center;
 }
 
 .self-description {
-    margin: 200px 0 400px 250px;
+    margin: 300px 0 450px 0;
     opacity: 70%;
+    display: inline-block;
 }
 
 .self-description h2 {
@@ -48,11 +46,22 @@ nav {
 }
 
 .self-description .self1 {
+    text-align: left;
     margin-bottom: 25px;
 }
 
 .self-description .self2 {
-    min-width: 300px;
+    text-align: left;
+}
+
+@media (max-width: 641px) {
+    .self-description .self1 {
+        text-align: center;
+    }
+
+    .self-description .self2 {
+        text-align: center;
+    }
 }
 
 /* Projects Section */
