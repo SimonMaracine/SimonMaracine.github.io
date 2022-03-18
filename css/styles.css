@@ -20,7 +20,7 @@ nav {
     margin: 0 5px;
 }
 
-/* First Page Content */
+/* First Section Content */
 
 #first-page {
     overflow: auto;
@@ -89,4 +89,22 @@ nav {
 .item-link {
     text-decoration: inherit;
     color: inherit;
+}
+
+/* Pages Section */
+
+#pages {
+    padding: 100px 0;
+}
+
+.pages-item {
+    margin-bottom: 50px;
+}
+
+.pages-item h2 {
+    font-weight: bold;
+}
+
+.pages-item p {
+    font-size: 1.15rem;
 }
