@@ -166,3 +166,20 @@ nav {
     border-radius: 100%;
     margin-bottom: 10px;
 }
+
+.social-media {
+    font-size: 1.8rem;
+}
+
+.social-media i {
+    padding: 0 5px;
+}
+
+/* Back to top button */
+
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none;
+}
