@@ -97,12 +97,17 @@ nav {
     padding: 100px 0;
 }
 
+#pages .container {
+    height: 600px;
+}
+
 .pages-item {
     margin-bottom: 50px;
 }
 
 .pages-item h2 {
     font-weight: bold;
+    color: rgb(20, 20, 20);
 }
 
 .pages-item p {
