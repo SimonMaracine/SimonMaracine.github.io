@@ -16,7 +16,7 @@ h1 {
     color: inherit;
 }
 
-/* Navigation Bar */
+/* Navigation bar */
 
 nav {
     padding-left: 30px;
@@ -29,7 +29,7 @@ nav {
     margin: 0 5px;
 }
 
-/* First Section Content */
+/* First section content */
 
 #first-page {
     overflow: auto;
@@ -73,7 +73,7 @@ nav {
     }
 }
 
-/* Projects Section */
+/* Projects section */
 
 .carousel-item {
     padding: 10% 15%;
@@ -91,7 +91,7 @@ nav {
     color: rgb(40, 40, 40);
 }
 
-/* Pages Section */
+/* Pages section */
 
 #pages {
     padding: 100px 0;
@@ -114,7 +114,7 @@ nav {
     font-size: 1.15rem;
 }
 
-/* Nine Morris 3D Section */
+/* Nine Morris 3D section */
 
 #nine-morris-3d {
     text-align: center;
@@ -134,4 +134,35 @@ nav {
     display: inline-block;
     font-size: 1.3rem;
     width: 700px;
+}
+
+/* About and contact section */
+
+#about-contact {
+    text-align: center;
+    padding: 100px 0;
+}
+
+.description {
+    margin-bottom: 50px;
+}
+
+.description h2 {
+    font-weight: bold;
+    font-size: 2.2rem;
+}
+
+.description p {
+    font-size: 1.3rem;
+    display: inline-block;
+    width: 600px;
+}
+
+.picture p {
+    font-size: 1.2rem;
+}
+
+.picture img {
+    border-radius: 100%;
+    margin-bottom: 10px;
 }
