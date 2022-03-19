@@ -26,6 +26,7 @@ nav {
 
 .nav-item {
     font-size: 1.3rem;
+    font-weight: bold;
     margin: 0 5px;
 }
 
@@ -43,34 +44,47 @@ nav {
     text-align: center;
 }
 
-.self-description {
+.hello {
     margin: 300px 0 450px 0;
     opacity: 70%;
     display: inline-block;
 }
 
-.self-description h2 {
+.hello h2 {
     font-size: 3rem;
     font-weight: bold;
 }
 
-.self-description .self1 {
+.hello #hello1 {
     text-align: left;
     margin-bottom: 25px;
 }
 
-.self-description .self2 {
+.hello #hello2 {
     text-align: left;
 }
 
 @media (max-width: 641px) {
-    .self-description .self1 {
+    .hello #hello1 {
         text-align: center;
     }
 
-    .self-description .self2 {
+    .hello #hello2 {
         text-align: center;
     }
+}
+
+.initially-hidden {
+    opacity: 0;
+}
+
+.fade-in {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 100%; }
 }
 
 /* Projects section */
@@ -144,7 +158,7 @@ nav {
 }
 
 .description {
-    margin-bottom: 50px;
+    margin-bottom: 40px;
 }
 
 .description h2 {
