@@ -3,8 +3,10 @@ body {
 }
 
 h1 {
-    font-family: "Dancing Script", cursive;
-    font-size: 3.7rem;
+    /* font-family: "Dancing Script", cursive; */
+    font-family: 'Philosopher', sans-serif;
+    font-size: 3.4rem;
+    color: rgb(90, 90, 90);
 }
 
 .colored-section {
@@ -51,7 +53,7 @@ nav {
 }
 
 .hello h2 {
-    font-size: 3rem;
+    font-size: 3.2rem;
     font-weight: bold;
 }
 
@@ -174,6 +176,7 @@ nav {
 
 .picture p {
     font-size: 1.2rem;
+    color: rgb(120, 120, 120);
 }
 
 .picture img {
@@ -182,7 +185,7 @@ nav {
 }
 
 .social-media {
-    font-size: 1.8rem;
+    font-size: 1.9rem;
 }
 
 .social-media i {

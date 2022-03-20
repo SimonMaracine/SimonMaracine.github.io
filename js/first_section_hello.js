@@ -5,7 +5,7 @@ window.onload = function() {
     setTimeout(() => {
         hello1.classList.remove("initially-hidden");
         hello1.classList.add("fade-in");
-    }, 500);
+    }, 700);
 
     setTimeout(() => {
         hello2.classList.remove("initially-hidden");
