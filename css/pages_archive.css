@@ -1,0 +1,50 @@
+.item-link {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+/* Content */
+
+.content {
+    text-align: center;
+}
+
+.blog-title {
+    font-family: "Dancing Script", cursive;
+    margin: 60px 0;
+    color: rgb(80, 80, 80);
+}
+
+.blog-title h2 {
+    font-size: 5.8rem;
+}
+
+.blog-title h3 {
+    font-size: 2.4rem;
+}
+
+.pages-item {
+    text-align: left;
+    background-color: aliceblue;
+    padding: 10px;
+    width: 80%;
+    margin: 0 auto 20px auto;
+}
+
+.pages-item h2 {
+    font-weight: bold;
+    color: rgb(80, 80, 80);
+    font-size: 2.5rem;
+}
+
+.pages-item p {
+    font-size: 1.3rem;
+}
+
+.preview {
+    color: rgb(110, 110, 110);
+}
+
+.page-link {
+    color: rgb(60, 60, 60);
+}

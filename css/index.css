@@ -2,13 +2,6 @@ body {
     font-family: "Montserrat", sans-serif;
 }
 
-h1 {
-    /* font-family: "Dancing Script", cursive; */
-    font-family: 'Philosopher', sans-serif;
-    font-size: 3.4rem;
-    color: rgb(90, 90, 90);
-}
-
 .colored-section {
     background-color: rgb(235, 240, 245);
 }
@@ -16,20 +9,6 @@ h1 {
 .item-link {
     text-decoration: inherit;
     color: inherit;
-}
-
-/* Navigation bar */
-
-nav {
-    padding-left: 30px;
-    padding-right: 60px;
-    opacity: 90%;
-}
-
-.nav-item {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin: 0 5px;
 }
 
 /* First section content */
@@ -66,7 +45,7 @@ nav {
     text-align: left;
 }
 
-@media (max-width: 641px) {
+@media (max-width: 683px) {
     .hello #hello1 {
         text-align: center;
     }
@@ -113,10 +92,6 @@ nav {
     padding: 100px 0;
 }
 
-#pages .container {
-    max-height: 600px;
-}
-
 .pages-item {
     margin-bottom: 50px;
 }
@@ -128,6 +103,12 @@ nav {
 
 .pages-item p {
     font-size: 1.15rem;
+}
+
+.archive {
+    font-size: 1.6rem;
+    text-align: center;
+    margin-top: 20px;
 }
 
 /* Nine Morris 3D section */
@@ -190,13 +171,4 @@ nav {
 
 .social-media i {
     padding: 0 5px;
-}
-
-/* Back to top button */
-
-#back-to-top {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    display: none;
 }
