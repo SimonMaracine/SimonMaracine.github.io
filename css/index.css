@@ -15,7 +15,7 @@ body {
 
 #first-page {
     overflow: auto;
-    background-image: url("../images/page1_background.png");
+    background-image: url("/images/page1_background.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: auto;
@@ -27,13 +27,13 @@ body {
 
 .hello {
     margin: 300px 0 450px 0;
-    opacity: 70%;
     display: inline-block;
 }
 
 .hello h2 {
     font-size: 3.2rem;
     font-weight: bold;
+    opacity: 70%;
 }
 
 .hello #hello1 {
@@ -56,7 +56,7 @@ body {
 }
 
 .initially-hidden {
-    opacity: 0;
+    visibility: hidden;
 }
 
 .fade-in {
@@ -65,13 +65,21 @@ body {
 
 @keyframes fadeIn {
     0% { opacity: 0; }
-    100% { opacity: 100%; }
+    100% { opacity: 70%; }
 }
 
 /* Projects section */
 
+.projects-title {
+    text-align: center;
+    font-weight: bold;
+    font-size: 2.1rem;
+    padding-top: 100px;
+    color: rgb(100, 100, 100);
+}
+
 .carousel-item {
-    padding: 10% 15%;
+    padding: 4% 15% 10% 15%;
     text-align: center;
 }
 
@@ -83,7 +91,7 @@ body {
 .carousel-item p {
     font-style: italic;
     font-size: 1.4rem;
-    color: rgb(40, 40, 40);
+    color: rgb(60, 60, 60);
 }
 
 /* Pages section */
