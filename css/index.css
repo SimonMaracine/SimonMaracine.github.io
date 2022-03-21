@@ -1,5 +1,6 @@
 body {
     font-family: "Montserrat", sans-serif;
+    background-color: rgb(252, 249, 249);
 }
 
 .colored-section {
@@ -19,6 +20,7 @@ body {
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: auto;
+    background-color: white;
 }
 
 .first-page-content {

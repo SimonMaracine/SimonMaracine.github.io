@@ -1,3 +1,7 @@
+body {
+    background-color: rgb(252, 249, 249);
+}
+
 .item-link {
     text-decoration: inherit;
     color: inherit;
