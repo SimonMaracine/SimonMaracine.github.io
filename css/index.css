@@ -108,11 +108,12 @@ body {
 
 .pages-item h2 {
     font-weight: bold;
-    color: rgb(20, 20, 20);
+    color: rgb(80, 80, 80);
 }
 
 .pages-item p {
     font-size: 1.15rem;
+    color: rgb(100, 100, 100);
 }
 
 .archive {
@@ -131,16 +132,17 @@ body {
 #nine-morris-3d h2 {
     font-weight: bold;
     font-size: 3rem;
+    color: rgb(80, 80, 80);
 }
 
 #nine-morris-3d h3 {
     margin-bottom: 50px;
+    color:rgb(100, 100, 100);
 }
 
 #nine-morris-3d p {
-    display: inline-block;
     font-size: 1.3rem;
-    width: 700px;
+    color: rgb(50, 50, 50);
 }
 
 /* About and contact section */
@@ -150,19 +152,23 @@ body {
     padding: 100px 0;
 }
 
-.description {
+.about-me {
     margin-bottom: 40px;
 }
 
-.description h2 {
+.about-me h2 {
     font-weight: bold;
     font-size: 2.2rem;
+    color:rgb(80, 80, 80);
 }
 
-.description p {
+.about-me p {
     font-size: 1.3rem;
-    display: inline-block;
-    width: 600px;
+    color: rgb(60, 60, 60);
+}
+
+.description {
+    max-width: 600px;
 }
 
 .picture p {
