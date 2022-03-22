@@ -55,6 +55,16 @@ body {
     text-align: left;
 }
 
+@media (max-width: 500px) {
+    .hello #hello1 {
+        text-align: center;
+    }
+    
+    .hello #hello2 {
+        text-align: center;
+    }
+}
+
 .initially-hidden {
     visibility: hidden;
 }
