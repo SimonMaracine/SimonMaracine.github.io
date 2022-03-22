@@ -16,7 +16,7 @@ body {
 
 #first-page {
     overflow: auto;
-    background-image: url("/images/page1_background.png");
+    background-image: url("/images/section1_background.png");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: auto;
@@ -24,18 +24,26 @@ body {
 }
 
 .first-page-content {
-    text-align: center;
+    height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .hello {
-    margin: 300px 0 450px 0;
     display: inline-block;
 }
 
 .hello h2 {
-    font-size: 3.2rem;
     font-weight: bold;
     opacity: 70%;
+    font-size: calc(1.3rem + 2.7vw);
+}
+
+@media (min-width: 1200px) {
+    .hello h2 {
+        font-size: 3.325rem;
+    }
 }
 
 .hello #hello1 {
@@ -45,16 +53,6 @@ body {
 
 .hello #hello2 {
     text-align: left;
-}
-
-@media (max-width: 683px) {
-    .hello #hello1 {
-        text-align: center;
-    }
-
-    .hello #hello2 {
-        text-align: center;
-    }
 }
 
 .initially-hidden {
