@@ -153,9 +153,9 @@ body {
     color: rgb(50, 50, 50);
 }
 
-/* About and contact section */
+/* About section */
 
-#about-contact {
+#about {
     text-align: center;
     padding: 100px 0;
 }
@@ -193,6 +193,26 @@ body {
     font-size: 1.9rem;
 }
 
+.social-media i:hover {
+    font-size: 2.2rem;
+}
+
 .social-media i {
     padding: 0 5px;
+}
+
+/* Contact section */
+
+#contact {
+    text-align: center;
+    padding: 70px 0;
+}
+
+#contact h2 {
+    font-weight: bold;
+    color:rgb(100, 100, 100);
+}
+
+#contact p {
+    color:rgb(120, 120, 120);
 }
