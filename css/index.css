@@ -130,6 +130,11 @@ body {
     margin-top: 20px;
 }
 
+.archive:hover {
+    font-size: 1.7rem;
+    margin-top: 18px;
+}
+
 /* Nine Morris 3D section */
 
 #nine-morris-3d {
@@ -194,7 +199,7 @@ body {
 }
 
 .social-media i:hover {
-    font-size: 2.19rem;
+    font-size: 2.17rem;
     padding: 0 3px;
 }
 
