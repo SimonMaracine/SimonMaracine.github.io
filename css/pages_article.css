@@ -1,0 +1,46 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: rgb(252, 249, 249);
+}
+
+/* Content */
+
+.content {
+    padding: 50px 0;
+    
+}
+
+.title-container {
+    border-bottom: rgb(60, 60, 60) 3px solid;
+}
+
+.title {
+    font-weight: bold;
+    color: rgb(60, 60, 60);
+}
+
+.details {
+    font-weight: bold;
+    color: rgb(60, 60, 60);
+    margin: 10px 0;
+}
+
+.date {
+    
+}
+
+.tags-head {
+    display: inline;
+    margin-right: 6px;
+}
+
+.tags {
+    display: inline;
+}
+
+.article-content {
+    font-family: "Inter", sans-serif;
+    font-size: 1.2rem;
+    line-height: 40px;
+    color: rgb(60, 60, 60);
+}
