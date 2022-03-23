@@ -128,11 +128,12 @@ body {
     font-size: 1.6rem;
     text-align: center;
     margin-top: 20px;
+    margin-bottom: 2px;
 }
 
 .archive:hover {
-    font-size: 1.7rem;
-    margin-top: 18px;
+    font-size: 1.6875rem;
+    margin-bottom: 0;
 }
 
 /* Nine Morris 3D section */
