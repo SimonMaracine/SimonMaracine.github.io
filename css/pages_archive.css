@@ -29,8 +29,8 @@ body {
 
 .pages-item {
     text-align: left;
-    background-color: aliceblue;
-    padding: 10px;
+    background-color: rgb(230, 235, 239);
+    padding: 15px;
     width: 80%;
     margin: 0 auto 20px auto;
 }
