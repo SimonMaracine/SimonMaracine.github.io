@@ -124,23 +124,27 @@ body {
     color: rgb(100, 100, 100);
 }
 
+.archive-container {
+    height: 28px;
+}
+
 .archive {
     font-size: 1.6rem;
     text-align: center;
     margin-top: 20px;
-    margin-bottom: 2px;
+    color: rgb(60, 60, 60);
 }
 
 .archive:hover {
-    font-size: 1.6875rem;
-    margin-bottom: 0;
+    font-size: 1.7rem;
+    color: rgb(10, 95, 240);
 }
 
 /* Nine Morris 3D section */
 
 #nine-morris-3d {
     text-align: center;
-    padding: 100px 0;
+    padding: 100px 0 60px 0;
 }
 
 #nine-morris-3d h2 {
@@ -156,7 +160,16 @@ body {
 
 #nine-morris-3d p {
     font-size: 1.3rem;
-    color: rgb(50, 50, 50);
+    color: rgb(80, 80, 80);
+    max-width: 350px;
+    margin: 0 auto 60px auto;
+}
+
+#nine-morris-3d img {
+    width: 95%;
+    max-width: 450px;
+    margin-bottom: 20px;
+    border-radius: 5px;
 }
 
 /* About section */
@@ -191,6 +204,7 @@ body {
 }
 
 .picture img {
+    width: 180px;
     border-radius: 100%;
     margin-bottom: 10px;
 }
