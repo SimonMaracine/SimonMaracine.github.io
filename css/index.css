@@ -16,10 +16,10 @@ body {
 
 #first-page {
     overflow: auto;
-    background-image: url("/images/section1_background.png");
+    background-image: url("/images/test.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
-    background-size: auto;
+    background-size: cover;
     background-color: white;
 }
 
@@ -36,7 +36,7 @@ body {
 
 .hello h2 {
     font-weight: bold;
-    opacity: 70%;
+    color: rgb(60, 60, 60);
     font-size: calc(1.3rem + 2.7vw);
 }
 
@@ -75,7 +75,7 @@ body {
 
 @keyframes fadeIn {
     0% { opacity: 0; }
-    100% { opacity: 70%; }
+    100% { opacity: 100%; }
 }
 
 /* Projects section */
