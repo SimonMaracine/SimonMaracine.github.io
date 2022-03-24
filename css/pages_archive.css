@@ -46,10 +46,11 @@ body {
 
 .date {
     font-size: 1.3rem;
-    color: rgb(80, 80, 80);
+    color: rgb(100, 100, 100);
 }
 
 .preview {
+    font-size: 1.15rem;
     color: rgb(110, 110, 110);
 }
 
