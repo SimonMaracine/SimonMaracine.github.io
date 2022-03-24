@@ -16,7 +16,7 @@ body {
 
 #first-page {
     overflow: auto;
-    background-image: url("/images/test.jpg");
+    background-image: url("/images/first_page_background.jpg");
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
@@ -36,7 +36,7 @@ body {
 
 .hello h2 {
     font-weight: bold;
-    color: rgb(60, 60, 60);
+    color: rgb(50, 50, 50);
     font-size: calc(1.3rem + 2.7vw);
 }
 
