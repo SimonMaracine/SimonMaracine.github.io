@@ -34,11 +34,12 @@ body {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 30px;
     border-radius: 70px;
+    box-shadow: 4px 4px 50px grey;
 }
 
 .hello h2 {
     font-weight: bold;
-    color: rgb(80, 80, 80);
+    color: rgb(100, 100, 100);
     font-size: calc(1.3rem + 2.7vw);
 }
 
