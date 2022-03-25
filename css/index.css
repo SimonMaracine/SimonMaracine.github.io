@@ -14,7 +14,7 @@ body {
 
 /* First section content */
 
-#first-page {
+#first-section {
     overflow: auto;
     background-image: url("/images/first_page_background.jpg");
     background-repeat: no-repeat;
@@ -23,7 +23,7 @@ body {
     background-color: white;
 }
 
-.first-page-content {
+.first-section-content {
     height: 92vh;
     display: flex;
     align-items: center;
@@ -32,11 +32,14 @@ body {
 
 .hello {
     display: inline-block;
+    background-color: rgba(255, 255, 255, 0.75);
+    padding: 30px;
+    border-radius: 70px;
 }
 
 .hello h2 {
     font-weight: bold;
-    color: rgb(50, 50, 50);
+    color: rgb(80, 80, 80);
     font-size: calc(1.3rem + 2.7vw);
 }
 
