@@ -13,11 +13,18 @@ window.onload = function() {
     }, 2000);
 }
 
-const firstSectionDiv = document.getElementsByClassName("first-section-content")[0];
+const firstSectionDiv = document.querySelector(".first-section-content");
+
+// function resizeBackground() {
+//     firstSectionDiv.height = window.height;
+// }
+
+// window.resizeBackground(resizeBackground);
+// resizeBackground();
 
 function resizeBackground() {
-    firstSectionDiv.height = window.height;
+    firstSectionDiv.height = $(window).height();
 }
 
-window.resizeBackground(resizeBackground);
+$(window).resize(resizeBackground);
 resizeBackground();
