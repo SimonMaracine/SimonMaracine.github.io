@@ -98,7 +98,7 @@ body {
 
 .carousel-item h2 {
     font-weight: bold;
-    color: rgb(50, 50, 50);
+    color: rgb(80, 80, 80);
 }
 
 .carousel-item p {
@@ -217,7 +217,7 @@ body {
 
 .about-me p {
     font-size: 1.3rem;
-    color: rgb(60, 60, 60);
+    color: rgb(65, 65, 65);
 }
 
 .description {
@@ -226,7 +226,7 @@ body {
 
 .picture p {
     font-size: 1.2rem;
-    color: rgb(120, 120, 120);
+    color: rgb(130, 130, 130);
 }
 
 .picture img {
