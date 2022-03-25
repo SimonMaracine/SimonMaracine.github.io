@@ -12,12 +12,3 @@ window.onload = function() {
         hello2.classList.add("fade-in");
     }, 2000);
 }
-
-// const firstSectionDiv = document.querySelector(".first-section-content");
-
-// function resizeBackground() {
-//     firstSectionDiv.height = $(window).height();
-// }
-
-// $(window).resize(resizeBackground);
-// resizeBackground();
