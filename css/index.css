@@ -34,7 +34,7 @@ body {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 30px;
     border-radius: 70px;
-    box-shadow: 4px 4px 50px grey;
+    box-shadow: 3px 3px 50px rgb(170, 170, 170);
 }
 
 .hello h2 {
