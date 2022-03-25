@@ -18,10 +18,10 @@ body {
     overflow: auto;
     background-image: url("/images/first_page_background.jpg");
     background-repeat: no-repeat;
-    background-attachment: fixed;
+    /* background-attachment: fixed; */
     background-size: cover;
     background-color: white;
-    transition: height 3s ease;
+    /* transition: height 3s ease; */
 }
 
 .first-section-content {
@@ -29,12 +29,12 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: height 3s ease;
+    /* transition: height 3s ease; */
 }
 
 .hello {
     display: inline-block;
-    background-color: rgba(255, 0, 255, 0.8);
+    background-color: rgba(255, 0, 0, 0.8);
     padding: 30px;
     border-radius: 70px;
 }
