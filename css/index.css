@@ -21,6 +21,7 @@ body {
     background-attachment: fixed;
     background-size: cover;
     background-color: white;
+    transition: height 3s ease;
 }
 
 .first-section-content {
@@ -33,7 +34,7 @@ body {
 
 .hello {
     display: inline-block;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(255, 0, 255, 0.8);
     padding: 30px;
     border-radius: 70px;
 }
