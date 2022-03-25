@@ -13,18 +13,11 @@ window.onload = function() {
     }, 2000);
 }
 
-const firstSectionDiv = document.querySelector(".first-section-content");
+// const firstSectionDiv = document.querySelector(".first-section-content");
 
 // function resizeBackground() {
-//     firstSectionDiv.height = window.height;
+//     firstSectionDiv.height = $(window).height();
 // }
 
-// window.resizeBackground(resizeBackground);
+// $(window).resize(resizeBackground);
 // resizeBackground();
-
-function resizeBackground() {
-    firstSectionDiv.height = $(window).height();
-}
-
-$(window).resize(resizeBackground);
-resizeBackground();

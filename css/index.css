@@ -24,10 +24,11 @@ body {
 }
 
 .first-section-content {
-    /* height: 92vh; */
+    height: 92vh;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: height 3s ease;
 }
 
 .hello {
