@@ -7,14 +7,13 @@ body {
 
 .content {
     padding: 50px 0;
-    
 }
 
 .title-container {
     border-bottom: rgb(60, 60, 60) 3px solid;
 }
 
-.title {
+#title {
     font-weight: bold;
     color: rgb(60, 60, 60);
 }
@@ -25,8 +24,12 @@ body {
     margin: 10px 0;
 }
 
-.date {
-    
+.details .detail {
+    margin-bottom: 5px;
+}
+
+#date {
+    margin-bottom: 0;
 }
 
 .tags-head {
@@ -34,11 +37,20 @@ body {
     margin-right: 6px;
 }
 
-.tags {
+#tags {
     display: inline;
 }
 
-.article-content {
+.last-modified-head {
+    display: inline;
+    margin-right: 6px;
+}
+
+#last-modified {
+    display: inline;
+}
+
+#article-content {
     font-family: "Inter", sans-serif;
     font-size: 1.2rem;
     line-height: 40px;

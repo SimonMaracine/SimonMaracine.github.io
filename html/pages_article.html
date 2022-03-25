@@ -28,6 +28,7 @@
     <!-- Custom scripts -->
     <script src="/js/back_to_top_button.js" defer></script>
     <script src="/js/navigation_bar.js" defer></script>
+    <script src="/js/pages_article_loader.js" defer></script>
 </head>
 <body>
     <!-- Navigation bar -->
@@ -37,27 +38,26 @@
     <div class="content">
         <div class="container">
             <div class="title-container">
-                <h2 class="title">My Very Interesting Article</h2>
+                <h2 id="title"></h2>
             </div>
 
             <div class="container details">
                 <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <p class="date">February 18, 2021</p>
+                    <div class="col-lg-4 col-md-4 col-sm-4 detail">
+                        <p id="date"></p>
                     </div>
-                    <div class="col-lg-4 col-md-8 col-sm-8">
+                    <div class="col-lg-4 col-md-4 col-sm-4 detail">
                         <p class="tags-head">Tags:</p>
-                        <p class="tags">Life, God, Love</p>
+                        <p id="tags"></p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 detail">
+                        <p class="last-modified-head">Last modified:</p>
+                        <p id="last-modified"></p>
                     </div>
                 </div>
             </div>
 
-            <div class="article-content">
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Hendrerit dolor magna eget est. Pretium lectus quam id leo in vitae turpis massa sed. Purus sit amet volutpat consequat mauris nunc. Dolor purus non enim praesent elementum facilisis leo vel. Ut pharetra sit amet aliquam id diam maecenas ultricies mi. Rhoncus mattis rhoncus urna neque viverra. Sagittis purus sit amet volutpat consequat mauris nunc congue. Ut diam quam nulla porttitor. Elementum sagittis vitae et leo duis ut diam quam nulla. Consectetur libero id faucibus nisl tincidunt eget nullam. Sollicitudin aliquam ultrices sagittis orci a. Consequat nisl vel pretium lectus quam id leo in. Ut diam quam nulla porttitor massa id neque. Massa tempor nec feugiat nisl pretium. Sagittis nisl rhoncus mattis rhoncus urna neque viverra justo nec. Purus viverra accumsan in nisl nisi scelerisque eu ultrices vitae. Mi tempus imperdiet nulla malesuada pellentesque elit. Ut tortor pretium viverra suspendisse. Semper feugiat nibh sed pulvinar proin gravida hendrerit.
-                    In metus vulputate eu scelerisque felis imperdiet proin. Neque vitae tempus quam pellentesque nec nam aliquam sem. Cursus mattis molestie a iaculis at erat pellentesque adipiscing. Facilisi etiam dignissim diam quis enim lobortis. Sodales neque sodales ut etiam sit amet. Dignissim suspendisse in est ante in. A cras semper auctor neque. Neque volutpat ac tincidunt vitae semper quis lectus. Dui accumsan sit amet nulla facilisi morbi tempus. Pulvinar elementum integer enim neque volutpat ac tincidunt. Facilisi morbi tempus iaculis urna id volutpat lacus. Sollicitudin nibh sit amet commodo nulla facilisi nullam vehicula ipsum. Congue eu consequat ac felis donec et. Netus et malesuada fames ac turpis egestas. Gravida neque convallis a cras semper auctor. Ornare arcu dui vivamus arcu felis.
-                </p>
-            </div>
+            <div id="article-content"></div>
         </div>
     </div>
 

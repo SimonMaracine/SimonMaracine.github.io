@@ -22,8 +22,7 @@ void draw() {
       }
     }
   }
-  
-  
+
   save("test.jpg");
   noLoop();
 }
