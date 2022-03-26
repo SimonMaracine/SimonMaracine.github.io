@@ -1,21 +1,4 @@
-function loadDetails(filePath, onLoad, onError) {
-    const request = new XMLHttpRequest();
-
-    request.onreadystatechange = function() {
-        if (this.readyState === this.DONE) {
-            if (request.status == 200) {
-                const result = request.responseText;
-                onLoad(result);
-            } else {
-                console.log("Error on request; status = " + request.status);
-                onError();
-            }
-        }
-    }
-
-    request.open("GET", filePath);
-    request.send();
-}
+import { loadFileFromServer } from "./load_file_from_server.js";
 
 function onError() {
     const content = document.querySelector(".content");
@@ -46,7 +29,7 @@ const articleName = parameters["article"];
 if (articleName !== undefined && /^(([a-z]+[0-9]*(\-)?)+)$/.test(articleName)) {
     const articlePath = "/html/pages/articles/" + articleName + "/" + articleName;
 
-    loadDetails(articlePath + ".json", onLoad, onError);
+    loadFileFromServer(articlePath + ".json", onLoad, onError);
 
     $(function() {
         $("#article-content").load(articlePath + ".html");

@@ -29,6 +29,7 @@
     <!-- Custom scripts -->
     <script src="/js/back_to_top_button.js" defer></script>
     <script src="/js/navigation_bar.js" defer></script>
+    <script src="/js/pages_archive_loader.js" type="module" defer></script>
     <script src="/js/copyright.js" defer></script>
 </head>
 <body>
@@ -42,99 +43,20 @@
             <h3>~Blog Archive~</h3>
         </div>
 
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="pages-item">
-                        <h2 class="title">My Very Interesting Article</h2>
-                        <p class="date">February 18, 2021</p>
-                        <p class="preview">Lorem ipsum dolor sit amet, at choro utamur probatus usu.</p>
-                        <div class="read-more-container">
-                            <!-- TODO temporary -->
-                            <a class="item-link" href="/html/pages/article.html?article=my-very-interesting-article">
-                                <p class="read-more">Read More</p>
-                            </a>
-                        </div>
-                    </div>
-                <div>
-            <div>
-            <div class="row"></div>
-                <div class="col-lg-12">
-                    <div class="pages-item">
-                        <h2 class="title">Title 2</h2>
-                        <p class="date">March 19, 2022</p>
-                        <p class="preview">Lorem ipsum dolor sit amet, at choro utamur probatus usu.</p>
-                        <div class="read-more-container">
-                            <a class="item-link" href="#">
-                                <p class="read-more">Read More</p>
-                            </a>
-                        </div>
-                    </div>
-                <div>
-            <div>
-            <div class="row"></div>
-                <div class="col-lg-12">
-                    <div class="pages-item">
-                        <h2 class="title">Title 3</h2>
-                        <p class="date">June 23, 2020</p>
-                        <p class="preview">Lorem ipsum dolor sit amet, at choro utamur probatus usu.</p>
-                        <div class="read-more-container">
-                            <a class="item-link" href="#">
-                                <p class="read-more">Read More</p>
-                            </a>
-                        </div>
-                    </div>
-                <div>
-            <div>
-            <div class="row"></div>
-                <div class="col-lg-12">
-                    <div class="pages-item">
-                        <h2 class="title">Title 4</h2>
-                        <p class="date">October 05, 2020</p>
-                        <p class="preview">Lorem ipsum dolor sit amet, at choro utamur probatus usu.</p>
-                        <div class="read-more-container">
-                            <a class="item-link" href="#">
-                                <p class="read-more">Read More</p>
-                            </a>
-                        </div>
-                    </div>
-                <div>
-            <div>
-            <div class="row"></div>
-                <div class="col-lg-12">
-                    <div class="pages-item">
-                        <h2 class="title">Title 5</h2>
-                        <p class="date">August 27, 2022</p>
-                        <p class="preview">Lorem ipsum dolor sit amet, at choro utamur probatus usu.</p>
-                        <div class="read-more-container">
-                            <a class="item-link" href="#">
-                                <p class="read-more">Read More</p>
-                            </a>
-                        </div>
-                    </div>
-                <div>
-            <div>
-
-            <nav>
-                <ul class="pagination justify-content-center">
-                    <li class="page-item">
-                        <a class="page-link" href="#">Previous</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
-        </div>
+        <div class="container-fluid" id="articles"></div>
+        <nav>
+            <ul class="pagination justify-content-center">
+                <li class="page-item">
+                    <a class="page-link" href="/html/pages/archive.html?pagination=1">1</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="/html/pages/archive.html?pagination=2">2</a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="/html/pages/archive.html?pagination=3">3</a>
+                </li>
+            </ul>
+        </nav>
     </div>
 
     <!-- Copyright -->
