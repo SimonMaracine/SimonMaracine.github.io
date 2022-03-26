@@ -1,4 +1,4 @@
-function loadContents(filePath, onLoad, onError) {
+function loadDetails(filePath, onLoad, onError) {
     const request = new XMLHttpRequest();
 
     request.onreadystatechange = function() {
@@ -7,7 +7,7 @@ function loadContents(filePath, onLoad, onError) {
                 const result = request.responseText;
                 onLoad(result);
             } else {
-                console.log("Error on request");
+                console.log("Error on request; status = " + request.status);
                 onError();
             }
         }
@@ -46,7 +46,7 @@ const articleName = parameters["article"];
 if (articleName !== undefined && /^(([a-z]+[0-9]*(\-)?)+)$/.test(articleName)) {
     const articlePath = "/html/pages/articles/" + articleName + "/" + articleName;
 
-    loadContents(articlePath + ".json", onLoad, onError);
+    loadDetails(articlePath + ".json", onLoad, onError);
 
     $(function() {
         $("#article-content").load(articlePath + ".html");
