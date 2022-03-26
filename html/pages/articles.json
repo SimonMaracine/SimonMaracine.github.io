@@ -1,13 +1,14 @@
 {
     "archive-pagination": [
         [
-            "my-very-interesting-article"
+            "my-very-interesting-article",
+            "este-o-lume-grea-afara"
         ],
         [],
         []
     ],
     "first-page-latest": [
-        "my-very-interesting-article",
+        "este-o-lume-grea-afara",
         "my-very-interesting-article"
     ]
 }

@@ -24,6 +24,7 @@ function onLoad(result) {
             articleResult => {
                 const articleDetails = JSON.parse(articleResult);
 
+                // FIXME this must be synchronous
                 articlesDiv.innerHTML += `
                 <div class="row"></div>
                     <div class="col-lg-12">
