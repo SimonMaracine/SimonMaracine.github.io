@@ -1,12 +1,14 @@
-function loadContents(filePath, loader) {
+function loadContents(filePath, onLoad, onError) {
     const request = new XMLHttpRequest();
 
     request.onreadystatechange = function() {
         if (this.readyState === this.DONE) {
             if (request.status == 200) {
                 const result = request.responseText;
-
-                loader(result);
+                onLoad(result);
+            } else {
+                console.log("Error on request");
+                onError();
             }
         }
     }
@@ -15,12 +17,12 @@ function loadContents(filePath, loader) {
     request.send();
 }
 
-const urlSearchParameters = new URLSearchParams(window.location.search);
-const parameters = Object.fromEntries(urlSearchParameters.entries());
+function onError() {
+    const content = document.querySelector(".content");
+    content.innerHTML = '<h2 style="text-align: center;">There was an error getting the article. :(</h2>';
+}
 
-const articleName = "/html/pages_articles/" + parameters["article"] + "/" + parameters["article"];
-
-loadContents(articleName + ".json", result => {
+function onLoad(result) {
     const articleDetails = JSON.parse(result);
 
     const title = document.getElementById("title");
@@ -34,8 +36,22 @@ loadContents(articleName + ".json", result => {
 
     const lastModified = document.getElementById("last-modified");
     lastModified.innerText = articleDetails["last-modified"];
-});
+}
 
-$(function() {
-    $("#article-content").load(articleName + ".html");
-});
+const urlSearchParameters = new URLSearchParams(window.location.search);
+const parameters = Object.fromEntries(urlSearchParameters.entries());
+
+const articleName = parameters["article"];
+
+if (articleName !== undefined && /^(([a-z]+[0-9]*(\-)?)+)$/.test(articleName)) {
+    const articlePath = "/html/pages/articles/" + articleName + "/" + articleName;
+
+    loadContents(articlePath + ".json", onLoad, onError);
+
+    $(function() {
+        $("#article-content").load(articlePath + ".html");
+    });
+} else {
+    console.log("Invalid argument passed to 'article'");
+    onError();
+}
