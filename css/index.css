@@ -12,6 +12,11 @@ body {
     color: inherit;
 }
 
+.section-title {
+    font-weight: bold;
+    color: rgb(100, 100, 100);
+}
+
 /* First section content */
 
 #first-section {
@@ -85,10 +90,7 @@ body {
 
 .projects-title {
     text-align: center;
-    font-weight: bold;
-    font-size: 2.1rem;
     padding-top: 100px;
-    color: rgb(100, 100, 100);
 }
 
 .carousel-item {
@@ -111,6 +113,15 @@ body {
 
 #pages {
     padding: 100px 0;
+    text-align: center;
+}
+
+.pages-title {
+    margin-bottom: 50px;
+}
+
+#pages .container {
+    text-align: left;
 }
 
 .pages-item {
@@ -156,7 +167,6 @@ body {
 
 .archive {
     font-size: 1.6rem;
-    text-align: center;
     margin-top: 20px;
     color: rgb(60, 60, 60);
 }
@@ -173,13 +183,7 @@ body {
     padding: 100px 0 60px 0;
 }
 
-#nine-morris-3d h2 {
-    font-weight: bold;
-    font-size: 2.3rem;
-    color: rgb(100, 100, 100);
-}
-
-#nine-morris-3d h3 {
+#nine-morris-3d h4 {
     margin-bottom: 50px;
     color:rgb(100, 100, 100);
 }
@@ -207,12 +211,6 @@ body {
 
 .about-me {
     margin-bottom: 40px;
-}
-
-.about-me h2 {
-    font-weight: bold;
-    font-size: 2.2rem;
-    color:rgb(100, 100, 100);
 }
 
 .about-me p {
@@ -253,11 +251,6 @@ body {
 #contact {
     text-align: center;
     padding: 70px 0;
-}
-
-#contact h2 {
-    font-weight: bold;
-    color:rgb(100, 100, 100);
 }
 
 #contact p {

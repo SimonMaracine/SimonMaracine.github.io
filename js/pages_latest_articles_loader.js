@@ -19,10 +19,10 @@ function onLoad(result) {
             break;
         }
 
-        const path = "/html/pages/articles/" + article + "/" + article + ".json";
+        const filePath = "/html/pages/articles/" + article + "/" + article + ".json";
 
         loadFileFromServer(
-            path,
+            filePath,
             articleResult => {
                 const articleDetails = JSON.parse(articleResult);
 
@@ -39,6 +39,7 @@ function onLoad(result) {
                         break;
                 };
 
+                // This should theoretically be synchronous, but it's ok :P
                 div.innerHTML += `
                     <div class="pages-item">
                         <h2>${articleDetails['title']}</h2>

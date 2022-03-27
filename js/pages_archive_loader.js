@@ -5,6 +5,55 @@ function onError() {
     articlesDiv.innerHTML = '<p style="text-align: center;">There was an error getting the articles in this page. :(</p>';
 }
 
+function processArticles(articlesInPage, articlesInOrder, articlesDiv) {
+    let articleIndex = 0;
+
+    let numberOfArticlesProcessed = 0;
+
+    for (const article of articlesInPage) {
+        const filePath = "/html/pages/articles/" + article + "/" + article + ".json";
+
+        loadFileFromServer(
+            filePath,
+            (articleResult, index) => {
+                const articleDetails = JSON.parse(articleResult);
+
+                articlesInOrder[index] = `
+                    <div class="row"></div>
+                        <div class="col-lg-12">
+                            <div class="pages-item">
+                                <h2 class="title">${articleDetails['title']}</h2>
+                                <p class="date">${articleDetails['date']}</p>
+                                <p class="preview">${articleDetails['preview']}</p>
+                                <div class="read-more-container">
+                                    <a class="item-link" href="${'/html/pages/article.html?article=' + article}">
+                                        <p class="read-more">Read More</p>
+                                    </a>
+                                </div>
+                            </div>
+                        <div>
+                    <div>
+                `;
+
+                numberOfArticlesProcessed++;
+
+                // Show these articles in the page
+                if (numberOfArticlesProcessed === articlesInOrder.length) {
+                    for (const articleHTML of articlesInOrder) {
+                        articlesDiv.innerHTML += articleHTML;
+                    }
+                }
+            },
+            () => {
+                console.log("Error getting article '" + article + "'");
+            },
+            articleIndex
+        );
+
+        articleIndex++;
+    }
+}
+
 function onLoad(result) {
     const articles = JSON.parse(result);
     const articlesInPage = articles["archive-pagination"][paginationNumber - 1];
@@ -16,37 +65,12 @@ function onLoad(result) {
 
     const articlesDiv = document.getElementById("articles");
 
+    const articlesInOrder = [];
     for (const article of articlesInPage) {
-        const path = "/html/pages/articles/" + article + "/" + article + ".json";
-
-        loadFileFromServer(
-            path,
-            articleResult => {
-                const articleDetails = JSON.parse(articleResult);
-
-                // FIXME this must be synchronous
-                articlesDiv.innerHTML += `
-                <div class="row"></div>
-                    <div class="col-lg-12">
-                        <div class="pages-item">
-                            <h2 class="title">${articleDetails['title']}</h2>
-                            <p class="date">${articleDetails['date']}</p>
-                            <p class="preview">${articleDetails['preview']}</p>
-                            <div class="read-more-container">
-                                <a class="item-link" href="${'/html/pages/article.html?article=' + article}">
-                                    <p class="read-more">Read More</p>
-                                </a>
-                            </div>
-                        </div>
-                    <div>
-                <div>
-                `;
-            },
-            () => {
-                console.log("Error getting article '" + article + "'");
-            }
-        );
+        articlesInOrder.push("");
     }
+
+    processArticles(articlesInPage, articlesInOrder, articlesDiv);
 }
 
 const urlSearchParameters = new URLSearchParams(window.location.search);
@@ -56,6 +80,12 @@ const paginationNumber = parameters["pagination"];
 
 if (paginationNumber !== undefined && /^([0-9]+)$/.test(paginationNumber) && paginationNumber > 0) {
     loadFileFromServer("/html/pages/articles.json", onLoad, onError);
+
+    const listItems = document.querySelectorAll(".pagination li");
+    for (const listItem of listItems) {
+        listItem.classList.remove("active");
+    }
+    listItems[paginationNumber - 1].classList.add("active");
 } else {
     console.log("Invalid argument passed to 'pagination'");
     onError();
