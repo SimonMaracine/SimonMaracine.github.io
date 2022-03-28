@@ -32,7 +32,7 @@ body {
     text-align: left;
     background-color: rgb(229, 234, 240);
     padding: 15px;
-    width: 80%;
+    max-width: 1200px;
     margin: 0 auto 20px auto;
     border-radius: 10px;
     overflow: hidden;
