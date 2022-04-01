@@ -6,23 +6,18 @@ function onError() {
 }
 
 function processArticles(articlesFirstPage, articlesInOrder, pagesDivColumn1, pagesDivColumn2) {
+    let articleIndex = 0;
     let numberOfArticlesProcessed = 0;
 
-    for (let i = 0; i < 4; i++) {
-        const article = articlesFirstPage[i];
-        if (article === undefined) {
-            console.log("qiefbeibfuqwbfiueqwbfiwebfibwefibwefiebguiebwfguiewbgiubweigubwriegbuebguiewb");
-            break;
-        }
-
+    for (const article of articlesFirstPage) {
         const filePath = "/html/pages/articles/" + article + "/" + article + ".json";
 
         loadFileFromServer(
             filePath,
-            articleResult => {
+            (articleResult, index) => {
                 const articleDetails = JSON.parse(articleResult);
 
-                articlesInOrder[i] = `
+                articlesInOrder[index] = `
                     <div class="pages-item">
                         <h2>${articleDetails['title']}</h2>
                         <p class="date">${articleDetails['date']}</p>
@@ -39,7 +34,7 @@ function processArticles(articlesFirstPage, articlesInOrder, pagesDivColumn1, pa
 
                 // Show these articles in the page
                 if (numberOfArticlesProcessed === articlesInOrder.length) {
-                    for (let j = 0; j < 4; j++) {                  
+                    for (let j = 0; j < articlesInOrder.length; j++) {                  
                         let div;
                         switch (j) {
                             case 0:
@@ -71,7 +66,10 @@ function processArticles(articlesFirstPage, articlesInOrder, pagesDivColumn1, pa
             () => {
                 console.log("Error getting article '" + article + "'");
             },
+            articleIndex
         );
+
+        articleIndex++;
     }
 }
 
@@ -82,7 +80,10 @@ function onLoad(result) {
     const pagesDivColumn1 = document.querySelector("#pages .column1");
     const pagesDivColumn2 = document.querySelector("#pages .column2");
 
-    const articlesInOrder = ["", "", "", ""];
+    const articlesInOrder = [];
+    for (const article of articlesFirstPage) {
+        articlesInOrder.push("");
+    }
 
     processArticles(articlesFirstPage, articlesInOrder, pagesDivColumn1, pagesDivColumn2);   
 }

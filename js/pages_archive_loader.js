@@ -7,7 +7,6 @@ function onError() {
 
 function processArticles(articlesInPage, articlesInOrder, articlesDiv) {
     let articleIndex = 0;
-
     let numberOfArticlesProcessed = 0;
 
     for (const article of articlesInPage) {
