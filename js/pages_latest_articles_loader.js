@@ -5,17 +5,13 @@ function onError() {
     pagesDiv.innerHTML = '<p style="text-align: center;">There was an error getting the latest articles. :(</p>';
 }
 
-function onLoad(result) {
-    const articles = JSON.parse(result);
-    const articlesFirstPage = articles["first-page-latest"];
-
-    const pagesDivColumn1 = document.querySelector("#pages .column1");
-    const pagesDivColumn2 = document.querySelector("#pages .column2");
+function processArticles(articlesFirstPage, articlesInOrder, pagesDivColumn1, pagesDivColumn2) {
+    let numberOfArticlesProcessed = 0;
 
     for (let i = 0; i < 4; i++) {
         const article = articlesFirstPage[i];
-
         if (article === undefined) {
+            console.log("qiefbeibfuqwbfiueqwbfiwebfibwefibwefiebguiebwfguiewbgiubweigubwriegbuebguiewb");
             break;
         }
 
@@ -26,21 +22,7 @@ function onLoad(result) {
             articleResult => {
                 const articleDetails = JSON.parse(articleResult);
 
-                let div;
-
-                switch (i) {
-                    case 0:
-                    case 2:
-                        div = pagesDivColumn1;
-                        break;
-                    case 1:
-                    case 3:
-                        div = pagesDivColumn2;
-                        break;
-                };
-
-                // This should theoretically be synchronous, but it's ok :P
-                div.innerHTML += `
+                articlesInOrder[i] = `
                     <div class="pages-item">
                         <h2>${articleDetails['title']}</h2>
                         <p class="date">${articleDetails['date']}</p>
@@ -53,8 +35,27 @@ function onLoad(result) {
                     </div>
                 `;
 
-                // All content has been loaded
-                if (i === 3) {
+                numberOfArticlesProcessed++;
+
+                // Show these articles in the page
+                if (numberOfArticlesProcessed === articlesInOrder.length) {
+                    for (let j = 0; j < 4; j++) {                  
+                        let div;
+                        switch (j) {
+                            case 0:
+                            case 2:
+                                div = pagesDivColumn1;
+                                break;
+                            case 1:
+                            case 3:
+                                div = pagesDivColumn2;
+                                break;
+                        };
+
+                        div.innerHTML += articlesInOrder[j];
+                    }
+
+                    // Jump to section
                     const urlSearchParameters = new URLSearchParams(window.location.search);
                     const parameters = Object.fromEntries(urlSearchParameters.entries());
 
@@ -69,9 +70,21 @@ function onLoad(result) {
             },
             () => {
                 console.log("Error getting article '" + article + "'");
-            }
+            },
         );
     }
+}
+
+function onLoad(result) {
+    const articles = JSON.parse(result);
+    const articlesFirstPage = articles["first-page-latest"];
+
+    const pagesDivColumn1 = document.querySelector("#pages .column1");
+    const pagesDivColumn2 = document.querySelector("#pages .column2");
+
+    const articlesInOrder = ["", "", "", ""];
+
+    processArticles(articlesFirstPage, articlesInOrder, pagesDivColumn1, pagesDivColumn2);   
 }
 
 loadFileFromServer("/html/pages/articles.json", onLoad, onError);
