@@ -52,6 +52,20 @@ function onLoad(result) {
                         </div>
                     </div>
                 `;
+
+                // All content has been loaded
+                if (i === 3) {
+                    const urlSearchParameters = new URLSearchParams(window.location.search);
+                    const parameters = Object.fromEntries(urlSearchParameters.entries());
+
+                    const section = parameters["s"];
+
+                    if (section !== undefined && /^([a-z]+)$/.test(section)) {
+                        document.getElementById(section).scrollIntoView({
+                            behavior: "smooth"
+                        });
+                    }
+                }
             },
             () => {
                 console.log("Error getting article '" + article + "'");
