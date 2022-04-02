@@ -1,7 +1,6 @@
 {
     "archive-pagination": [
         [
-            "my-very-interesting-article",
             "este-o-lume-grea-afara",
             "o-dorinta",
             "ganduri-vise-si-tu"
@@ -12,7 +11,6 @@
     "first-page-latest": [
         "ganduri-vise-si-tu",
         "o-dorinta",
-        "este-o-lume-grea-afara",
-        "my-very-interesting-article"
+        "este-o-lume-grea-afara"
     ]
 }
