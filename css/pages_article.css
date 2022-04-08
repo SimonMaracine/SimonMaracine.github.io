@@ -3,10 +3,15 @@ body {
     background-color: rgb(252, 249, 249);
 }
 
+.link {
+    text-decoration: inherit;
+    color: inherit;
+}
+
 /* Content */
 
 .content {
-    padding: 50px 0;
+    padding: 50px 0 10px 0;
 }
 
 .content .container {
@@ -59,4 +64,18 @@ body {
     font-size: 1.2rem;
     line-height: 40px;
     color: rgb(60, 60, 60);
+}
+
+.archive-container {
+    height: 28px;
+}
+
+.archive {
+    font-size: 1.5rem;
+    margin-top: 50px;
+    text-align: center;
+}
+
+.archive:hover {
+    font-size: 1.6rem;
 }
