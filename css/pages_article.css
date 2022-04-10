@@ -43,7 +43,7 @@ body {
 
 .tags-head {
     display: inline;
-    margin-right: 6px;
+    margin-right: 2px;
 }
 
 #tags {
@@ -52,7 +52,7 @@ body {
 
 .last-modified-head {
     display: inline;
-    margin-right: 6px;
+    margin-right: 2px;
 }
 
 #last-modified {
