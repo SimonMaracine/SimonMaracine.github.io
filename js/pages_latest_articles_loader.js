@@ -56,7 +56,7 @@ function processArticles(articlesFirstPage, articlesInOrder, pagesDivColumn1, pa
 
                     const section = parameters["s"];
 
-                    if (section !== undefined && /^([a-z\-]+)$/.test(section)) {
+                    if (section !== undefined && /^([a-z0-9\-]+)$/.test(section)) {
                         document.getElementById(section).scrollIntoView({
                             behavior: "smooth"
                         });
