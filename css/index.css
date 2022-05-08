@@ -63,7 +63,7 @@ body {
     text-align: left;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 540px) {
     .hello #hello1 {
         text-align: center;
     }
@@ -126,7 +126,7 @@ body {
 
 .pages-item {
     margin-bottom: 40px;
-    border-radius: 10px;
+    border-radius: 20px;
     background-color: rgb(230, 235, 239);
     padding: 15px;
 }

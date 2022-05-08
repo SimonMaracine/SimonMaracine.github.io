@@ -14,7 +14,7 @@ body {
     text-align: center;
 }
 
-.blog-title {
+.blog-header {
     font-family: "Dancing Script", cursive;
     margin: 60px 0 50px 0;
     color: rgb(80, 80, 80);
@@ -24,13 +24,27 @@ body {
     font-size: 5.8rem;
 }
 
-.blog-title p {
-    font-size: 2.4rem;
+.quote {
+    font-size: 2.8rem;
+    margin-bottom: 60px;
 }
 
-.blog-title h3 {
-    font-size: 2.9rem;
-    margin-top: 60px;
+.description {
+    font-size: 1.5rem;
+    font-family: "Montserrat", sans-serif;
+    color: rgb(100, 100, 100);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.archive-title {
+    font-size: 3.3rem;
+    margin-top: 80px;
+}
+
+.blog-name {
+    font-weight: bold;
 }
 
 .pages-item {
@@ -39,7 +53,7 @@ body {
     padding: 15px;
     max-width: 1200px;
     margin: 0 auto 20px auto;
-    border-radius: 10px;
+    border-radius: 20px;
     overflow: hidden;
 }
 
