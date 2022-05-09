@@ -25,12 +25,12 @@ body {
 }
 
 .quote {
-    font-size: 2.8rem;
+    font-size: calc(1.9rem + 0.9vw);
     margin-bottom: 60px;
 }
 
 .description {
-    font-size: 1.5rem;
+    font-size: calc(1.05rem + 0.6vw);
     font-family: "Montserrat", sans-serif;
     color: rgb(100, 100, 100);
     max-width: 700px;
