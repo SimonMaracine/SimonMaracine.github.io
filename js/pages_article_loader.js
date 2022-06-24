@@ -11,14 +11,24 @@ function onLoad(result) {
     const title = document.getElementById("title");
     title.innerText = articleDetails["title"];
 
-    const date = document.getElementById("date");
-    date.innerText = articleDetails["date"];
+    {
+        const date = document.getElementById("date");
+        const day = articleDetails["date"]["day"];
+        const month = articleDetails["date"]["month"];
+        const year = articleDetails["date"]["year"];
+        date.innerText = `${month} ${day}, ${year}`;
+    }
 
     const tags = document.getElementById("tags");
-    tags.innerText = articleDetails["tags"];
+    tags.innerText = articleDetails["tags"].join(", ");
 
-    const lastModified = document.getElementById("last-modified");
-    lastModified.innerText = articleDetails["last-modified"];
+    {
+        const lastModified = document.getElementById("last-modified");
+        const day = articleDetails["last-modified"]["day"];
+        const month = articleDetails["last-modified"]["month"];
+        const year = articleDetails["last-modified"]["year"];
+        lastModified.innerText = `${month} ${day}, ${year}`;
+    }
 }
 
 const urlSearchParameters = new URLSearchParams(window.location.search);

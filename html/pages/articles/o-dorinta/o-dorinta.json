@@ -1,7 +1,15 @@
 {
     "title": "O dorință",
-    "date": "March 27, 2022",
-    "tags": "Love, Highschool homework",
-    "last-modified": "March 27, 2022",
+    "date": {
+        "day": 27,
+        "month": "March",
+        "year": 2022
+    },
+    "tags": ["Love", "Highschool homework"],
+    "last-modified": {
+        "day": 27,
+        "month": "March",
+        "year": 2022
+    },
     "preview": "Oh, de cum te văd În mine-ncepe-o flacără să ardă; Mintea mea spre tine mă poartă;..."
 }

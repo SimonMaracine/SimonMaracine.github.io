@@ -20,7 +20,7 @@ function processArticles(articlesFirstPage, articlesInOrder, pagesDivColumn1, pa
                 articlesInOrder[index] = `
                     <div class="pages-item">
                         <h2>${articleDetails['title']}</h2>
-                        <p class="date">${articleDetails['date']}</p>
+                        <p class="date">${articleDetails['date']['month']} ${articleDetails['date']['day']}, ${articleDetails['date']['year']}</p>
                         <p class="preview">${articleDetails['preview']}</p>
                         <div class="read-more-container">
                             <a class="item-link" href="${'/html/pages/article.html?article=' + article}">

@@ -1,7 +1,15 @@
 {
     "title": "Pagini",
-    "date": "April 19, 2022",
-    "tags": "People, Life, Questions",
-    "last-modified": "April 20, 2022",
+    "date": {
+        "day": 19,
+        "month": "April",
+        "year": 2022
+    },
+    "tags": ["People", "Life", "Questions"],
+    "last-modified": {
+        "day": 20,
+        "month": "April",
+        "year": 2022
+    },
     "preview": "Pagini şi cărţi pline de viaţă Atârnă pe a vieţii mare aţă..."
 }
