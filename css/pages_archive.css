@@ -14,14 +14,10 @@ body {
     text-align: center;
 }
 
-.blog-header {
+.pages-header {
     font-family: "Dancing Script", cursive;
     margin: 60px 0 50px 0;
     color: rgb(80, 80, 80);
-}
-
-.blog-title h2 {
-    font-size: 5.8rem;
 }
 
 .quote {
@@ -43,7 +39,7 @@ body {
     margin-top: 80px;
 }
 
-.blog-name {
+.pages-name {
     font-weight: bold;
 }
 
