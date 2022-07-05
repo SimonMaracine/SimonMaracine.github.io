@@ -1,0 +1,92 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: rgb(252, 249, 249);
+}
+
+.item-link {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+/* Content */
+
+.content {
+    text-align: center;
+}
+
+.blog-header {
+    font-family: "Dancing Script", cursive;
+    margin: 60px 0 50px 0;
+    color: rgb(80, 80, 80);
+}
+
+.blog-title h2 {
+    font-size: 5.8rem;
+}
+
+.quote {
+    font-size: calc(1.9rem + 0.9vw);
+    margin-bottom: 60px;
+}
+
+.description {
+    font-size: calc(1.05rem + 0.6vw);
+    font-family: "Montserrat", sans-serif;
+    color: rgb(100, 100, 100);
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.archive-title {
+    font-size: 3.3rem;
+    margin-top: 80px;
+}
+
+.blog-name {
+    font-weight: bold;
+}
+
+.pages-item {
+    text-align: left;
+    background-color: rgb(229, 234, 240);
+    padding: 15px;
+    max-width: 1200px;
+    margin: 0 auto 20px auto;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.title {
+    font-weight: bold;
+    color: rgb(80, 80, 80);
+}
+
+.date {
+    font-size: 1.3rem;
+    color: rgb(100, 100, 100);
+}
+
+.preview {
+    font-size: 1.15rem;
+    color: rgb(110, 110, 110);
+}
+
+.read-more-container {
+    height: 32px;
+    text-align: right;
+}
+
+.read-more {
+    font-size: 1.6rem;
+    color: rgb(60, 60, 60);
+}
+
+.read-more:hover {
+    font-size: 1.7rem;
+    color: rgb(10, 95, 240);
+}
+
+.page-link {
+    color: rgb(60, 60, 60);
+}

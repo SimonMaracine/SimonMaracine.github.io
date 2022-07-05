@@ -1,0 +1,262 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: rgb(252, 249, 249);
+}
+
+.colored-section {
+    background-color: rgb(229, 234, 240);
+}
+
+.item-link {
+    text-decoration: inherit;
+    color: inherit;
+}
+
+.section-title {
+    font-weight: bold;
+    color: rgb(100, 100, 100);
+}
+
+/* First section content */
+
+#first-section {
+    overflow: auto;
+    background-image: url("/images/binary_background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: white;
+}
+
+.first-section-content {
+    height: 92vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hello {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 30px;
+    border-radius: 70px;
+    box-shadow: 3px 3px 50px rgb(170, 170, 170);
+}
+
+.hello h2 {
+    font-weight: bold;
+    color: rgb(100, 100, 100);
+    font-size: calc(1.3rem + 2.7vw);
+}
+
+@media (min-width: 1200px) {
+    .hello h2 {
+        font-size: 3.325rem;
+    }
+}
+
+.hello #hello1 {
+    text-align: left;
+    margin-bottom: 25px;
+}
+
+.hello #hello2 {
+    text-align: left;
+}
+
+@media (max-width: 540px) {
+    .hello #hello1 {
+        text-align: center;
+    }
+    
+    .hello #hello2 {
+        text-align: center;
+    }
+}
+
+.initially-hidden {
+    visibility: hidden;
+}
+
+.fade-in {
+    animation: fadeIn 5s;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 100%; }
+}
+
+/* Projects section */
+
+.projects-title {
+    text-align: center;
+    padding-top: 100px;
+}
+
+.carousel-item {
+    padding: 50px 15% 90px 15%;
+    text-align: center;
+}
+
+.carousel-item h2 {
+    font-weight: bold;
+    color: rgb(80, 80, 80);
+}
+
+.carousel-item p {
+    font-style: italic;
+    font-size: 1.4rem;
+    color: rgb(60, 60, 60);
+}
+
+/* Pages section */
+
+#pages {
+    padding: 100px 0;
+    text-align: center;
+}
+
+.pages-title {
+    margin-bottom: 50px;
+}
+
+#pages .container {
+    text-align: left;
+}
+
+.pages-item {
+    margin-bottom: 40px;
+    border-radius: 20px;
+    background-color: rgb(230, 235, 239);
+    padding: 15px;
+}
+
+.pages-item h2 {
+    font-weight: bold;
+    color: rgb(80, 80, 80);
+}
+
+.date {
+    font-size: 1.15rem;
+    color: rgb(100, 100, 100);
+}
+
+.preview {
+    font-size: 1.15rem;
+    color: rgb(110, 110, 110);
+}
+
+.read-more-container {
+    height: 32px;
+    text-align: right;
+}
+
+.read-more {
+    font-size: 1.5rem;
+    color: rgb(60, 60, 60);
+}
+
+.read-more:hover {
+    font-size: 1.6rem;
+    color: rgb(10, 95, 240);
+}
+
+.archive-container {
+    height: 28px;
+}
+
+.archive {
+    font-size: 1.6rem;
+    margin-top: 20px;
+    color: rgb(60, 60, 60);
+}
+
+.archive:hover {
+    font-size: 1.7rem;
+    color: rgb(10, 95, 240);
+}
+
+/* Nine Morris 3D section */
+
+#nine-morris-3d {
+    text-align: center;
+    padding: 100px 0 60px 0;
+}
+
+#nine-morris-3d h4 {
+    margin-bottom: 50px;
+    color: rgb(100, 100, 100);
+}
+
+#nine-morris-3d p {
+    font-size: 1.3rem;
+    color: rgb(80, 80, 80);
+    max-width: 350px;
+    margin: 0 auto 60px auto;
+}
+
+#nine-morris-3d img {
+    width: 95%;
+    max-width: 450px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+#nine-morris-3d .link {
+    text-decoration: inherit;
+}
+
+/* About section */
+
+#about {
+    text-align: center;
+    padding: 100px 0;
+}
+
+.about-me {
+    margin-bottom: 40px;
+}
+
+.about-me p {
+    font-size: 1.3rem;
+    color: rgb(65, 65, 65);
+}
+
+.description {
+    max-width: 600px;
+}
+
+.picture p {
+    font-size: 1.2rem;
+    color: rgb(130, 130, 130);
+}
+
+.picture img {
+    width: 180px;
+    border-radius: 100%;
+    margin-bottom: 10px;
+}
+
+.social-media {
+    font-size: 1.9rem;
+}
+
+.social-media i:hover {
+    font-size: 2.17rem;
+    padding: 0 3px;
+}
+
+.social-media i {
+    padding: 0 5px;
+}
+
+/* Contact section */
+
+#contact {
+    text-align: center;
+    padding: 70px 0;
+}
+
+#contact p {
+    color: rgb(120, 120, 120);
+}
