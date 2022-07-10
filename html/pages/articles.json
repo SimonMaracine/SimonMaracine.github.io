@@ -5,13 +5,14 @@
             "o-dorinta",
             "ganduri-vise-si-tu",
             "speranta",
-            "pagini"
+            "pagini",
+            "cugetare"
         ]
     ],
     "first-page-latest": [
+        "cugetare",
         "pagini",
         "speranta",
-        "ganduri-vise-si-tu",
-        "o-dorinta"
+        "ganduri-vise-si-tu"
     ]
 }
