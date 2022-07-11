@@ -1,55 +1,72 @@
 import { loadFileFromServer } from "./load_file_from_server.js";
 
+class Article {
+    constructor(index, htmlContent) {
+        this.index = index;
+        this.htmlContent = htmlContent;
+    }
+}
+
+function showArticles(articles, articlesDiv) {
+    const minIndex = Math.min(...Object.values(articles).map(article => article.index));
+    let index = minIndex;
+
+    for (let i = 0; i < Object.keys(articles).length; i++) {
+        articlesDiv.innerHTML += articles[index].htmlContent;
+        index++;
+    }
+}
+
 function onError() {
     const articlesDiv = document.getElementById("articles");
     articlesDiv.innerHTML = '<p style="text-align: center;">There was an error getting the articles in this page. :(</p>';
 }
 
-function processArticles(articlesInPage, articlesInOrder, articlesDiv) {
-    let articleIndex = 0;
-    let numberOfArticlesProcessed = 0;
+function processArticles(articlesInPage, articlesDiv) {
+    const articles = {};
+
+    let articlesProcessed = 0;
 
     for (const article of articlesInPage) {
         const filePath = "/html/pages/articles/" + article + "/" + article + ".json";
 
         loadFileFromServer(
             filePath,
-            (articleResult, index) => {
+            (articleResult) => {
                 const articleDetails = JSON.parse(articleResult);
+                const index = articleDetails["index"];
 
-                articlesInOrder[index] = `
-                    <div class="row"></div>
-                        <div class="col-lg-12">
-                            <div class="pages-item">
-                                <h2 class="title">${articleDetails['title']}</h2>
-                                <p class="date">${articleDetails['date']['month']} ${articleDetails['date']['day']}, ${articleDetails['date']['year']}</p>
-                                <p class="preview">${articleDetails['preview']}</p>
-                                <div class="read-more-container">
-                                    <a class="item-link" href="${'/html/pages/article.html?article=' + article}">
-                                        <p class="read-more">Read More</p>
-                                    </a>
+                articles[index] = new Article(
+                    index,
+                    `
+                        <div class="row"></div>
+                            <div class="col-lg-12">
+                                <div class="pages-item">
+                                    <h2 class="title">${articleDetails['title']}</h2>
+                                    <p class="date">${articleDetails['date']['month']} ${articleDetails['date']['day']}, ${articleDetails['date']['year']}</p>
+                                    <p class="preview">${articleDetails['preview']}</p>
+                                    <div class="read-more-container">
+                                        <a class="item-link" href="${'/html/pages/article.html?article=' + article}">
+                                            <p class="read-more">Read More</p>
+                                        </a>
+                                    </div>
                                 </div>
-                            </div>
+                            <div>
                         <div>
-                    <div>
-                `;
+                    `
+                );
 
-                numberOfArticlesProcessed++;
+                articlesProcessed++;
 
                 // Show these articles in the page
-                if (numberOfArticlesProcessed === articlesInOrder.length) {
-                    for (const articleHTML of articlesInOrder) {
-                        articlesDiv.innerHTML += articleHTML;
-                    }
+                if (articlesProcessed === articlesInPage.length) {
+                    showArticles(articles, articlesDiv);
                 }
             },
             () => {
                 console.log("Error getting article '" + article + "'");
-            },
-            articleIndex
+            }
         );
-
-        articleIndex++;
     }
 }
 
@@ -64,12 +81,7 @@ function onLoad(result) {
 
     const articlesDiv = document.getElementById("articles");
 
-    const articlesInOrder = [];
-    for (const article of articlesInPage) {
-        articlesInOrder.push("");
-    }
-
-    processArticles(articlesInPage, articlesInOrder, articlesDiv);
+    processArticles(articlesInPage, articlesDiv);
 }
 
 const urlSearchParameters = new URLSearchParams(window.location.search);
