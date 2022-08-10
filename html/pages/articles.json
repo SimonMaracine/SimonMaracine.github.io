@@ -6,13 +6,14 @@
             "ganduri-vise-si-tu",
             "speranta",
             "pagini",
-            "cugetare"
+            "cugetare",
+            "relatii"
         ]
     ],
     "first-page-latest": [
+        "relatii",
         "cugetare",
         "pagini",
-        "speranta",
-        "ganduri-vise-si-tu"
+        "speranta"
     ]
 }
