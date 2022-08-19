@@ -7,13 +7,14 @@
             "speranta",
             "pagini",
             "cugetare",
-            "relatii"
+            "relatii",
+            "rugaciune"
         ]
     ],
     "first-page-latest": [
+        "rugaciune",
         "relatii",
         "cugetare",
-        "pagini",
-        "speranta"
+        "pagini"
     ]
 }
