@@ -8,13 +8,14 @@
             "pagini",
             "cugetare",
             "relatii",
-            "rugaciune"
+            "rugaciune",
+            "inima-de-slujitor"
         ]
     ],
     "first-page-latest": [
+        "inima-de-slujitor",
         "rugaciune",
         "relatii",
-        "cugetare",
-        "pagini"
+        "cugetare"
     ]
 }
