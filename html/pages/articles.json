@@ -9,13 +9,14 @@
             "cugetare",
             "relatii",
             "rugaciune",
-            "inima-de-slujitor"
+            "inima-de-slujitor",
+            "tu-si-eu"
         ]
     ],
     "first-page-latest": [
+        "tu-si-eu",
         "inima-de-slujitor",
         "rugaciune",
-        "relatii",
-        "cugetare"
+        "relatii"
     ]
 }
