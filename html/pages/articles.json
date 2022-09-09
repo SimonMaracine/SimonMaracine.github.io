@@ -7,13 +7,15 @@
             "speranta",
             "pagini",
             "cugetare",
-            "relatii"
+            "relatii",
+            "rugaciune",
+            "inima-de-slujitor"
         ]
     ],
     "first-page-latest": [
+        "inima-de-slujitor",
+        "rugaciune",
         "relatii",
-        "cugetare",
-        "pagini",
-        "speranta"
+        "cugetare"
     ]
 }
