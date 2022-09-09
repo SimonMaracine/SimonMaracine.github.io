@@ -19,8 +19,8 @@ function onLoad(result) {
         date.innerText = `${month} ${day}, ${year}`;
     }
 
-    const tags = document.getElementById("tags");
-    tags.innerText = articleDetails["tags"].join(", ");
+    const keywords = document.getElementById("keywords");
+    keywords.innerText = articleDetails["keywords"].join(", ");
 
     {
         const lastModified = document.getElementById("last-modified");
