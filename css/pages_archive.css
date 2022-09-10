@@ -45,7 +45,7 @@ body {
 
 .pages-item {
     text-align: left;
-    background-color: rgb(229, 234, 240);
+    background-color: rgb(222, 222, 239);
     padding: 15px;
     max-width: 1200px;
     margin: 0 auto 20px auto;
@@ -80,9 +80,14 @@ body {
 
 .read-more:hover {
     font-size: 1.7rem;
-    color: rgb(10, 95, 240);
+    color: rgb(120, 50, 250);
 }
 
 .page-link {
     color: rgb(60, 60, 60);
+}
+
+.pagination > .active > a {
+    background-color: rgb(120, 50, 250) !important;
+    border: solid 1px rgb(120, 50, 250) !important;
 }

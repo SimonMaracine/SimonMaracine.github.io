@@ -4,7 +4,7 @@ body {
 }
 
 .colored-section {
-    background-color: rgb(229, 234, 240);
+    background-color: rgb(222, 222, 239);
 }
 
 .item-link {
@@ -96,6 +96,7 @@ body {
 .carousel-item {
     padding: 50px 15% 90px 15%;
     text-align: center;
+    min-height: 350px;
 }
 
 .carousel-item h2 {
@@ -127,7 +128,7 @@ body {
 .pages-item {
     margin-bottom: 40px;
     border-radius: 20px;
-    background-color: rgb(230, 235, 239);
+    background-color: rgb(222, 222, 239);
     padding: 15px;
 }
 
@@ -158,7 +159,7 @@ body {
 
 .read-more:hover {
     font-size: 1.6rem;
-    color: rgb(10, 95, 240);
+    color: rgb(120, 50, 250);
 }
 
 .archive-container {
@@ -173,7 +174,7 @@ body {
 
 .archive:hover {
     font-size: 1.7rem;
-    color: rgb(10, 95, 240);
+    color: rgb(120, 50, 250);
 }
 
 /* Nine Morris 3D section */
@@ -204,6 +205,7 @@ body {
 
 #nine-morris-3d .link {
     text-decoration: inherit;
+    color: rgb(120, 50, 250);
 }
 
 /* About section */
@@ -244,6 +246,7 @@ body {
 .social-media i:hover {
     font-size: 2.17rem;
     padding: 0 3px;
+    color: rgb(120, 50, 250);
 }
 
 .social-media i {
