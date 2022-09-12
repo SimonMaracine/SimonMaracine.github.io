@@ -66,13 +66,14 @@ function processArticles(articlesFirstPage, pagesDivRow1Column1, pagesDivRow1Col
             (articleResult) => {
                 const articleDetails = JSON.parse(articleResult);
                 const index = articleDetails["index"];
+                const date = articleDetails['date'];
 
                 articles[index] = new Article(
                     index,
                     `
                         <div class="pages-item">
                             <h2>${articleDetails['title']}</h2>
-                            <p class="date">${articleDetails['date']['month']} ${articleDetails['date']['day']}, ${articleDetails['date']['year']}</p>
+                            <p class="date">${date['month']} ${date['day']}, ${date['year']}</p>
                             <p class="preview">${articleDetails['preview']}</p>
                             <div class="read-more-container">
                                 <a class="item-link" href="${'/html/pages/article.html?article=' + article}">
