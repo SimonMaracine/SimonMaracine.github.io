@@ -1,22 +1,14 @@
 {
-    "archive-pagination": [
-        [
-            "este-o-lume-grea-afara",
-            "o-dorinta",
-            "ganduri-vise-si-tu",
-            "speranta",
-            "pagini",
-            "cugetare",
-            "relatii",
-            "rugaciune",
-            "inima-de-slujitor",
-            "o-inima-printre-altele"
-        ]
-    ],
-    "first-page-latest": [
-        "o-inima-printre-altele",
-        "inima-de-slujitor",
+    "articles": [
+        "este-o-lume-grea-afara",
+        "o-dorinta",
+        "ganduri-vise-si-tu",
+        "speranta",
+        "pagini",
+        "cugetare",
+        "relatii",
         "rugaciune",
-        "relatii"
+        "inima-de-slujitor",
+        "o-inima-printre-altele"
     ]
 }

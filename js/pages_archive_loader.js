@@ -73,7 +73,10 @@ function processArticles(articlesInPage, articlesDiv) {
 
 function onLoad(result) {
     const articles = JSON.parse(result);
-    const articlesInPage = articles["archive-pagination"][paginationNumber - 1];
+    const allArticles = articles["articles"];
+
+    const ARTICLES = 10;
+    const articlesInPage = allArticles.slice(ARTICLES * (paginationNumber - 1), ARTICLES * paginationNumber);
 
     if (articlesInPage === undefined) {
         onError();

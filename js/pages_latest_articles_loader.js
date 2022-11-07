@@ -7,7 +7,7 @@ class Article {
     }
 }
 
-function showArticles(articles, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1, pagesDivRow2Column2) {  
+function showArticles(articles, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1, pagesDivRow2Column2) {
     const maxIndex = Math.max(...Object.values(articles).map(article => article.index));
     let index = maxIndex;
 
@@ -52,13 +52,13 @@ function onError() {
     pagesDiv.innerHTML = '<p style="text-align: center;">There was an error getting the latest articles. :(</p>';
 }
 
-function processArticles(articlesFirstPage, pagesDivRow1Column1, pagesDivRow1Column2,
+function processArticles(latestArticles, pagesDivRow1Column1, pagesDivRow1Column2,
         pagesDivRow2Column1, pagesDivRow2Column2) {
     const articles = {};
 
     let articlesProcessed = 0;
 
-    for (const article of articlesFirstPage) {
+    for (const article of latestArticles) {
         const filePath = "/html/pages/articles/" + article + "/" + article + ".json";
 
         loadFileFromServer(
@@ -100,7 +100,10 @@ function processArticles(articlesFirstPage, pagesDivRow1Column1, pagesDivRow1Col
 
 function onLoad(result) {
     const articles = JSON.parse(result);
-    const articlesFirstPage = articles["first-page-latest"];
+    const allArticles = articles["articles"];
+
+    const ARTICLES = 4;
+    const latestArticles = allArticles.slice(-ARTICLES);
 
     const pagesDivRow1Column1 = document.querySelector("#pages-section .row1 .column1");
     const pagesDivRow1Column2 = document.querySelector("#pages-section .row1 .column2");
@@ -108,7 +111,7 @@ function onLoad(result) {
     const pagesDivRow2Column2 = document.querySelector("#pages-section .row2 .column2");
 
     processArticles(
-        articlesFirstPage, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1, pagesDivRow2Column2
+        latestArticles, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1, pagesDivRow2Column2
     );
 }
 

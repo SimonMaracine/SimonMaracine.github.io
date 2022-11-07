@@ -86,4 +86,9 @@ body {
 .pagination > .active > a {
     background-color: rgb(110, 50, 250) !important;
     border: solid 1px rgb(110, 50, 250) !important;
+    color: white !important;
+}
+
+.page-link {
+    color: rgb(60, 60, 60) !important;
 }
