@@ -109,7 +109,7 @@ function onLoad(result) {
 
     processArticles(
         articlesFirstPage, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1, pagesDivRow2Column2
-    );   
+    );
 }
 
 loadFileFromServer("/html/pages/articles.json", onLoad, onError);

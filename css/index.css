@@ -42,14 +42,14 @@ body {
     box-shadow: 3px 3px 50px rgb(170, 170, 170);
 }
 
-.hello h2 {
+.hello p {
     font-weight: bold;
     color: rgb(100, 100, 100);
     font-size: calc(1.3rem + 2.7vw);
 }
 
 @media (min-width: 1200px) {
-    .hello h2 {
+    .hello p {
         font-size: 3.325rem;
     }
 }
@@ -67,7 +67,7 @@ body {
     .hello #hello1 {
         text-align: center;
     }
-    
+
     .hello #hello2 {
         text-align: center;
     }

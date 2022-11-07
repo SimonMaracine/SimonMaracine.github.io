@@ -16,7 +16,7 @@ function backToTop() {
 
 function doneLoading() {
     toTopButton = document.getElementById("back-to-top");
-    
+
     window.onscroll = onScroll;
     toTopButton.addEventListener("click", backToTop);
 }
