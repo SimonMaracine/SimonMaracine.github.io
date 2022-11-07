@@ -48,7 +48,7 @@ function showArticles(articles, pagesDivRow1Column1, pagesDivRow1Column2, pagesD
 }
 
 function onError() {
-    const pagesDiv = document.querySelector("#pages .container");
+    const pagesDiv = document.querySelector("#pages-section .container");
     pagesDiv.innerHTML = '<p style="text-align: center;">There was an error getting the latest articles. :(</p>';
 }
 
@@ -102,10 +102,10 @@ function onLoad(result) {
     const articles = JSON.parse(result);
     const articlesFirstPage = articles["first-page-latest"];
 
-    const pagesDivRow1Column1 = document.querySelector("#pages .row1 .column1");
-    const pagesDivRow1Column2 = document.querySelector("#pages .row1 .column2");
-    const pagesDivRow2Column1 = document.querySelector("#pages .row2 .column1");
-    const pagesDivRow2Column2 = document.querySelector("#pages .row2 .column2");
+    const pagesDivRow1Column1 = document.querySelector("#pages-section .row1 .column1");
+    const pagesDivRow1Column2 = document.querySelector("#pages-section .row1 .column2");
+    const pagesDivRow2Column1 = document.querySelector("#pages-section .row2 .column1");
+    const pagesDivRow2Column2 = document.querySelector("#pages-section .row2 .column2");
 
     processArticles(
         articlesFirstPage, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1, pagesDivRow2Column2

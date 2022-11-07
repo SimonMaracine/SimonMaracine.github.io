@@ -5,6 +5,7 @@ body {
 
 .colored-section {
     background-color: rgb(222, 216, 240);
+    box-shadow: 2px 2px 40px rgb(205, 205, 205);
 }
 
 .item-link {
@@ -15,6 +16,8 @@ body {
 .section-title {
     font-weight: bold;
     color: rgb(100, 100, 100);
+    text-align: center;
+    padding: 80px 0 50px 0;
 }
 
 /* First section content */
@@ -88,15 +91,13 @@ body {
 
 /* Projects section */
 
-.projects-title {
+#projects-section {
     text-align: center;
-    padding-top: 100px;
 }
 
 .carousel-item {
-    padding: 50px 15% 90px 15%;
-    text-align: center;
-    min-height: 350px;
+    padding: 10px 15% 10px 15%;
+    min-height: 250px;
 }
 
 .carousel-item h2 {
@@ -111,16 +112,11 @@ body {
 
 /* Pages section */
 
-#pages {
-    padding: 100px 0;
+#pages-section {
     text-align: center;
 }
 
-.pages-title {
-    margin-bottom: 50px;
-}
-
-#pages .container {
+#pages-section .container {
     text-align: left;
 }
 
@@ -163,11 +159,11 @@ body {
 
 .archive-container {
     height: 28px;
+    margin: 20px 0 70px 0;
 }
 
 .archive {
     font-size: 1.6rem;
-    margin-top: 20px;
     color: rgb(60, 60, 60);
 }
 
@@ -178,45 +174,39 @@ body {
 
 /* Nine Morris 3D section */
 
-#nine-morris-3d {
+#nine-morris-3d-section {
     text-align: center;
-    padding: 100px 0 60px 0;
 }
 
-#nine-morris-3d h4 {
-    margin-bottom: 50px;
-    color: rgb(100, 100, 100);
-}
-
-#nine-morris-3d p {
+#nine-morris-3d-section p {
     font-size: 1.3rem;
     color: rgb(90, 90, 90);
     max-width: 350px;
-    margin: 0 auto 60px auto;
+    margin: 0 auto 70px auto;
 }
 
-#nine-morris-3d img {
+#nine-morris-3d-section img {
     width: 95%;
     max-width: 450px;
     margin-bottom: 20px;
     border-radius: 5px;
 }
 
-#nine-morris-3d .link {
+#nine-morris-3d-section .link {
     text-decoration: inherit;
     color: rgb(110, 50, 250);
 }
 
 /* About section */
 
-#about {
+#about-section {
     text-align: center;
-    padding: 100px 0;
+    padding: 0 0 70px 0;
 }
 
 @media (min-width: 992px) {
-    #about {
-        padding: 100px 15%;
+    #about-section {
+        padding: 0 15% 70px 15%;
     }
 }
 
@@ -262,11 +252,11 @@ body {
 
 /* Contact section */
 
-#contact {
+#contact-section {
     text-align: center;
-    padding: 70px 0;
+    padding: 0 0 70px 0;
 }
 
-#contact p {
+#contact-section p {
     color: rgb(120, 120, 120);
 }
