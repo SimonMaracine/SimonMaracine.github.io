@@ -214,17 +214,24 @@ body {
     padding: 100px 0;
 }
 
-.about-me {
-    margin-bottom: 40px;
-}
-
-.about-me p {
-    font-size: 1.3rem;
-    color: rgb(80, 80, 80);
+@media (min-width: 992px) {
+    #about {
+        padding: 100px 15%;
+    }
 }
 
 .description {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
     max-width: 600px;
+    margin-bottom: 40px;
+}
+
+.description p {
+    font-size: 1.3rem;
+    color: rgb(80, 80, 80);
 }
 
 .picture p {
@@ -242,14 +249,15 @@ body {
     font-size: 1.9rem;
 }
 
+.social-media i {
+    padding: 0 5px;
+    color: rgb(80, 80, 80);
+}
+
 .social-media i:hover {
     font-size: 2.17rem;
     padding: 0 3px;
     color: rgb(110, 50, 250);
-}
-
-.social-media i {
-    padding: 0 5px;
 }
 
 /* Contact section */
