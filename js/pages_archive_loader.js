@@ -97,10 +97,19 @@ if (paginationNumber !== undefined && /^([0-9]+)$/.test(paginationNumber) && pag
     loadFileFromServer("/html/pages/articles.json", onLoad, onError);
 
     const listItems = document.querySelectorAll(".pagination li");
+
     for (const listItem of listItems) {
         listItem.classList.remove("active");
     }
-    listItems[paginationNumber - 1].classList.add("active");
+
+    const activePage = listItems[paginationNumber - 1];
+
+    if (activePage !== undefined) {
+        activePage.classList.add("active");
+    } else {
+        console.log("Invalid argument passed to 'pagination'");
+        onError();
+    }
 } else {
     console.log("Invalid argument passed to 'pagination'");
     onError();

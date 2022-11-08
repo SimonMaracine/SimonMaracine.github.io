@@ -48,9 +48,10 @@ body {
     background-color: rgb(222, 216, 240);
     padding: 15px;
     max-width: 1200px;
-    margin: 0 auto 20px auto;
+    margin: 0 auto 35px auto;
     border-radius: 20px;
     overflow: hidden;
+    box-shadow: 1px 1px 30px rgb(205, 205, 205);
 }
 
 .title {
