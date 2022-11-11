@@ -93,6 +93,7 @@ function processArticles(latestArticles, pagesDivRow1Column1, pagesDivRow1Column
             },
             () => {
                 console.log("Error getting article '" + article + "'");
+                onError();
             }
         );
     }

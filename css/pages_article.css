@@ -1,6 +1,6 @@
 body {
     font-family: "Montserrat", sans-serif;
-    background-color: rgb(252, 246, 246);
+    background-color: rgb(250, 244, 240);
 }
 
 .link {
@@ -68,6 +68,8 @@ body {
 
 .archive-container {
     height: 28px;
+    margin-bottom: 50px;
+    text-align: center;
 }
 
 .archive {

@@ -66,6 +66,7 @@ function processArticles(articlesInPage, articlesDiv) {
             },
             () => {
                 console.log("Error getting article '" + article + "'");
+                onError();
             }
         );
     }

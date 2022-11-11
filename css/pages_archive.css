@@ -12,6 +12,7 @@ body {
 
 .content {
     text-align: center;
+    padding-bottom: 20px;
 }
 
 .pages-header {
@@ -88,6 +89,7 @@ body {
     background-color: rgb(110, 50, 250) !important;
     border: solid 1px rgb(110, 50, 250) !important;
     color: white !important;
+    margin-bottom: 30px;
 }
 
 .page-link {
