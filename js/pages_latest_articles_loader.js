@@ -7,7 +7,8 @@ class Article {
     }
 }
 
-function showArticles(articles, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1, pagesDivRow2Column2) {
+function showArticles(articles, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1,
+        pagesDivRow2Column2) {
     const maxIndex = Math.max(...Object.values(articles).map(article => article.index));
     let index = maxIndex;
 
@@ -41,7 +42,9 @@ function showArticles(articles, pagesDivRow1Column1, pagesDivRow1Column2, pagesD
     const section = parameters["s"];
 
     if (section !== undefined && /^([a-z0-9\-]+)$/.test(section)) {
-        document.getElementById(section).scrollIntoView({
+        const actualSection = section + "-section";
+
+        document.getElementById(actualSection).scrollIntoView({
             behavior: "smooth"
         });
     }
@@ -88,7 +91,13 @@ function processArticles(latestArticles, pagesDivRow1Column1, pagesDivRow1Column
 
                 // Show these articles in the page
                 if (articlesProcessed === 4) {
-                    showArticles(articles, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1, pagesDivRow2Column2);
+                    showArticles(
+                        articles,
+                        pagesDivRow1Column1,
+                        pagesDivRow1Column2,
+                        pagesDivRow2Column1,
+                        pagesDivRow2Column2
+                    );
                 }
             },
             () => {
@@ -112,7 +121,11 @@ function onLoad(result) {
     const pagesDivRow2Column2 = document.querySelector("#pages-section .row2 .column2");
 
     processArticles(
-        latestArticles, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1, pagesDivRow2Column2
+        latestArticles,
+        pagesDivRow1Column1,
+        pagesDivRow1Column2,
+        pagesDivRow2Column1,
+        pagesDivRow2Column2
     );
 }
 

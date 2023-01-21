@@ -191,6 +191,7 @@ body {
     max-width: 450px;
     margin-bottom: 20px;
     border-radius: 5px;
+    box-shadow: 2px 2px 40px rgb(160, 160, 160);
 }
 
 #nine-morris-3d-section .link {
@@ -227,14 +228,14 @@ body {
 
 .picture p {
     font-size: 1.2rem;
-    color: rgb(130, 130, 130);
+    color: rgb(125, 125, 125);
 }
 
 .picture img {
     width: 180px;
     border-radius: 45%;
     margin-bottom: 10px;
-    box-shadow: 2px 2px 40px rgb(200, 200, 200);
+    box-shadow: 2px 2px 40px rgb(160, 160, 160);
 }
 
 .social-media {
@@ -260,5 +261,5 @@ body {
 }
 
 #contact-section p {
-    color: rgb(120, 120, 120);
+    color: rgb(110, 110, 110);
 }
