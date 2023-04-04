@@ -150,7 +150,7 @@ body {
 
 .read-more {
     font-size: 1.5rem;
-    color: rgb(80, 80, 80);
+    color: rgb(105, 105, 105);
 }
 
 .read-more:hover {
@@ -165,7 +165,7 @@ body {
 
 .archive {
     font-size: 1.6rem;
-    color: rgb(60, 60, 60);
+    color: rgb(85, 85, 85);
 }
 
 .archive:hover {
