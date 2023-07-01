@@ -1,11 +1,5 @@
 import { loadFileFromServer } from "./load_file_from_server.js";
-
-class Article {
-    constructor(index, htmlContent) {
-        this.index = index;
-        this.htmlContent = htmlContent;
-    }
-}
+import { Article } from "./article_struct.js";
 
 function showArticles(articles, articlesDiv) {
     const minIndex = Math.min(...Object.values(articles).map(article => article.index));

@@ -1,11 +1,5 @@
 import { loadFileFromServer } from "./load_file_from_server.js";
-
-class Article {
-    constructor(index, htmlContent) {
-        this.index = index;
-        this.htmlContent = htmlContent;
-    }
-}
+import { Article } from "./article_struct.js";
 
 function showArticles(articles, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1,
         pagesDivRow2Column2) {
