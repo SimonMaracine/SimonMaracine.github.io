@@ -66,19 +66,19 @@ body {
     color: rgb(60, 60, 60);
 }
 
-.archive-container {
+.all-pages-container {
     height: 28px;
     margin-bottom: 50px;
     text-align: center;
 }
 
-.archive {
+.all-pages {
     font-size: 1.5rem;
     margin-top: 50px;
     text-align: center;
 }
 
-.archive:hover {
+.all-pages:hover {
     font-size: 1.6rem;
     color: rgb(110, 50, 250);
 }

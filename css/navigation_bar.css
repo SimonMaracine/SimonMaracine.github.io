@@ -7,7 +7,7 @@
 #navigation-bar {
     border-top: 1px rgb(210, 210, 210) solid;
     border-bottom: 1px rgb(210, 210, 210) solid;
-    box-shadow: 2px 2px 40px rgb(200, 200, 200);
+    box-shadow: 0px 3px 40px rgb(200, 200, 200);
 }
 
 .navbar-toggler:focus {

@@ -5,7 +5,7 @@ body {
 
 .colored-section {
     background-color: rgb(222, 216, 240);
-    box-shadow: 2px 2px 40px rgb(200, 200, 200);
+    box-shadow: 0px 0px 30px rgb(170, 170, 170);
 }
 
 .item-link {
@@ -18,6 +18,14 @@ body {
     color: rgb(100, 100, 100);
     text-align: center;
     padding: 80px 0 50px 0;
+}
+
+.section-centered {
+    text-align: center;
+}
+
+.shadowed {
+    box-shadow: 0px 0px 30px rgb(170, 170, 170);
 }
 
 /* First section content */
@@ -42,7 +50,6 @@ body {
     background-color: rgba(255, 255, 255, 0.8);
     padding: 30px;
     border-radius: 70px;
-    box-shadow: 3px 3px 50px rgb(170, 170, 170);
 }
 
 .hello p {
@@ -91,10 +98,6 @@ body {
 
 /* Projects section */
 
-#projects-section {
-    text-align: center;
-}
-
 .carousel-item {
     padding: 10px 15% 10px 15%;
     min-height: 270px;
@@ -102,19 +105,15 @@ body {
 
 .carousel-item h2 {
     font-weight: bold;
-    color: rgb(90, 90, 90);
+    color: rgb(100, 100, 100);
 }
 
 .carousel-item p {
     font-size: 1.4rem;
-    color: rgb(70, 70, 70);
+    color: rgb(90, 90, 90);
 }
 
 /* Pages section */
-
-#pages-section {
-    text-align: center;
-}
 
 #pages-section .container {
     text-align: left;
@@ -125,17 +124,17 @@ body {
     border-radius: 20px;
     background-color: rgb(222, 216, 240);
     padding: 15px;
-    box-shadow: 1px 1px 30px rgb(205, 205, 205);
+    box-shadow: 0px 0px 30px rgb(200, 200, 200);
 }
 
-.pages-item h2 {
+.title {
     font-weight: bold;
     color: rgb(100, 100, 100);
 }
 
 .date {
     font-size: 1.15rem;
-    color: rgb(100, 100, 100);
+    color: rgb(110, 110, 110);
 }
 
 .preview {
@@ -158,26 +157,22 @@ body {
     color: rgb(110, 50, 250);
 }
 
-.archive-container {
+.all-pages-container {
     height: 28px;
     margin: 20px 0 70px 0;
 }
 
-.archive {
+.all-pages {
     font-size: 1.6rem;
     color: rgb(85, 85, 85);
 }
 
-.archive:hover {
+.all-pages:hover {
     font-size: 1.7rem;
     color: rgb(110, 50, 250);
 }
 
 /* Nine Morris 3D section */
-
-#nine-morris-3d-section {
-    text-align: center;
-}
 
 #nine-morris-3d-section p {
     font-size: 1.3rem;
@@ -191,7 +186,6 @@ body {
     max-width: 450px;
     margin-bottom: 20px;
     border-radius: 5px;
-    box-shadow: 2px 2px 40px rgb(160, 160, 160);
 }
 
 #nine-morris-3d-section .link {
@@ -202,7 +196,6 @@ body {
 /* About section */
 
 #about-section {
-    text-align: center;
     padding: 0 0 70px 0;
 }
 
@@ -223,7 +216,7 @@ body {
 
 .description p {
     font-size: 1.3rem;
-    color: rgb(80, 80, 80);
+    color: rgb(90, 90, 90);
 }
 
 .picture p {
@@ -235,7 +228,6 @@ body {
     width: 180px;
     border-radius: 45%;
     margin-bottom: 10px;
-    box-shadow: 2px 2px 40px rgb(160, 160, 160);
 }
 
 .social-media {
@@ -256,7 +248,6 @@ body {
 /* Contact section */
 
 #contact-section {
-    text-align: center;
     padding: 0 0 70px 0;
 }
 

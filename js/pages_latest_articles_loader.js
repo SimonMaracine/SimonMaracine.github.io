@@ -34,20 +34,6 @@ function showArticles(articles, pagesDivRow1Column1, pagesDivRow1Column2, pagesD
 
         index--;
     }
-
-    // Jump to section
-    const urlSearchParameters = new URLSearchParams(window.location.search);
-    const parameters = Object.fromEntries(urlSearchParameters.entries());
-
-    const section = parameters["s"];
-
-    if (section !== undefined && /^([a-z0-9\-]+)$/.test(section)) {
-        const actualSection = section + "-section";
-
-        document.getElementById(actualSection).scrollIntoView({
-            behavior: "smooth"
-        });
-    }
 }
 
 function onError() {
@@ -75,7 +61,7 @@ function processArticles(latestArticles, pagesDivRow1Column1, pagesDivRow1Column
                     index,
                     `
                         <div class="pages-item">
-                            <h2>${articleDetails['title']}</h2>
+                            <h2 class="title">${articleDetails['title']}</h2>
                             <p class="date">${date['month']} ${date['day']}, ${date['year']}</p>
                             <p class="preview">${articleDetails['preview']}</p>
                             <div class="read-more-container">

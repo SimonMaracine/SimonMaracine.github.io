@@ -16,32 +16,22 @@ body {
 }
 
 .pages-header {
-    font-family: "Dancing Script", cursive;
     margin: 60px 0 50px 0;
-    color: rgb(100, 100, 100);
+    color: rgb(110, 110, 110);
 }
 
 .quote {
+    font-family: "Dancing Script", cursive;
     font-size: calc(1.9rem + 0.9vw);
     margin-bottom: 60px;
 }
 
 .description {
-    font-size: calc(1.05rem + 0.6vw);
-    font-family: "Montserrat", sans-serif;
+    font-size: calc(1.05rem + 0.52vw);
     color: rgb(115, 115, 115);
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
-}
-
-.archive-title {
-    font-size: 3.4rem;
-    margin-top: 80px;
-}
-
-.pages-name {
-    font-weight: bold;
 }
 
 .pages-item {
@@ -52,7 +42,7 @@ body {
     margin: 0 auto 35px auto;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 1px 1px 30px rgb(205, 205, 205);
+    box-shadow: 0px 0px 30px rgb(200, 200, 200);
 }
 
 .title {
@@ -62,7 +52,7 @@ body {
 
 .date {
     font-size: 1.3rem;
-    color: rgb(100, 100, 100);
+    color: rgb(110, 110, 110);
 }
 
 .preview {
