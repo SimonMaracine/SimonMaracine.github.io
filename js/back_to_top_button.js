@@ -1,8 +1,12 @@
 let toTopButton;
 
 function onScroll() {
-    if (document.body.scrollTop > document.body.scrollHeight / 2
-            || document.documentElement.scrollTop > document.body.scrollHeight / 2) {
+    const show = (
+        document.body.scrollTop > document.body.scrollHeight / 2
+        || document.documentElement.scrollTop > document.body.scrollHeight / 2
+    );
+
+    if (show) {
         toTopButton.style.display = "block";
     } else {
         toTopButton.style.display = "none";
