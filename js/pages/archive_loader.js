@@ -34,7 +34,7 @@ function processArticles(articlesInPage, articlesDiv) {
                                 <div class="pages-item">
                                     <h2 class="title">${articleDetails['title']}</h2>
                                     <p class="date">${date['month']} ${date['day']}, ${date['year']}</p>
-                                    <p class="preview">${articleDetails['preview']}</p>
+                                    <p class="preview">${articleDetails['preview']}...</p>
                                     <div class="read-more-container">
                                         <a class="item-link" href="${'/html/pages/article.html?article=' + article}">
                                             <p class="read-more">Read More</p>
