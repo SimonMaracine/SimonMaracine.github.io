@@ -30,15 +30,10 @@ function showArticles(articles, pagesDivRow1Column1, pagesDivRow1Column2, pagesD
                 break;
         };
 
-        div.innerHTML += articles[index].htmlContent;
+        div.innerHTML = articles[index].htmlContent;
 
         index--;
     }
-}
-
-function onError() {
-    const pagesDiv = document.querySelector("#pages-section .container");
-    pagesDiv.innerHTML = '<p style="text-align: center;">There was an error getting the latest articles. :(</p>';
 }
 
 function processArticles(latestArticles, pagesDivRow1Column1, pagesDivRow1Column2,
@@ -115,4 +110,23 @@ function onLoad(result) {
     );
 }
 
-loadFileFromServer("/html/pages/articles.json", onLoad, onError);
+function onError() {
+    const pagesDiv = document.querySelector("#pages-section .container");
+    pagesDiv.innerHTML = '<p style="text-align: center;">There was an error getting the latest articles. :(</p>';
+}
+
+let loadedArticles = false;
+
+window.addEventListener("scroll", () => {
+    const pagesSection = document.getElementById("pages-section");
+
+    const scrollY = window.scrollY + window.innerHeight;
+
+    if (!loadedArticles && scrollY > pagesSection.offsetTop) {
+        loadFileFromServer("/html/pages/articles.json", onLoad, onError);
+
+        loadedArticles = true;
+    }
+
+    console.log(pagesSection.offsetHeight);
+});

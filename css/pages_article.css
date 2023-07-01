@@ -1,6 +1,6 @@
 body {
     font-family: "Montserrat", sans-serif;
-    background-color: rgb(250, 244, 240);
+    background-color: rgb(250, 244, 236);
 }
 
 .link {
@@ -12,6 +12,7 @@ body {
 
 .content {
     padding: 50px 0 10px 0;
+    color: rgb(62, 62, 62);
 }
 
 .content .container {
@@ -19,17 +20,15 @@ body {
 }
 
 .title-container {
-    border-bottom: rgb(60, 60, 60) 3px solid;
+    border-bottom: rgb(62, 62, 62) 3px solid;
 }
 
 #title {
     font-weight: bold;
-    color: rgb(60, 60, 60);
 }
 
 .details {
     font-weight: bold;
-    color: rgb(60, 60, 60);
     margin: 10px 0 30px 0;
 }
 
@@ -63,7 +62,6 @@ body {
     font-family: "Inter", sans-serif;
     font-size: 1.2rem;
     line-height: 40px;
-    color: rgb(60, 60, 60);
 }
 
 .all-pages-container {

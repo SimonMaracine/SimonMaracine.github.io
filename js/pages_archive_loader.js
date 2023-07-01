@@ -17,11 +17,6 @@ function showArticles(articles, articlesDiv) {
     }
 }
 
-function onError() {
-    const articlesDiv = document.getElementById("articles");
-    articlesDiv.innerHTML = '<p style="text-align: center;">There was an error getting the articles in this page. :(</p>';
-}
-
 function processArticles(articlesInPage, articlesDiv) {
     const articles = {};
 
@@ -87,6 +82,11 @@ function onLoad(result) {
     const articlesDiv = document.getElementById("articles");
 
     processArticles(articlesInPage, articlesDiv);
+}
+
+function onError() {
+    const articlesDiv = document.getElementById("articles");
+    articlesDiv.innerHTML = '<p style="text-align: center;">There was an error getting the articles in this page. :(</p>';
 }
 
 const urlSearchParameters = new URLSearchParams(window.location.search);

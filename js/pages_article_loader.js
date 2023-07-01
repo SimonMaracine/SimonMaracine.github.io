@@ -1,10 +1,5 @@
 import { loadFileFromServer } from "./load_file_from_server.js";
 
-function onError() {
-    const content = document.querySelector(".content");
-    content.innerHTML = '<h2 style="text-align: center;">There was an error getting the article. :(</h2>';
-}
-
 function onLoad(result) {
     const articleDetails = JSON.parse(result);
 
@@ -29,6 +24,11 @@ function onLoad(result) {
         const year = articleDetails["last-modified"]["year"];
         lastModified.innerText = `${month} ${day}, ${year}`;
     }
+}
+
+function onError() {
+    const content = document.querySelector(".content");
+    content.innerHTML = '<h2 style="text-align: center;">There was an error getting the article. :(</h2>';
 }
 
 const urlSearchParameters = new URLSearchParams(window.location.search);
