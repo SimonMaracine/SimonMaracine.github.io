@@ -121,6 +121,4 @@ window.addEventListener("scroll", () => {
 
         loadedArticles = true;
     }
-
-    console.log(pagesSection.offsetHeight);
 });
