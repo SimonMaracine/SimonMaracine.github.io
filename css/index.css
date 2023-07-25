@@ -15,9 +15,10 @@ body {
 
 .section-title {
     font-weight: bold;
-    color: rgb(100, 100, 100);
+    color: rgb(90, 90, 90);
     text-align: center;
-    padding: 80px 0 50px 0;
+    padding: 85px 0 50px 0;
+    margin: 0 40px;
 }
 
 .section-centered {
@@ -98,9 +99,14 @@ body {
 
 /* Projects section */
 
+.carousel-inner {
+    min-height: 290px;
+    display: flex;
+    align-items: center;
+}
+
 .carousel-item {
-    padding: 10px 15% 10px 15%;
-    min-height: 270px;
+    padding: 0 15%;
 }
 
 .carousel-item h2 {
@@ -109,7 +115,7 @@ body {
 }
 
 .carousel-item p {
-    font-size: 1.3rem;
+    font-size: calc(1.17rem + 0.2vw);
     color: rgb(90, 90, 90);
 }
 
