@@ -61,6 +61,7 @@ body {
 #article-content {
     font-family: "Inter", sans-serif;
     font-size: 1.2rem;
+    font-size: calc(0.95rem + 0.35vw);
     line-height: 40px;
 }
 
