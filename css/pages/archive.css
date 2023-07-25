@@ -75,6 +75,10 @@ body {
     color: rgb(110, 50, 250);
 }
 
+.pagination {
+    font-size: 1.25rem;
+}
+
 .pagination > .active > a {
     background-color: rgb(110, 50, 250) !important;
     border: solid 1px rgb(110, 50, 250) !important;
