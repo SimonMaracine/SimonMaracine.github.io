@@ -60,7 +60,7 @@ body {
 
 #article-content {
     font-family: "Inter", sans-serif;
-    font-size: calc(0.98rem + 0.35vw);
+    font-size: calc(1rem + 0.35vw);
     line-height: 40px;
 }
 

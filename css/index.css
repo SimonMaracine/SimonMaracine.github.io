@@ -100,7 +100,7 @@ body {
 /* Projects section */
 
 .carousel-inner {
-    min-height: 290px;
+    min-height: 270px;
     display: flex;
     align-items: center;
 }
