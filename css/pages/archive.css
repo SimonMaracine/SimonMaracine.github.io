@@ -60,17 +60,17 @@ body {
     color: rgb(110, 110, 110);
 }
 
-.read-more-container {
+.read-page-container {
     height: 32px;
     text-align: right;
 }
 
-.read-more {
+.read-page {
     font-size: 1.6rem;
     color: rgb(105, 105, 105);
 }
 
-.read-more:hover {
+.read-page:hover {
     font-size: 1.7rem;
     color: rgb(110, 50, 250);
 }
