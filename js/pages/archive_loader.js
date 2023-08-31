@@ -5,6 +5,9 @@ function showArticles(articles, articlesDiv) {
     const minIndex = Math.min(...Object.values(articles).map(article => article.index));
     let index = minIndex;
 
+    // Clear the placeholder code
+    articlesDiv.innerHTML = "";
+
     for (let i = 0; i < Object.keys(articles).length; i++) {
         articlesDiv.innerHTML += articles[index].htmlContent;
         index++;
@@ -29,20 +32,16 @@ function processArticles(articlesInPage, articlesDiv) {
                 articles[index] = new Article(
                     index,
                     `
-                        <div class="row"></div>
-                            <div class="col-lg-12">
-                                <div class="pages-item">
-                                    <h2 class="title">${articleDetails['title']}</h2>
-                                    <p class="date">${date['month']} ${date['day']}, ${date['year']}</p>
-                                    <p class="preview">${articleDetails['preview']}...</p>
-                                    <div class="read-page-container">
-                                        <a class="item-link" href="${'/html/pages/article.html?article=' + article}">
-                                            <p class="read-page">Read Page</p>
-                                        </a>
-                                    </div>
-                                </div>
-                            <div>
-                        <div>
+                        <div class="pages-item">
+                            <h2 class="title">${articleDetails['title']}</h2>
+                            <p class="date">${date['month']} ${date['day']}, ${date['year']}</p>
+                            <p class="preview">${articleDetails['preview']}...</p>
+                            <div class="read-page-container">
+                                <a class="item-link" href="${'/html/pages/article.html?article=' + article}">
+                                    <p class="read-page">Read Page</p>
+                                </a>
+                            </div>
+                        </div>
                     `
                 );
 
