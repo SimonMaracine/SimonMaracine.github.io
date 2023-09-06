@@ -38,11 +38,15 @@ body {
     text-align: left;
     background-color: rgb(222, 214, 240);
     padding: 15px;
-    max-width: 1200px;
+    max-width: 1100px;
     margin: 0 auto 35px auto;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0px 0px 30px rgb(200, 200, 200);
+}
+
+.placeholder-item {
+    height: 170px;
 }
 
 .title {
@@ -76,7 +80,7 @@ body {
 }
 
 .pagination {
-    font-size: 1.2rem;
+    font-size: 1.25rem;
 }
 
 .pagination > .active > a {
