@@ -1,39 +1,18 @@
 import { loadFileFromServer } from "./load_file_from_server.js";
-import { Article } from "./article_struct.js";
+import { Article } from "./article.js";
 
-function showArticles(articles, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1,
-        pagesDivRow2Column2) {
+function showArticles(articles, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1, pagesDivRow2Column2) {
     const maxIndex = Math.max(...Object.values(articles).map(article => article.index));
     let index = maxIndex;
 
-    for (let i = 0; i < 4; i++) {
-        let div;
-
-        switch (i) {
-            case 0:
-                div = pagesDivRow1Column1;
-                break;
-            case 1:
-                div = pagesDivRow1Column2;
-                break;
-            case 2:
-                div = pagesDivRow2Column1;
-                break;
-            case 3:
-                div = pagesDivRow2Column2;
-                break;
-        };
-
-        div.innerHTML = articles[index].htmlContent;
-
-        index--;
-    }
+    pagesDivRow1Column1.innerHTML = articles[index--].htmlContent;
+    pagesDivRow1Column2.innerHTML = articles[index--].htmlContent;
+    pagesDivRow2Column1.innerHTML = articles[index--].htmlContent;
+    pagesDivRow2Column2.innerHTML = articles[index--].htmlContent;
 }
 
-function processArticles(latestArticles, pagesDivRow1Column1, pagesDivRow1Column2,
-        pagesDivRow2Column1, pagesDivRow2Column2) {
+function processArticles(latestArticles, pagesDivRow1Column1, pagesDivRow1Column2, pagesDivRow2Column1, pagesDivRow2Column2) {
     const articles = {};
-
     let articlesProcessed = 0;
 
     for (const article of latestArticles) {
@@ -41,7 +20,7 @@ function processArticles(latestArticles, pagesDivRow1Column1, pagesDivRow1Column
 
         loadFileFromServer(
             filePath,
-            (articleResult) => {
+            articleResult => {
                 const articleDetails = JSON.parse(articleResult);
                 const index = articleDetails["index"];
                 const date = articleDetails['date'];
@@ -62,10 +41,7 @@ function processArticles(latestArticles, pagesDivRow1Column1, pagesDivRow1Column
                     `
                 );
 
-                articlesProcessed++;
-
-                // Show these articles in the page
-                if (articlesProcessed === 4) {
+                if (++articlesProcessed === 4) {
                     showArticles(
                         articles,
                         pagesDivRow1Column1,
@@ -85,10 +61,9 @@ function processArticles(latestArticles, pagesDivRow1Column1, pagesDivRow1Column
 
 function onLoad(result) {
     const articles = JSON.parse(result);
-    const allArticles = articles["articles"];
 
     const ARTICLES = 4;
-    const latestArticles = allArticles.slice(-ARTICLES);
+    const latestArticles = articles.slice(-ARTICLES);
 
     const pagesDivRow1Column1 = document.querySelector("#pages-section .row1 .column1");
     const pagesDivRow1Column2 = document.querySelector("#pages-section .row1 .column2");
@@ -113,7 +88,6 @@ let loadedArticles = false;
 
 window.addEventListener("scroll", () => {
     const pagesSection = document.getElementById("pages-section");
-
     const scrollY = window.scrollY + window.innerHeight;
 
     if (!loadedArticles && scrollY > pagesSection.offsetTop) {

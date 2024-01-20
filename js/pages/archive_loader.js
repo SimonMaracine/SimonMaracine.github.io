@@ -1,5 +1,5 @@
 import { loadFileFromServer } from "./load_file_from_server.js";
-import { Article } from "./article_struct.js";
+import { Article } from "./article.js";
 
 function showArticles(articles, articlesDiv) {
     const minIndex = Math.min(...Object.values(articles).map(article => article.index));
@@ -16,7 +16,6 @@ function showArticles(articles, articlesDiv) {
 
 function processArticles(articlesInPage, articlesDiv) {
     const articles = {};
-
     let articlesProcessed = 0;
 
     for (const article of articlesInPage) {
@@ -24,7 +23,7 @@ function processArticles(articlesInPage, articlesDiv) {
 
         loadFileFromServer(
             filePath,
-            (articleResult) => {
+            articleResult => {
                 const articleDetails = JSON.parse(articleResult);
                 const index = articleDetails["index"];
                 const date = articleDetails["date"];
@@ -45,10 +44,7 @@ function processArticles(articlesInPage, articlesDiv) {
                     `
                 );
 
-                articlesProcessed++;
-
-                // Show these articles in the page
-                if (articlesProcessed === articlesInPage.length) {
+                if (++articlesProcessed === articlesInPage.length) {
                     showArticles(articles, articlesDiv);
                 }
             },
@@ -62,10 +58,9 @@ function processArticles(articlesInPage, articlesDiv) {
 
 function onLoad(result) {
     const articles = JSON.parse(result);
-    const allArticles = articles["articles"];
 
     const ARTICLES = 10;
-    const articlesInPage = allArticles.slice(ARTICLES * (paginationNumber - 1), ARTICLES * paginationNumber);
+    const articlesInPage = articles.slice(ARTICLES * (paginationNumber - 1), ARTICLES * paginationNumber);
 
     if (articlesInPage === undefined) {
         onError();
@@ -79,12 +74,11 @@ function onLoad(result) {
 
 function onError() {
     const articlesDiv = document.getElementById("articles");
-    articlesDiv.innerHTML = '<p style="text-align: center;">There was an error getting the articles in this page. :(</p>';
+    articlesDiv.innerHTML = '<p style="text-align: center;">There was an error getting the articles. :(</p>';
 }
 
 const urlSearchParameters = new URLSearchParams(window.location.search);
 const parameters = Object.fromEntries(urlSearchParameters.entries());
-
 const paginationNumber = parameters["pagination"];
 
 if (paginationNumber !== undefined && /^([0-9]+)$/.test(paginationNumber) && paginationNumber > 0) {

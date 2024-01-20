@@ -5,8 +5,11 @@ window.addEventListener("load", () => {
     hello1.classList.remove("initially-hidden");
     hello1.classList.add("fade-in");
 
-    setTimeout(() => {
-        hello2.classList.remove("initially-hidden");
-        hello2.classList.add("fade-in");
-    }, 1200);
+    setTimeout(
+        () => {
+            hello2.classList.remove("initially-hidden");
+            hello2.classList.add("fade-in");
+        },
+        1200
+    );
 });

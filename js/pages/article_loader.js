@@ -28,12 +28,11 @@ function onLoad(result) {
 
 function onError() {
     const content = document.querySelector(".content");
-    content.innerHTML = '<h2 style="text-align: center;">There was an error getting the article. :(</h2>';
+    content.innerHTML = '<p style="text-align: center;">There was an error getting the article. :(</p>';
 }
 
 const urlSearchParameters = new URLSearchParams(window.location.search);
 const parameters = Object.fromEntries(urlSearchParameters.entries());
-
 const articleName = parameters["article"];
 
 if (articleName !== undefined && /^(([a-z]+[0-9]*(\-)?)+)$/.test(articleName)) {
