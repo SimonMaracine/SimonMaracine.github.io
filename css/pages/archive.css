@@ -1,23 +1,21 @@
 body {
     font-family: "Montserrat", sans-serif;
-    background-color: rgb(250, 250, 245);
+    background-color: #fafaf5;
 }
 
 .item-link {
-    text-decoration: inherit;
+    text-decoration: none;
     color: inherit;
 }
 
-/* Content */
-
-.content {
+main {
     text-align: center;
     padding-bottom: 20px;
 }
 
 .pages-header {
     margin: 60px 0;
-    color: rgb(110, 110, 110);
+    color: #6e6e6e;
 }
 
 .quote {
@@ -28,7 +26,6 @@ body {
 
 .description {
     font-size: calc(1.02rem + 0.47vw);
-    color: rgb(115, 115, 115);
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
@@ -36,13 +33,14 @@ body {
 
 .pages-item {
     text-align: left;
-    background-color: rgb(222, 214, 240);
+    background-color: #dcd2f0;
     padding: 15px;
     max-width: 1100px;
     margin: 0 auto 35px auto;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0px 0px 30px rgb(200, 200, 200);
+    color: #6e6e6e;
 }
 
 .placeholder-item {
@@ -51,17 +49,14 @@ body {
 
 .title {
     font-weight: bold;
-    color: rgb(100, 100, 100);
 }
 
 .date {
     font-size: 1.3rem;
-    color: rgb(110, 110, 110);
 }
 
 .preview {
     font-size: 1.15rem;
-    color: rgb(110, 110, 110);
 }
 
 .read-page-container {
@@ -71,7 +66,7 @@ body {
 
 .read-page {
     font-size: 1.6rem;
-    color: rgb(105, 105, 105);
+    color: #646464;
 }
 
 .read-page:hover {
@@ -87,9 +82,8 @@ body {
     background-color: rgb(110, 50, 250) !important;
     border: solid 1px rgb(110, 50, 250) !important;
     color: white !important;
-    margin-bottom: 30px;
 }
 
-.page-link {
-    color: rgb(60, 60, 60) !important;
+.pagination a {
+    color: #646464 !important;
 }

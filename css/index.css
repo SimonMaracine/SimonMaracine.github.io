@@ -1,26 +1,28 @@
 body {
     font-family: "Montserrat", sans-serif;
-    background-color: rgb(250, 250, 245);
+    background-color: #fafaf5;
 }
 
 .colored-section {
-    background-color: rgb(222, 214, 240);
+    background-color: #dcd2f0;
     box-shadow: 0px 0px 30px rgb(170, 170, 170);
 }
 
 .item-link {
-    text-decoration: inherit;
+    text-decoration: none;
     color: inherit;
 }
 
 .section-title {
     font-weight: bold;
-    color: rgb(90, 90, 90);
+    color: #646464;
     text-align: center;
+    /* TODO tweak */
     padding: 85px 0 50px 0;
     margin: 0 40px;
 }
 
+/* TODO maybe remove */
 .section-centered {
     text-align: center;
 }
@@ -29,18 +31,12 @@ body {
     box-shadow: 0px 0px 30px rgb(170, 170, 170);
 }
 
-/* First section content */
+/* First */
 
 #first-section {
     overflow: auto;
-    background-image: url("/images/binary_background.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-color: white;
-}
-
-.first-section-content {
-    height: 92vh;
+    background-image: url("/images/binary.jpg");
+    height: 95vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -55,8 +51,9 @@ body {
 
 .hello p {
     font-weight: bold;
-    color: rgb(100, 100, 100);
+    color: #646464;
     font-size: calc(1.3rem + 2.7vw);
+    text-align: left;
 }
 
 @media (min-width: 1200px) {
@@ -65,21 +62,8 @@ body {
     }
 }
 
-.hello #hello1 {
-    text-align: left;
-    margin-bottom: 25px;
-}
-
-.hello #hello2 {
-    text-align: left;
-}
-
-@media (max-width: 540px) {
-    .hello #hello1 {
-        text-align: center;
-    }
-
-    .hello #hello2 {
+@media (max-width: 576px) {
+    .hello p {
         text-align: center;
     }
 }
@@ -97,7 +81,7 @@ body {
     100% { opacity: 100%; }
 }
 
-/* Projects section */
+/* Projects */
 
 .carousel-inner {
     min-height: 270px;
@@ -111,15 +95,15 @@ body {
 
 .carousel-item h2 {
     font-weight: bold;
-    color: rgb(100, 100, 100);
+    color: #646464;
 }
 
 .carousel-item p {
     font-size: calc(1.17rem + 0.2vw);
-    color: rgb(90, 90, 90);
+    color: #646464;
 }
 
-/* Pages section */
+/* Pages */
 
 #pages-section .container {
     text-align: left;
@@ -128,28 +112,26 @@ body {
 .pages-item {
     margin-bottom: 45px;
     border-radius: 20px;
-    background-color: rgb(222, 214, 240);
+    background-color: #dcd2f0;
     padding: 15px;
     box-shadow: 0px 0px 30px rgb(200, 200, 200);
+    color: #6e6e6e;
 }
 
 .placeholder-item {
     height: 170px;
 }
 
-.title {
+.pages-item .title {
     font-weight: bold;
-    color: rgb(100, 100, 100);
 }
 
-.date {
+.pages-item .date {
     font-size: 1.15rem;
-    color: rgb(110, 110, 110);
 }
 
-.preview {
+.pages-item .preview {
     font-size: 1.15rem;
-    color: rgb(110, 110, 110);
 }
 
 .read-page-container {
@@ -159,7 +141,7 @@ body {
 
 .read-page {
     font-size: 1.5rem;
-    color: rgb(105, 105, 105);
+    color: #646464;
 }
 
 .read-page:hover {
@@ -174,7 +156,7 @@ body {
 
 .all-pages {
     font-size: 1.6rem;
-    color: rgb(85, 85, 85);
+    color: #646464;
 }
 
 .all-pages:hover {
@@ -182,11 +164,11 @@ body {
     color: rgb(110, 50, 250);
 }
 
-/* Nine Morris 3D section */
+/* Nine Morris 3D */
 
 #nine-morris-3d-section p {
     font-size: 1.3rem;
-    color: rgb(90, 90, 90);
+    color: #646464;
     max-width: 350px;
     margin: 0 auto 70px auto;
 }
@@ -198,12 +180,12 @@ body {
     border-radius: 5px;
 }
 
-#nine-morris-3d-section .link {
-    text-decoration: inherit;
+#nine-morris-3d-section a {
+    text-decoration: none;
     color: rgb(110, 50, 250);
 }
 
-/* About section */
+/* About */
 
 #about-section {
     padding: 0 0 70px 0;
@@ -226,12 +208,12 @@ body {
 
 .description p {
     font-size: 1.3rem;
-    color: rgb(90, 90, 90);
+    color: #646464;
 }
 
 .picture p {
     font-size: 1.2rem;
-    color: rgb(125, 125, 125);
+    color: #7d7d7d;
 }
 
 .picture img {
@@ -246,7 +228,7 @@ body {
 
 .social-media i {
     padding: 0 5px;
-    color: rgb(80, 80, 80);
+    color: #646464;
 }
 
 .social-media i:hover {
@@ -255,12 +237,12 @@ body {
     color: rgb(110, 50, 250);
 }
 
-/* Contact section */
+/* Contact */
 
 #contact-section {
     padding: 0 0 70px 0;
 }
 
 #contact-section p {
-    color: rgb(100, 100, 100);
+    color: #646464;
 }

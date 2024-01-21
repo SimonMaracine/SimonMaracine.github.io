@@ -1,26 +1,25 @@
 body {
     font-family: "Montserrat", sans-serif;
-    background-color: rgb(250, 245, 230);
+    background-color: #faf5e6;
 }
 
 .link {
-    text-decoration: inherit;
+    text-decoration: none;
     color: inherit;
 }
 
-/* Content */
-
-.content {
+main {
     padding: 50px 0 10px 0;
-    color: rgb(62, 62, 62);
+    color: #5a5a5a;
 }
 
-.content .container {
+main .container {
+    /* TODO refactor */
     max-width: 1100px;
 }
 
 .title-container {
-    border-bottom: rgb(62, 62, 62) 3px solid;
+    border-bottom: #5a5a5a 3px solid;
 }
 
 #title {
@@ -74,6 +73,7 @@ body {
     font-size: 1.5rem;
     margin-top: 50px;
     text-align: center;
+    color: #646464;
 }
 
 .all-pages:hover {
