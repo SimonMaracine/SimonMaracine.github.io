@@ -1,3 +1,4 @@
 #! /bin/bash
 
-python3 -m http.server $1
+port=$1
+python3 -m http.server $port
