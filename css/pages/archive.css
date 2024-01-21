@@ -39,7 +39,7 @@ main {
     margin: 0 auto 35px auto;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0px 0px 30px #bebebe;
+    box-shadow: 0 0 30px #bebebe;
     color: #6e6e6e;
 }
 
