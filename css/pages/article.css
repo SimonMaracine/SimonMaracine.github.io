@@ -9,7 +9,7 @@ body {
 }
 
 main {
-    padding: 50px 0 10px 0;
+    padding: 3rem 0 1rem 0;
     color: #5a5a5a;
 }
 
@@ -28,11 +28,11 @@ main .container {
 
 .details {
     font-weight: bold;
-    margin: 10px 0 30px 0;
+    margin: 1rem 0 2rem 0;
 }
 
 .details .detail {
-    margin-bottom: 5px;
+    margin-bottom: 0.5rem;
 }
 
 #date {
@@ -64,14 +64,13 @@ main .container {
 }
 
 .all-pages-container {
-    height: 28px;
-    margin-bottom: 50px;
-    text-align: center;
+    height: 32px;
+    margin-bottom: 3.5rem;
 }
 
 .all-pages {
     font-size: 1.5rem;
-    margin-top: 50px;
+    margin-top: 3.5rem;
     text-align: center;
     color: #646464;
 }

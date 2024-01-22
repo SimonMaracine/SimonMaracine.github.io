@@ -1,7 +1,7 @@
 nav {
-    padding-left: 30px;
-    padding-right: 30px;
-    box-shadow: 0 4px 40px rgb(170, 170, 170);
+    padding-left: 2rem;
+    padding-right: 2rem;
+    box-shadow: 0 2px 40px #aaaaaa;
 }
 
 .navbar-toggler:focus {
@@ -21,4 +21,5 @@ nav li {
     font-size: 1.3rem;
     font-weight: bold;
     margin: 0 5px;
+    text-align: left;
 }

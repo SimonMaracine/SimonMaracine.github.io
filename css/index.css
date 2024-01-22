@@ -1,6 +1,7 @@
 body {
     font-family: "Montserrat", sans-serif;
     background-color: #fafaf5;
+    text-align: center;
 }
 
 .colored-section {
@@ -16,15 +17,9 @@ body {
 .section-title {
     font-weight: bold;
     color: #646464;
-    text-align: center;
     /* TODO tweak */
     padding: 85px 0 50px 0;
     margin: 0 40px;
-}
-
-/* TODO maybe remove */
-.section-centered {
-    text-align: center;
 }
 
 .shadowed {
@@ -45,7 +40,7 @@ body {
 .hello {
     display: inline-block;
     background-color: rgba(255, 255, 255, 0.8);
-    padding: 30px;
+    padding: 2rem;
     border-radius: 70px;
 }
 
@@ -110,28 +105,24 @@ body {
 }
 
 .pages-item {
-    margin-bottom: 45px;
+    margin-bottom: 3rem;
     border-radius: 20px;
     background-color: #dcd2f0;
-    padding: 15px;
+    padding: 1rem;
     box-shadow: 0 0 30px #bebebe;
     color: #6e6e6e;
 }
 
+.pages-item p {
+    font-size: 1.15rem;
+}
+
 .placeholder-item {
-    height: 170px;
+    height: 180px;
 }
 
 .pages-item .title {
     font-weight: bold;
-}
-
-.pages-item .date {
-    font-size: 1.15rem;
-}
-
-.pages-item .preview {
-    font-size: 1.15rem;
 }
 
 .read-page-container {
@@ -150,8 +141,8 @@ body {
 }
 
 .all-pages-container {
-    height: 28px;
-    margin: 20px 0 70px 0;
+    height: 32px;
+    margin: 2rem 0 5rem 0;
 }
 
 .all-pages {
@@ -170,14 +161,14 @@ body {
     font-size: 1.3rem;
     color: #646464;
     max-width: 350px;
-    margin: 0 auto 70px auto;
+    margin: 0 auto 4.5rem auto;
 }
 
 #nine-morris-3d-section img {
     width: 95%;
     max-width: 450px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+    margin-bottom: 1.5rem;
+    border-radius: 6px;
 }
 
 #nine-morris-3d-section a {
@@ -188,22 +179,24 @@ body {
 /* About */
 
 #about-section {
-    padding: 0 0 70px 0;
+    padding: 0 0 4.5rem 0;
 }
 
 @media (min-width: 992px) {
     #about-section {
-        padding: 0 15% 70px 15%;
+        padding: 0 15% 4.5rem 15%;
     }
 }
 
-.description {
+.description-container {
     display: flex;
     justify-content: center;
-    flex-direction: column;
-    height: 100%;
+    align-items: center;
+}
+
+.description {
     max-width: 600px;
-    margin-bottom: 40px;
+    padding-bottom: 2rem;
 }
 
 .description p {
@@ -240,7 +233,7 @@ body {
 /* Contact */
 
 #contact-section {
-    padding: 0 0 70px 0;
+    padding-bottom: 4.5rem;
 }
 
 #contact-section p {

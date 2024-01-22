@@ -1,7 +1,7 @@
 #back-to-top {
     position: fixed;
-    bottom: 20px;
-    right: 20px;
+    bottom: 2.5rem;
+    right: 2.5rem;
     display: none;
     background-color: #646464;
     border: none;
