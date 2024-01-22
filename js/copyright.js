@@ -1,3 +1,3 @@
 $(function() {
-    $("#copyright").load("/html/components/copyright.html");
+    $("footer").load("/html/components/copyright.html");
 });

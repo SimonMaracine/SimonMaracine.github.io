@@ -1,3 +1,3 @@
 $(function() {
-    $("#navigation-bar").load("/html/components/navigation_bar.html");
+    $("header").load("/html/components/navigation_bar.html");
 });
