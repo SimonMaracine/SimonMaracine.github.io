@@ -15,11 +15,14 @@ body {
 }
 
 .section-title {
-    font-weight: bold;
     color: #646464;
     /* TODO tweak */
     padding: 85px 0 50px 0;
     margin: 0 40px;
+}
+
+h2 {
+    font-weight: bold;
 }
 
 .shadowed {
@@ -86,16 +89,11 @@ body {
 
 .carousel-item {
     padding: 0 15%;
-}
-
-.carousel-item h2 {
-    font-weight: bold;
     color: #6e6e6e;
 }
 
 .carousel-item p {
     font-size: calc(1.17rem + 0.2vw);
-    color: #6e6e6e;
 }
 
 /* Pages */
@@ -119,10 +117,6 @@ body {
 
 .placeholder-item {
     height: 180px;
-}
-
-.pages-item .title {
-    font-weight: bold;
 }
 
 .read-page-container {

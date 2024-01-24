@@ -29,9 +29,9 @@ function processArticles(latestArticles, pagesDivRow1Column1, pagesDivRow1Column
                     index,
                     `
                         <div class="pages-item">
-                            <h2 class="title">${articleDetails['title']}</h2>
-                            <p class="date">${date['month']} ${date['day']}, ${date['year']}</p>
-                            <p class="preview">${articleDetails['preview']}...</p>
+                            <h2 lang="ro">${articleDetails['title']}</h2>
+                            <p>${date['month']} ${date['day']}, ${date['year']}</p>
+                            <p lang="ro">${articleDetails['preview']}...</p>
                             <div class="read-page-container">
                                 <a class="item-link read-page" href="${'/html/pages/article.html?article=' + article}">
                                     Read Page

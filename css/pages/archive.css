@@ -51,7 +51,7 @@ main {
     height: 180px;
 }
 
-.title {
+.pages-item h2 {
     font-weight: bold;
 }
 
