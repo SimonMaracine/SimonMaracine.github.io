@@ -39,22 +39,12 @@ main .container {
     margin-bottom: 0;
 }
 
-.keywords-head {
+.keywords-head, #keywords, .last-modified-head, #last-modified {
     display: inline;
+}
+
+.keywords-head, .last-modified-head {
     margin-right: 2px;
-}
-
-#keywords {
-    display: inline;
-}
-
-.last-modified-head {
-    display: inline;
-    margin-right: 2px;
-}
-
-#last-modified {
-    display: inline;
 }
 
 #article-content {
