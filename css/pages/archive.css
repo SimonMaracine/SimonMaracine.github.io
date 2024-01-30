@@ -15,7 +15,7 @@ main {
 
 .pages-header {
     margin: 4rem 0;
-    color: #6e6e6e;
+    color: #6c6c6c;
 }
 
 .quote {
@@ -40,7 +40,7 @@ main {
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 0 30px #bebebe;
-    color: #6e6e6e;
+    color: #6c6c6c;
 }
 
 .pages-item p {
@@ -62,7 +62,7 @@ main {
 
 .read-page {
     font-size: 1.6rem;
-    color: #646464;
+    color: #626262;
 }
 
 .read-page:hover {
@@ -88,5 +88,5 @@ main {
 }
 
 .pagination a {
-    color: #646464 !important;
+    color: #626262 !important;
 }

@@ -15,7 +15,7 @@ body {
 }
 
 .section-title {
-    color: #646464;
+    color: #626262;
     /* TODO tweak */
     padding: 85px 0 50px 0;
     margin: 0 40px;
@@ -49,7 +49,7 @@ h2 {
 
 .hello p {
     font-weight: bold;
-    color: #646464;
+    color: #626262;
     font-size: calc(1.3rem + 2.7vw);
     text-align: left;
 }
@@ -89,7 +89,7 @@ h2 {
 
 .carousel-item {
     padding: 0 15%;
-    color: #6e6e6e;
+    color: #6c6c6c;
 }
 
 .carousel-item p {
@@ -108,7 +108,7 @@ h2 {
     background-color: #dcd2f0;
     padding: 1rem;
     box-shadow: 0 0 30px #bebebe;
-    color: #6e6e6e;
+    color: #6c6c6c;
 }
 
 .pages-item p {
@@ -126,7 +126,7 @@ h2 {
 
 .read-page {
     font-size: 1.5rem;
-    color: #646464;
+    color: #626262;
 }
 
 .read-page:hover {
@@ -141,7 +141,7 @@ h2 {
 
 .all-pages {
     font-size: 1.6rem;
-    color: #646464;
+    color: #626262;
 }
 
 .all-pages:hover {
@@ -153,7 +153,7 @@ h2 {
 
 #nine-morris-3d-section p {
     font-size: 1.3rem;
-    color: #646464;
+    color: #626262;
     max-width: 350px;
     margin: 0 auto 4.5rem auto;
 }
@@ -195,7 +195,7 @@ h2 {
 
 .description p {
     font-size: 1.3rem;
-    color: #646464;
+    color: #626262;
 }
 
 #about-section img {
@@ -210,7 +210,7 @@ h2 {
 
 .social-media i {
     padding: 0 5px;
-    color: #646464;
+    color: #626262;
 }
 
 .social-media i:hover {
@@ -226,5 +226,5 @@ h2 {
 }
 
 #contact-section p {
-    color: #646464;
+    color: #626262;
 }
