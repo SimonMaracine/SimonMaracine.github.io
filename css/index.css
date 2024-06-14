@@ -223,6 +223,12 @@ h2 {
     color: #7332ff;
 }
 
+.social-media .explanation {
+    display: inline;
+    font-size: 0.8rem;
+    color: #626262;
+}
+
 /* Contact */
 
 #contact-section {
