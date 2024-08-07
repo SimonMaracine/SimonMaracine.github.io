@@ -1,6 +1,6 @@
 {
     "index": 18,
-    "title": "Concertul",
+    "title": "Concert",
     "date": {
         "day": 6,
         "month": "August",
@@ -8,7 +8,7 @@
     },
     "keywords": ["human life", "world", "darkness"],
     "last-modified": {
-        "day": 6,
+        "day": 7,
         "month": "August",
         "year": 2024
     },
