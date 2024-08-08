@@ -27,8 +27,8 @@ function onLoad(result) {
 }
 
 function onError() {
-    const content = document.querySelector(".content");
-    content.innerHTML = '<p style="text-align: center;">There was an error getting the article. :(</p>';
+    const main = document.getElementsByTagName("main");
+    main[0].innerHTML = '<p style="text-align: center;">There was an error getting the article. :(</p>';
 }
 
 const urlSearchParameters = new URLSearchParams(window.location.search);
