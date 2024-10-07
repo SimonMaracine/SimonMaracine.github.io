@@ -21,6 +21,4 @@ function doneLoading() {
     toTopButton.addEventListener("click", backToTop);
 }
 
-$(function() {
-    $("#back-to-top-button").load("/html/components/back_to_top_button.html", doneLoading);
-});
+document.addEventListener("DOMContentLoaded", doneLoading);
