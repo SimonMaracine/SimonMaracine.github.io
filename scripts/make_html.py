@@ -11,7 +11,7 @@ class Macro:
     file: bool
 
 
-def print_help():
+def _print_help():
     print(
 """make_html.py <template> <destination> [#macro=value...] [$macro=file_path...]
 
@@ -21,7 +21,7 @@ Where `template` is a path to the template file, `destination` is a path to the 
     )
 
 
-def parse_macro_arguments(args: list[str]) -> list[Macro]:
+def _parse_macro_arguments(args: list[str]) -> list[Macro]:
     if len(args) == 3:
         return []
 
@@ -48,7 +48,7 @@ def parse_macro_arguments(args: list[str]) -> list[Macro]:
     return result
 
 
-def process_template(template_contents: str, macros: list[Macro]) -> str:
+def _process_template(template_contents: str, macros: list[Macro]) -> str:
     result = template_contents
 
     for macro in macros:
@@ -68,45 +68,49 @@ def process_template(template_contents: str, macros: list[Macro]) -> str:
     return result
 
 
-def main(args: list[str]) -> int:
+def make_html(template_file_path: str, destination_file_path: str, macros: list[Macro]):
+    try:
+        with open(template_file_path, "r") as template_file:
+            template_contents = template_file.read()
+    except FileNotFoundError as err:
+        raise RuntimeError(f"Could not find template file: {err}")
+    except Exception as err:
+        raise RuntimeError(f"Could not open template file: {err}")
+
+    try:
+        destination_contents = _process_template(template_contents, macros)
+    except RuntimeError as err:
+        raise RuntimeError(f"Could not process template: {err}")
+
+    try:
+        with open(destination_file_path, "w") as destination_file:
+            destination_file.write(destination_contents)
+    except Exception as err:
+        raise RuntimeError(f"Could not write to destination file: {err}")
+
+
+def _main(args: list[str]) -> int:
     if len(args) < 3:
-        print_help()
+        _print_help()
         return 1
 
     template_file_path = args[1]
     destination_file_path = args[2]
 
     try:
-        macros = parse_macro_arguments(args)
+        macros = _parse_macro_arguments(args)
     except RuntimeError as err:
         print(f"Could not parse macros: {err}", file=sys.stderr)
         return 1
 
     try:
-        with open(template_file_path, "r") as template_file:
-            template_contents = template_file.read()
-    except FileNotFoundError as err:
-        print(f"Could not find template file: {err}", file=sys.stderr)
-        return 1
-    except Exception as err:
-        print(f"Could not open template file: {err}", file=sys.stderr)
-        return 1
-
-    try:
-        destination_contents = process_template(template_contents, macros)
+        make_html(template_file_path, destination_file_path, macros)
     except RuntimeError as err:
-        print(f"Could not process template: {err}", file=sys.stderr)
-        return 1
-
-    try:
-        with open(destination_file_path, "w") as destination_file:
-            destination_file.write(destination_contents)
-    except Exception as err:
-        print(f"Could not write to destination file: {err}", file=sys.stderr)
+        print(f"Could not make HTML: {err}", file=sys.stderr)
         return 1
 
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main(sys.argv))
+    sys.exit(_main(sys.argv))

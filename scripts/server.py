@@ -9,4 +9,7 @@ if __name__ == "__main__":
     except IndexError:
         port = []
 
-    subprocess.run(["python3", "-m", "http.server", "--directory", ".."] + port)
+    try:
+        subprocess.run(["python3", "-m", "http.server", "--directory", ".."] + port)
+    except KeyboardInterrupt:
+        pass
