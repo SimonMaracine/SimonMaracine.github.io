@@ -19,7 +19,7 @@ function processArticles(articlesInPage, articlesDiv) {
     let articlesProcessed = 0;
 
     for (const article of articlesInPage) {
-        const filePath = `/html/articles/${article}/${article}.json`;
+        const filePath = `/articles/${article}.json`;
 
         loadFileFromServer(
             filePath,
@@ -80,7 +80,7 @@ const parameters = Object.fromEntries(urlSearchParameters.entries());
 const paginationNumber = parameters["pagination"];
 
 if (paginationNumber !== undefined && /^([0-9]+)$/.test(paginationNumber) && paginationNumber > 0) {
-    loadFileFromServer("/html/articles/articles.json", onLoad, onError);
+    loadFileFromServer("/articles/articles.json", onLoad, onError);
 
     const listItems = document.querySelectorAll(".pagination li");
 

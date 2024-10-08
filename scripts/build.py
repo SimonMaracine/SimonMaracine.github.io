@@ -34,11 +34,11 @@ def main(args: list[str]) -> int:
             ]
         )
 
-        with open("../html/articles/articles.json", "r") as file:
+        with open("../articles/articles.json", "r") as file:
             articles = json.load(file)
 
         for article in articles:
-            with open(f"../html/articles/{article}/{article}.json", "r") as file:
+            with open(f"../articles/{article}.json", "r") as file:
                 article_metadata = json.load(file)
 
             date = article_metadata["date"]
@@ -56,7 +56,7 @@ def main(args: list[str]) -> int:
                     f"#M_DATE={f"{date["month"]} {date["day"]}, {date["year"]}"}",
                     f"#M_KEYWORDS={", ".join(keywords)}",
                     f"#M_LAST_MODIFIED={f"{last_modified["month"]} {last_modified["day"]}, {last_modified["year"]}"}",
-                    f"$M_CONTENTS={f"../html/articles/{article}/{article}.html"}"
+                    f"$M_CONTENTS={f"../html/articles/{article}.html"}"
                 ]
             )
     except Exception as err:

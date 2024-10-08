@@ -16,7 +16,7 @@ function processArticles(latestArticles, pagesDivRow1Column1, pagesDivRow1Column
     let articlesProcessed = 0;
 
     for (const article of latestArticles) {
-        const filePath = `/html/articles/${article}/${article}.json`;
+        const filePath = `/articles/${article}.json`;
 
         loadFileFromServer(
             filePath,
@@ -89,7 +89,7 @@ window.addEventListener("scroll", () => {
     const scrollY = window.scrollY + window.innerHeight;
 
     if (!loadedArticles && scrollY > pagesSection.offsetTop) {
-        loadFileFromServer("/html/articles/articles.json", onLoad, onError);
+        loadFileFromServer("/articles/articles.json", onLoad, onError);
 
         loadedArticles = true;
     }
