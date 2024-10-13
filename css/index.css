@@ -18,6 +18,8 @@ body {
     color: #7332ff;
 }
 
+/* FIXME use uniform padding in sections */
+
 .section-title {
     color: #626262;
     /* TODO tweak */
@@ -81,6 +83,17 @@ h2 {
 @keyframes fadeIn {
     0% { opacity: 0; }
     100% { opacity: 1.0; }
+}
+
+/* Question */
+
+#question-section {
+    padding: 4rem 0;
+}
+
+#question-section p {
+    font-size: 1.3rem;
+    color: #626266;
 }
 
 /* Projects */
