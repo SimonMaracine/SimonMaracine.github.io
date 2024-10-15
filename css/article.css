@@ -3,9 +3,13 @@ body {
     background-color: #faf5e6;
 }
 
-.link {
+.generic-link {
     text-decoration: none;
     color: inherit;
+}
+
+.generic-link:hover {
+    color: #000000;
 }
 
 main {
@@ -53,19 +57,11 @@ main .container {
     line-height: 3.1rem;
 }
 
-.all-pages-container {
-    height: 32px;
-    margin-bottom: 3.5rem;
-}
-
-.all-pages {
-    font-size: 1.5rem;
-    margin-top: 3.5rem;
+.view-all-pages {
     text-align: center;
-    color: #626262;
 }
 
-.all-pages:hover {
+.view-all-pages a {
     font-size: 1.6rem;
-    color: #000000;
+    color: #626262;
 }

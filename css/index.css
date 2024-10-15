@@ -4,35 +4,36 @@ body {
     text-align: center;
 }
 
+h2 {
+    font-weight: bold;
+}
+
+section {
+    padding: 4rem 0;
+}
+
+.shadowed {
+    box-shadow: 0 0 30px #aaaaaa;
+}
+
+.generic-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.generic-link:hover {
+    color: #7332ff;
+}
+
 .colored-section {
     background-color: #dcd2f0;
     box-shadow: 0 0 30px #aaaaaa;
 }
 
-.item-link {
-    text-decoration: none;
-    color: inherit;
-}
-
-.item-link:hover {
-    color: #7332ff;
-}
-
-/* FIXME use uniform padding in sections */
-
 .section-title {
     color: #626262;
-    /* TODO tweak */
-    padding: 85px 0 50px 0;
-    margin: 0 40px;
-}
-
-h2 {
-    font-weight: bold;
-}
-
-.shadowed {
-    box-shadow: 0 0 30px #aaaaaa;
+    margin: 0 2.5rem;
+    margin-bottom: 3.5rem;
 }
 
 /* First */
@@ -87,10 +88,6 @@ h2 {
 
 /* Question */
 
-#question-section {
-    padding: 4rem 0;
-}
-
 #question-section p {
     font-size: 1.3rem;
     color: #626266;
@@ -111,55 +108,6 @@ h2 {
 
 .carousel-item p {
     font-size: calc(1.17rem + 0.2vw);
-}
-
-/* Pages */
-
-#pages-section .container {
-    text-align: left;
-}
-
-.pages-item {
-    margin-bottom: 3rem;
-    border-radius: 20px;
-    background-color: #dcd2f0;
-    padding: 1rem;
-    box-shadow: 0 0 30px #bebebe;
-    color: #6c6c6c;
-}
-
-.pages-item p {
-    font-size: 1.15rem;
-}
-
-.read-page-container {
-    height: 32px;
-    text-align: right;
-}
-
-.read-page {
-    font-size: 1.5rem;
-    color: #626262;
-}
-
-.read-page:hover {
-    font-size: 1.6rem;
-    color: #7332ff;
-}
-
-.all-pages-container {
-    height: 32px;
-    margin: 2rem 0 5rem 0;
-}
-
-.all-pages {
-    font-size: 1.6rem;
-    color: #626262;
-}
-
-.all-pages:hover {
-    font-size: 1.7rem;
-    color: #7332ff;
 }
 
 /* Nine Morris 3D */
@@ -183,15 +131,50 @@ h2 {
     color: #7332ff;
 }
 
-/* About */
+/* Pages */
 
-#about-section {
-    padding: 0 0 4.5rem 0;
+#pages-section .container {
+    text-align: left;
 }
+
+.pages-item {
+    margin-bottom: 3rem;
+    border-radius: 20px;
+    background-color: #dcd2f0;
+    padding: 1rem;
+    box-shadow: 0 0 30px #bebebe;
+    color: #6c6c6c;
+}
+
+.pages-item p {
+    font-size: 1.15rem;
+}
+
+.read-page {
+    text-align: right;
+    margin: 0;
+}
+
+.read-page a {
+    font-size: 1.5rem;
+    color: #626262;
+}
+
+.read-page a:hover {
+    color: #7332ff;
+}
+
+.view-all-pages a {
+    font-size: 1.6rem;
+    color: #626262;
+}
+
+/* About */
 
 @media (min-width: 992px) {
     #about-section {
-        padding: 0 15% 4.5rem 15%;
+        padding-left: 15%;
+        padding-right: 15%;
     }
 }
 
@@ -217,33 +200,14 @@ h2 {
     margin-bottom: 1rem;
 }
 
-.social-media {
-    font-size: 1.9rem;
-}
-
-.social-media i {
-    padding: 0 5px;
-    color: #626262;
-}
-
-.social-media i:hover {
-    font-size: 2.17rem;
-    padding: 0 3px;
-    color: #7332ff;
-}
-
-.social-media .explanation {
-    display: inline;
-    font-size: 0.8rem;
+.explanation {
+    font-size: 0.85rem;
     color: #626262;
 }
 
 /* Contact */
 
-#contact-section {
-    padding-bottom: 4.5rem;
-}
-
 #contact-section p {
+    font-size: 1.1rem;
     color: #626262;
 }

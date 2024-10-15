@@ -3,9 +3,13 @@ body {
     background-color: #fafaf5;
 }
 
-.item-link {
+.generic-link {
     text-decoration: none;
     color: inherit;
+}
+
+.generic-link:hover {
+    color: #7332ff;
 }
 
 main {
@@ -51,19 +55,14 @@ main {
     font-weight: bold;
 }
 
-.read-page-container {
-    height: 32px;
+.read-page {
     text-align: right;
+    margin: 0;
 }
 
-.read-page {
+.read-page a {
     font-size: 1.6rem;
     color: #626262;
-}
-
-.read-page:hover {
-    font-size: 1.7rem;
-    color: #7332ff;
 }
 
 .pagination {

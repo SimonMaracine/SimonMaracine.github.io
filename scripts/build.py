@@ -13,11 +13,9 @@ f"""
     <h2 lang="ro">{title}</h2>
     <p>{date}</p>
     <p lang="ro">{preview}...</p>
-    <div class="read-page-container">
-        <a class="item-link read-page" href="/pages/{article_name}.html">
-            Read Page
-        </a>
-    </div>
+    <p class="read-page">
+        <a class="generic-link" href="/pages/{article_name}.html">Read Page</a>
+    </p>
 </div>
 """.strip()
 
