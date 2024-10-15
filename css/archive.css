@@ -51,7 +51,8 @@ main {
     font-size: 1.2rem;
 }
 
-.pages-item h2 {
+.pages-item .page-title {
+    font-size: 1.6rem;
     font-weight: bold;
 }
 

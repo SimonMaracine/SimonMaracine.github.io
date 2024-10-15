@@ -107,7 +107,12 @@ section {
 }
 
 .carousel-item p {
-    font-size: calc(1.17rem + 0.2vw);
+    font-size: calc(1.1rem + 0.2vw);
+}
+
+.carousel-item .project-title {
+    font-size: 1.6rem;
+    font-weight: bold;
 }
 
 /* Nine Morris 3D */
@@ -147,7 +152,12 @@ section {
 }
 
 .pages-item p {
-    font-size: 1.15rem;
+    font-size: 1.2rem;
+}
+
+.pages-item .page-title {
+    font-size: 1.6rem;
+    font-weight: bold;
 }
 
 .read-page {

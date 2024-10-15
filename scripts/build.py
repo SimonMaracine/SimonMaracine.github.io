@@ -10,7 +10,7 @@ def article_template(title: str, date: str, preview: str, article_name: str) -> 
     return \
 f"""
 <div class="pages-item">
-    <h2 lang="ro">{title}</h2>
+    <p class="page-title" lang="ro">{title}</p>
     <p>{date}</p>
     <p lang="ro">{preview}...</p>
     <p class="read-page">
