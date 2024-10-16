@@ -4,17 +4,17 @@ nav {
     box-shadow: 0 2px 40px #aaaaaa;
 }
 
+nav li {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin: 0 5px;
+    text-align: left;
+}
+
 .navbar-toggler:focus {
     box-shadow: none;
 }
 
 h1 {
     font-family: "Philosopher", sans-serif;
-}
-
-nav li {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin: 0 5px;
-    text-align: left;
 }

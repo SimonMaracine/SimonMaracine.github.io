@@ -4,12 +4,13 @@ body {
     text-align: center;
 }
 
-h2 {
-    font-weight: bold;
-}
-
 section {
     padding: 4rem 0;
+}
+
+p {
+    font-size: 1.3rem;
+    color: #626262;
 }
 
 .shadowed {
@@ -32,6 +33,7 @@ section {
 
 .section-title {
     color: #626262;
+    font-weight: bold;
     margin: 0 2.5rem;
     margin-bottom: 3.5rem;
 }
@@ -56,7 +58,6 @@ section {
 
 .hello p {
     font-weight: bold;
-    color: #626262;
     font-size: calc(1.8rem + 2.7vw);
     text-align: left;
 }
@@ -88,11 +89,6 @@ section {
 
 /* Question */
 
-#question-section p {
-    font-size: 1.3rem;
-    color: #626262;
-}
-
 /* Projects */
 
 .carousel-inner {
@@ -103,7 +99,6 @@ section {
 
 .carousel-item {
     padding: 0 15%;
-    color: #6c6c6c;
 }
 
 .carousel-item p {
@@ -118,8 +113,6 @@ section {
 /* Nine Morris 3D */
 
 #nine-morris-3d-section p {
-    font-size: 1.3rem;
-    color: #626262;
     max-width: 350px;
     margin: 0 auto 4.5rem auto;
 }
@@ -129,11 +122,6 @@ section {
     max-width: 450px;
     margin-bottom: 1.5rem;
     border-radius: 6px;
-}
-
-#nine-morris-3d-section a {
-    text-decoration: none;
-    color: #7332ff;
 }
 
 /* Pages */
@@ -148,7 +136,6 @@ section {
     background-color: #dcd2f0;
     padding: 1rem;
     box-shadow: 0 0 30px #bebebe;
-    color: #6c6c6c;
 }
 
 .pages-item p {
@@ -167,16 +154,10 @@ section {
 
 .read-page a {
     font-size: 1.5rem;
-    color: #626262;
-}
-
-.read-page a:hover {
-    color: #7332ff;
 }
 
 .view-all-pages a {
     font-size: 1.6rem;
-    color: #626262;
 }
 
 /* About */
@@ -199,11 +180,6 @@ section {
     padding-bottom: 2rem;
 }
 
-.description p {
-    font-size: 1.3rem;
-    color: #626262;
-}
-
 #about-section img {
     width: 180px;
     border-radius: 45%;
@@ -211,13 +187,11 @@ section {
 }
 
 .explanation {
-    font-size: 0.85rem;
-    color: #626262;
+    font-size: 0.9rem;
 }
 
 /* Contact */
 
 #contact-section p {
     font-size: 1.1rem;
-    color: #626262;
 }
