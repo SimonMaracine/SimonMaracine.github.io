@@ -1,0 +1,26 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #fafaf5;
+}
+
+p {
+    font-size: 1.3rem;
+    color: #626262;
+}
+
+li {
+    font-size: 1.3rem;
+    color: #626262;
+}
+
+.outlined-link {
+    color: inherit;
+}
+
+.outlined-link:hover {
+    color: #7332ff;
+}
+
+.simon-says-article {
+
+}

@@ -38,7 +38,7 @@ main {
     margin-right: auto;
 }
 
-.pages-item {
+.pages-article {
     text-align: left;
     background-color: #dcd2f0;
     padding: 1rem;
@@ -49,11 +49,11 @@ main {
     box-shadow: 0 0 30px #bebebe;
 }
 
-.pages-item p {
+.pages-article p {
     font-size: 1.2rem;
 }
 
-.pages-item .page-title {
+.pages-article .page-title {
     font-size: 1.6rem;
     font-weight: bold;
 }

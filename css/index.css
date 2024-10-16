@@ -26,6 +26,14 @@ p {
     color: #7332ff;
 }
 
+.outlined-link {
+    color: inherit;
+}
+
+.outlined-link:hover {
+    color: #7332ff;
+}
+
 .colored-section {
     background-color: #dcd2f0;
     box-shadow: 0 0 30px #aaaaaa;
@@ -130,7 +138,7 @@ p {
     text-align: left;
 }
 
-.pages-item {
+.pages-article {
     margin-bottom: 3rem;
     border-radius: 20px;
     background-color: #dcd2f0;
@@ -138,11 +146,11 @@ p {
     box-shadow: 0 0 30px #bebebe;
 }
 
-.pages-item p {
+.pages-article p {
     font-size: 1.2rem;
 }
 
-.pages-item .page-title {
+.pages-article .page-title {
     font-size: 1.6rem;
     font-weight: bold;
 }
