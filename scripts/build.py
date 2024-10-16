@@ -24,20 +24,20 @@ def pagination_template(index: int, active: bool) -> str:
     return \
 f"""
 <li {'class="active"' if active else ''}>
-    <a class="page-link" href="/archive{index}.html">{index}</a>
+    <a class="page-link" href="/pages-archive-{index}.html">{index}</a>
 </li>
 """.strip()
 
 
 def build_index():
-    with open("../articles/articles.json", "r") as file:
+    with open("../articles/pages/ALL.json", "r") as file:
         articles = json.load(file)
 
     latest_articles = list(reversed(articles[-4:]))
     latest_articles_content: list[str] = []
 
     for article in latest_articles:
-        with open(f"../articles/{article}.json", "r") as file:
+        with open(f"../articles/pages/{article}.json", "r") as file:
             article_metadata = json.load(file)
 
         date = article_metadata["date"]
@@ -57,8 +57,8 @@ def build_index():
         "../html/templates/index.html",
         "../index.html",
         [
-            make_html.Macro("M_NAVIGATION_BAR", "../html/navigation_bar.html", True),
-            make_html.Macro("M_BACK_TO_TOP_BUTTON", "../html/back_to_top_button.html", True),
+            make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
+            make_html.Macro("M_BACK_TO_TOP_BUTTON", "../html/back-to-top-button.html", True),
             make_html.Macro("M_COPYRIGHT", "../html/copyright.html", True),
             make_html.Macro("M_PAGE_11", latest_articles_content[0], False),
             make_html.Macro("M_PAGE_12", latest_articles_content[1], False),
@@ -68,8 +68,8 @@ def build_index():
     )
 
 
-def build_archive():
-    with open("../articles/articles.json", "r") as file:
+def build_pages_archive():
+    with open("../articles/pages/ALL.json", "r") as file:
         articles = json.load(file)
 
     COUNT = 10
@@ -82,7 +82,7 @@ def build_archive():
         articles_in_page_content: list[str] = []
 
         for article in articles_in_page:
-            with open(f"../articles/{article}.json", "r") as file:
+            with open(f"../articles/pages/{article}.json", "r") as file:
                 article_metadata = json.load(file)
 
             date = article_metadata["date"]
@@ -101,11 +101,11 @@ def build_archive():
         pagination_content = [pagination_template(i + 1, index == i) for i in range(article_pages)]
 
         make_html.make_html(
-            "../html/templates/archive.html",
-            f"../archive{index + 1}.html",
+            "../html/templates/pages-archive.html",
+            f"../pages-archive-{index + 1}.html",
             [
-                make_html.Macro("M_NAVIGATION_BAR", "../html/navigation_bar.html", True),
-                make_html.Macro("M_BACK_TO_TOP_BUTTON", "../html/back_to_top_button.html", True),
+                make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
+                make_html.Macro("M_BACK_TO_TOP_BUTTON", "../html/back-to-top-button.html", True),
                 make_html.Macro("M_COPYRIGHT", "../html/copyright.html", True),
                 make_html.Macro("M_ARTICLES", "\n".join(articles_in_page_content), False),
                 make_html.Macro("M_PAGINATION", "\n".join(pagination_content), False)
@@ -114,11 +114,11 @@ def build_archive():
 
 
 def build_pages():
-    with open("../articles/articles.json", "r") as file:
+    with open("../articles/pages/ALL.json", "r") as file:
         articles = json.load(file)
 
     for article in articles:
-        with open(f"../articles/{article}.json", "r") as file:
+        with open(f"../articles/pages/{article}.json", "r") as file:
             article_metadata = json.load(file)
 
         date = article_metadata["date"]
@@ -126,17 +126,17 @@ def build_pages():
         keywords = article_metadata["keywords"]
 
         make_html.make_html(
-            "../html/templates/article.html",
+            "../html/templates/pages-article.html",
             f"../pages/{article}.html",
             [
-                make_html.Macro("M_NAVIGATION_BAR", "../html/navigation_bar.html", True),
-                make_html.Macro("M_BACK_TO_TOP_BUTTON", "../html/back_to_top_button.html", True),
+                make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
+                make_html.Macro("M_BACK_TO_TOP_BUTTON", "../html/back-to-top-button.html", True),
                 make_html.Macro("M_COPYRIGHT", "../html/copyright.html", True),
                 make_html.Macro("M_TITLE", article_metadata["title"], False),
                 make_html.Macro("M_DATE", f"{date["month"]} {date["day"]}, {date["year"]}", False),
                 make_html.Macro("M_KEYWORDS", ", ".join(keywords), False),
                 make_html.Macro("M_LAST_MODIFIED", f"{last_modified["month"]} {last_modified["day"]}, {last_modified["year"]}", False),
-                make_html.Macro("M_CONTENTS", f"../html/articles/{article}.html", True)
+                make_html.Macro("M_CONTENTS", f"../html/articles/pages/{article}.html", True)
             ]
         )
 
@@ -144,7 +144,7 @@ def build_pages():
 def main(args: list[str]) -> int:
     try:
         build_index()
-        build_archive()
+        build_pages_archive()
         build_pages()
     except Exception as err:
         print(f"An error occurred building the pages: {err}", file=sys.stderr)
