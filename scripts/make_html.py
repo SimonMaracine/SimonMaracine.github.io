@@ -2,6 +2,8 @@
 
 import sys
 import dataclasses
+import pathlib
+import os
 
 
 @dataclasses.dataclass(frozen=True)
@@ -81,6 +83,9 @@ def make_html(template_file_path: str, destination_file_path: str, macros: list[
         destination_contents = _process_template(template_contents, macros)
     except RuntimeError as err:
         raise RuntimeError(f"Could not process template: {err}")
+
+    path = pathlib.PurePath(destination_file_path)
+    os.makedirs(path.parent, exist_ok=True)
 
     try:
         with open(destination_file_path, "w") as destination_file:

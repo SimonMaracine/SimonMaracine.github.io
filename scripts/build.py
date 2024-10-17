@@ -54,7 +54,7 @@ def pages_pagination_template(index: int, active: bool) -> str:
     return \
 f"""
 <li {'class="active"' if active else ''}>
-    <a href="/pages-archive-{index}.html">{index}</a>
+    <a class="page-link" href="/pages-archive-{index}.html">{index}</a>
 </li>
 """.strip()
 
@@ -62,7 +62,7 @@ f"""
 def simon_says_article_template(title: str, date: str, article_name: str) -> str:
     return \
 f"""
-<li class="simon-says-article">
+<li>
     <a class="outlined-link" href="/simon-says/{article_name}.html">{title} | {date}</a>
 </li>
 """.strip()
@@ -209,7 +209,31 @@ def build_simon_says_archive():
 
 
 def build_simon_says_articles():
-    pass
+    with open("../articles/simon-says/ALL.json", "r") as file:
+        articles = json.load(file)
+
+    for article in articles:
+        with open(f"../articles/simon-says/{article}.json", "r") as file:
+            article_metadata = json.load(file)
+
+        date = article_metadata["date"]
+        last_modified = article_metadata["last-modified"]
+        topics = article_metadata["topics"]
+
+        make_html.make_html(
+            "../html/templates/simon-says-article.html",
+            f"../simon-says/{article}.html",
+            [
+                make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
+                make_html.Macro("M_BACK_TO_TOP_BUTTON", "../html/back-to-top-button.html", True),
+                make_html.Macro("M_COPYRIGHT", "../html/copyright.html", True),
+                make_html.Macro("M_TITLE", article_metadata["title"], False),
+                make_html.Macro("M_DATE", f"{stringify_month(date["month"])} {date["day"]}, {date["year"]}", False),
+                make_html.Macro("M_TOPICS", ", ".join(topics), False),
+                make_html.Macro("M_LAST_MODIFIED", f"{stringify_month(last_modified["month"])} {last_modified["day"]}, {last_modified["year"]}", False),
+                make_html.Macro("M_CONTENTS", f"../html/articles/simon-says/{article}.html", True)
+            ]
+        )
 
 
 def main(args: list[str]) -> int:

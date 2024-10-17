@@ -8,9 +8,14 @@ p {
     color: #626262;
 }
 
+main {
+    padding: 3rem 0;
+}
+
 li {
     font-size: 1.3rem;
     color: #626262;
+    margin: 1.3rem 0;
 }
 
 .outlined-link {
@@ -19,8 +24,4 @@ li {
 
 .outlined-link:hover {
     color: #7332ff;
-}
-
-.simon-says-article {
-
 }

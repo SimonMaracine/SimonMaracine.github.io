@@ -1,0 +1,58 @@
+body {
+    font-family: "Montserrat", sans-serif;
+    background-color: #fafaf5;
+}
+
+main {
+    padding: 3rem 0 1rem 0;
+    color: #5a5a5a;
+}
+
+main .container {
+    /* TODO refactor */
+    max-width: 1200px;
+}
+
+.generic-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.generic-link:hover {
+    color: #000000;
+}
+
+.article-title-container {
+    border-bottom: #5a5a5a 3px solid;
+}
+
+#article-title {
+    font-weight: bold;
+}
+
+.article-details {
+    font-weight: bold;
+    margin: 1rem 0 2rem 0;
+}
+
+.article-details .article-detail {
+    margin-bottom: 0.5rem;
+}
+
+#article-date {
+    margin-bottom: 0;
+}
+
+.article-topics-head, #article-topics, .article-last-modified-head, #article-last-modified {
+    display: inline;
+}
+
+.article-topics-head, .article-last-modified-head {
+    margin-right: 2px;
+}
+
+#article-content {
+    font-family: "Inter", sans-serif;
+    font-size: calc(1rem + 0.2vw);
+    line-height: 2rem;
+}
