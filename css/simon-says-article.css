@@ -56,3 +56,19 @@ main .container {
     font-size: calc(1rem + 0.2vw);
     line-height: 2rem;
 }
+
+/* Article helpers */
+
+.code-block {
+    background-color: #2e283e;
+    color: #f4e2e6;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+.cmd {
+    background-color: #221a23;
+    color: #f9cdc7;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
