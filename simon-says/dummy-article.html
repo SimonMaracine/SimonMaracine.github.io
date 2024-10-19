@@ -105,6 +105,41 @@ if __name__ == "__main__":
 </code></pre>
 <p>Then some sus command that you're going to enter into your terminal:</p>
 <pre class="cmd"><code>sudo apt update && sudo apt upgrade</code></pre>
+<p>Now look at that! A code block with header:</p>
+<pre class="code-block"><code><span class="code-block-header">make_month_plan.sh</span>
+#!/bin/bash
+
+# This is a long line of text that I need in order to check something. All right, I think it's long enough now.
+
+DAYS_OF_THE_WEEK=(
+    "Monday"
+    "Tuesday"
+    "Wednesday"
+    "Thursday"
+    "Friday"
+    "Saturday"
+    "Sunday"
+)
+
+echo "Current directory: $(pwd)"
+
+for i in {1..4}; do
+    week="Week${i}"
+    mkdir $week
+    cd $week
+
+    for day in ${DAYS_OF_THE_WEEK[*]}; do
+        mkdir $day
+        cd $day
+        touch notes.txt
+        cd ..
+    done
+
+    cd ..
+done
+
+echo Done.
+</code></pre>
             </div>
         </div>
     </main>
