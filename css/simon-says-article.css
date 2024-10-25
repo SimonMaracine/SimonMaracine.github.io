@@ -84,3 +84,17 @@ main .container {
     padding: 0.5rem;
     border-radius: 10px;
 }
+
+.text-red {
+    background-color: #f8dee0;
+    color: #da5863;
+    padding: 0.5rem;
+    border-radius: 10px;
+}
+
+.text-green {
+    background-color: #e5f2e4;
+    color: #6db668;
+    padding: 0.5rem;
+    border-radius: 5px;
+}
