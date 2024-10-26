@@ -180,11 +180,12 @@ def build_simon_says_archive():
     with open("../articles/simon-says/ALL.json", "r") as file:
         articles = json.load(file)
 
+    articles_content: list[str] = []
+
     for article in articles:
         with open(f"../articles/simon-says/{article}.json", "r") as file:
             article_metadata = json.load(file)
 
-        articles_content: list[str] = []
 
         date = article_metadata["date"]
 

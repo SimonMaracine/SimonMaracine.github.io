@@ -1,0 +1,424 @@
+<p>
+    C++ is known for both its versatility and complexity. Part of the reason for its widespread usage is the fact that it
+    is like an extension to the C programming language, inheriting much of C's syntax and semantics. That includes
+    (non-intentional pun) the C preprocessor and the
+    include system. In this article I'm going to talk about how I am including header files when I'm writing C++, what
+    conventions I use in order to maximize consistency and avoid certain issues and, the rules I follow
+    when I have to think about dependencies between source and header files. I hope that this will help you write
+    better C++.
+</p>
+
+<h3>An Example Library</h3>
+
+<p>
+    Let's start with an example of a C++ library that we might write, that uses a C library as a dependency, and it's
+    being used by a C++ executable. We'll see all the code first, then I'll explain why I've written it this way.
+</p>
+
+<pre class="code-block-header">my_library.hpp</pre>
+<pre class="code-block"><code>#pragma once
+
+#include &lt;cstddef&gt;
+#include &lt;optional&gt;
+#include &lt;filesystem&gt;
+#include &lt;string&gt;
+#include &lt;memory&gt;
+
+struct SomeCLibraryContext;
+
+class MyLibrary {
+public:
+    explicit MyLibrary(std::size_t size);
+
+    std::optional&lt;int&gt; return_optional_int() const;
+    void take_filesystem_path(const std::filesystem::path& path);
+private:
+    std::size_t m_size;
+    std::string m_string;
+    std::unique_ptr&lt;SomeCLibraryContext&gt; m_some_c_library;
+};
+</code></pre>
+
+<pre class="code-block-header">my_library.cpp</pre>
+<pre class="code-block"><code>#include "my_library.hpp"
+
+#include &lt;some_c_library.h&gt;
+
+MyLibrary::MyLibrary(std::size_t size)
+    : m_size(size), m_some_c_library(std::make_shared&lt;SomeCLibraryContext&gt;()) {}
+
+std::optional&lt;int&gt; MyLibrary::return_optional_int() const {
+    // ...
+}
+
+void MyLibrary::take_filesystem_path(const std::filesystem::path& path) {
+    // ...
+}
+</code></pre>
+
+<pre class="code-block-header">some_c_library.h</pre>
+<pre class="code-block"><code>#ifndef SOME_C_LIBRARY_H
+#define SOME_C_LIBRARY_H
+
+typedef struct SomeCLibraryContext {
+    // ...
+} SomeCLibraryContext;
+
+int some_c_library_initialize(SomeCLibraryContext* ctx);
+int some_c_library_uninitialize(SomeCLibraryContext* ctx);
+int some_c_library_do_thing(SomeCLibraryContext* ctx, int parameter);
+
+#endif
+</code></pre>
+
+<pre class="code-block-header">some_c_library.c</pre>
+<pre class="code-block"><code>#include "some_c_library.h"
+
+int some_c_library_initialize(SomeCLibraryContext* ctx) {
+    // ...
+}
+
+int some_c_library_uninitialize(SomeCLibraryContext* ctx) {
+    // ...
+}
+
+int some_c_library_do_thing(SomeCLibraryContext* ctx, int parameter) {
+    // ...
+}
+</code></pre>
+
+<pre class="code-block-header">main.cpp</pre>
+<pre class="code-block"><code>#include &lt;my_library.hpp&gt;
+
+int main() {
+    MyLibrary my_library {5};
+    const std::optional&ltint&gt; optional_int {my_library.return_optional_int()};
+    const std::filesystem::path path {"/home/simon/Documents"};
+    my_library.take_filesystem_path(path);
+}
+</code></pre>
+
+<p>
+    Let's say that we're writing <code>MyLibrary</code>. We don't actually care what it's doing. Instead, we care about what
+    it contains and what it depends on as a class and as a C++ library.
+
+    There are two kinds of dependencies in C++, that we are going to talk about: at the code level and at the binary
+    level. Dependencies at the code level represent the relationships between the objects in the code, i.e. between
+    types. Dependencies at the binary level are the relationships between C++ libraries and executables.
+</p>
+
+<h3>Code Level Dependencies</h3>
+
+<p>
+    See that <code>MyLibrary</code> makes use of <code>std::size_t</code>, <code>std::optional</code>, <code>std::filesystem::path</code> etc.
+    Those are all definitions that the class depends on. We have to include their corresponding header files in order
+    to use them. Thus every single one of those includes brings in a dependency for the class. Remember the
+    three relationship types between classes: composition, aggregation and association.
+    <code>std::string</code> is a composite object, same as <code>std::unique_ptr</code> itself.
+    For this matter we must include <code>&lt;string&gt;</code> and <code>&lt;memory&gt;</code>.
+    <code>std::optional</code> and <code>std::filesystem::path</code>
+    are associates. They are not part of the class, but they are used as function return types and parameters.
+    For these too we must include <code>&lt;optional&gt;</code> and <code>&lt;filsystem&gt;</code>.
+    Lastly, <code>SomeCLibraryContext</code> is an aggregate, because it's not a member of <code>MyLibrary</code> directly,
+    it's a pointer instead. <code>MyLibrary</code> could work just fine with <code>m_some_c_library</code> being <code>nullptr</code>.
+</p>
+
+<p>
+    Take note that I did not include <code>&lt;some_c_library.h&gt;</code> in the header file for a reason. I instead wrote a
+    forward declaration. <code>MyLibrary</code> is in fact very happy just knowing that <code>SomeCLibraryContext</code> exists somewhere,
+    without knowing its full definition. I'll talk about the reason for this decision later, but now, looking at
+    <code>my_library.cpp</code>, we finally include <code>&lt;some_c_library.h&gt;</code>, because here, in the
+    implementation of <code>MyLibrary</code>, we do need the definition of <code>SomeCLibraryContext</code> and need to call its functions.
+</p>
+
+<h3>Binary Level Dependencies</h3>
+
+<pre class="code-block-header">Example's Directory Structure</pre>
+<pre class="code-block"><code>.
+├── CMakeLists.txt
+├── main.cpp
+├── my_library
+│   ├── my_library.cpp
+│   └── my_library.hpp
+└── some_c_library
+    ├── some_c_library.c
+    └── some_c_library.h
+</code></pre>
+
+<pre class="code-block-header">CMakeLists.txt</pre>
+<pre class="code-block"><code>cmake_minimum_required(VERSION 3.20)
+
+project("how_to_include_in_cpp")
+
+add_library(some_c_library STATIC "some_c_library/some_c_library.c" "some_c_library/some_c_library.h")
+target_include_directories(some_c_library PUBLIC "some_c_library")
+
+add_library(my_library STATIC "my_library/my_library.cpp" "my_library/my_library.hpp")
+target_include_directories(my_library PUBLIC "my_library")
+target_link_libraries(my_library PRIVATE some_c_library)
+
+add_executable(main "main.cpp")
+target_link_libraries(main PRIVATE my_library)
+</code></pre>
+
+<p>
+    When I say binaries, I'm of course referring to executables and libraries. Libraries in C and C++ usually come
+    with a compiled binary blob and a header file. Anywhere we include that header file, we bring in that
+    library as a dependency (assuming we also link the library).
+    Any time we include <code>&lt;string&gt;</code> or <code>&lt;iostream&gt;</code>, we bring in <code>libstdc++</code>,
+    the standard library as a dependency. Including <code>&lt;some_c_library.h&gt;</code> in the source file of
+    <code>MyLibrary</code> means that <code>libmy_library</code> alone depends on <code>libsome_c_library</code>.
+    If we instead included <code>&lt;some_c_library.h&gt;</code> in the header file, then we just made
+    <code>libsome_c_library</code> a dependency not only on <code>libmy_library</code>, but also on all of its dependents
+    (all libraries and executables that depend on <code>libmy_library</code>). That is because including a header
+    that includes other headers and other headers recursively ends up including everything. I avoided including the
+    header library <code>&lt;some_c_library.h&gt;</code> in the header file to keep <code>libsome_c_library</code>
+    like an implementation to main.
+</p>
+
+<p>
+    If we didn't care for that side effect, then we could have made <code>SomeCLibraryContext</code> a composite,
+    which would have saved us a heap allocation, but then we had to also mark target <code>some_c_library</code>
+    accessible from target <code>main</code>:
+</p>
+
+<pre class="code-block code-block-noheader"><code># ...
+
+add_library(my_library STATIC "my_library/my_library.cpp" "my_library/my_library.hpp")
+target_include_directories(my_library PUBLIC "my_library")
+target_link_libraries(my_library PUBLIC some_c_library)  # Note the `PUBLIC` here
+
+# ...
+</code></pre>
+
+<h3>Friends Aren't Hard Dependencies</h3>
+
+<p>
+    If in a header file containing a class, we need a specific object name just to mark it as a friend, then we
+    don't need its full definition:
+</p>
+
+<pre class="code-block-header">class_a.hpp</pre>
+<pre class="code-block"><code>#pragma once
+
+// Don't need to include class_b.hpp
+class B;
+
+class A {
+    friend class B;
+};
+</code></pre>
+
+<pre class="code-block-header">class_b.hpp</pre>
+<pre class="code-block"><code>#pragma once
+
+class B {};
+</code></pre>
+
+<h3>To Include Or Not To Include</h3>
+
+<p>
+    See that <code>main.cpp</code> only ever includes <code>&lt;my_library.hpp&gt;</code>. That is because it only needs
+    <code>&lt;my_library.hpp&gt;</code>! Even though we use <code>std::optional</code> and <code>std::filesystem::path</code>
+    in <code>main()</code>, we don't have to include <code>&lt;optional&gt;</code> and <code>&lt;filesystem&gt;</code>,
+    because those are already included im <code>&lt;my_library.hpp&gt;</code>. A rule of thumb is that if we only use
+    <code>std::optional</code> and <code>std::filesystem::path</code> in the context of <code>&lt;my_library.hpp&gt;</code>,
+    then we don't include the headers again, but if we use them independent of <code>&lt;my_library.hpp&gt;</code>,
+    then we should include those headers, because if at any point in the future we get rid of <code>&lt;my_library.hpp&gt;</code>,
+    we'll suddenly have compilation errors with undefined symbols.
+</p>
+
+<pre class="code-block-header">main.cpp</pre>
+<pre class="code-block"><code>#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+
+// Include these
+#include &lt;optional&gt;
+#include &lt;string_view&gt;
+
+// some_dependency.hpp also includes &lt;optional&gt; and &lt;string_view&gt;, but we should not rely on that
+#include "some_dependency.hpp"
+
+static std::optional&lt;std::string_view&gt; get_env(const char* variable) {
+    const char* value {std::getenv(variable)};
+    if (value == nullptr) {
+        return std::nullopt;
+    }
+    return std::make_optional(value);
+}
+
+int main() {
+    DataFile data {"whatever.txt"};
+    data.get_next_data();
+
+    std::cout &lt;&lt; get_env("HOME").value_or("[empty]") &lt;&lt; '\n';
+}
+</code></pre>
+
+<pre class="code-block-header">some_dependency.hpp</pre>
+<pre class="code-block"><code>#pragma once
+
+#include &lt;optional&gt;
+#include &lt;string_view&gt;
+
+class DataFile {
+public:
+    explicit DataFile(std::string_view file_path) {
+        // ...
+    }
+
+    std::optional&lt;int&gt; get_next_data() {
+        // ...
+    }
+};
+</code></pre>
+
+<pre class="cmd"><code>g++ -o main main.cpp</code></pre>
+
+<p>
+    We have to be careful what headers we include in other headers, for example in your library's headers.
+    Users of your library may not be happy having tons of symbols accessible within their code because of
+    your messy library header. Avoid including <code>&lt;cassert&gt;</code> or <code>&lt;iostream&gt;</code> in header files.
+</p>
+
+<p>
+    What do I hear? You need to overload the &lt;&lt; operator in order to print stuff? For that you may consider including
+    <code>&lt;iosfwd&gt;</code> instead:
+</p>
+
+<pre class="code-block-header">thing.hpp</pre>
+<pre class="code-block"><code>#pragma once
+
+#include &lt;iosfwd&gt;  // Don't include iostream here
+
+struct Thing {
+    int x {};
+};
+
+template&lt;typename CharType, typename Traits&gt;
+std::basic_ostream&lt;CharType, Traits&gt;& operator&lt;&lt;(std::basic_ostream&lt;CharType, Traits&gt;& stream, const Thing& thing) {
+    stream &lt;&lt; "Thing { " &lt;&lt; thing.x &lt;&lt; " }";
+    return stream;
+}
+</code></pre>
+
+<pre class="code-block-header">main.cpp</pre>
+<pre class="code-block"><code>#include <iostream>
+
+#include "thing.hpp"
+
+int main() {
+    Thing thing;
+    std::cout &lt;&lt; thing &lt;&lt; "\n";  // Printing works, because we included iostream, as we should
+}
+</code></pre>
+
+<pre class="cmd"><code>g++ -o main main.cpp</code></pre>
+
+<p>
+    Here, we are making <code>Thing</code> printable to any sort of output stream. Because the function is a template, we can actually
+    get away with writing its definition in the header, even though <code>std::basic_ostream&lt;...&gt;</code> is just a forward declaration.
+    The header on its own compiles just fine. The moment we actually call <code>operator&lt;&lt;</code> on a <code>Thing</code> object we actually
+    need <code>&lt;iostream&gt;</code> to be included. It just works!
+</p>
+
+<h3>Source/Header Pairs</h3>
+
+<p>
+    Taking again a look at <code>my_library.cpp</code>, we see that the first line is <code>#include "my_library.hpp"</code>.
+    A rule of thumb here is when we have a pair of files <code>something.hpp</code>/<code>something.cpp</code>, the first line in
+    <code>something.cpp</code> should always be an include of its header. That is because the header should be a
+    self-contained section of the code and being pasted at the top of the source file ensures that we do make it self-contained.
+    Take a look at this broken code now:
+</p>
+
+<pre class="code-block-header">broken.hpp</pre>
+<pre class="code-block"><code>#pragma once
+
+struct Broken {
+    void do_thing(std::string_view parameter);
+};
+</code></pre>
+
+<pre class="code-block-header">broken.cpp</pre>
+<pre class="code-block"><code>#include <string_view>
+
+#include "broken.hpp"
+
+void Broken::do_thing(std::string_view parameter) {
+    // ...
+}
+</code></pre>
+
+<pre class="code-block-header">broken_main.cpp</pre>
+<pre class="code-block"><code>#include <string_view>
+
+#include "broken.hpp"
+
+int main() {
+    Broken broken;
+    const std::string_view str {"???"};
+    broken.do_thing(str);
+}
+</code></pre>
+
+<pre class="cmd"><code>g++ -o broken_main broken_main.cpp broken.cpp</code></pre>
+
+<p>
+    This code compiles just fine. But can you see the problem? broken.hpp is not self-contained. We include <code>"broken.hpp"</code>
+    in <code>broken.cpp</code> after we include <code>&lt;string_view&gt;</code>, that shouldn't be there in the first place.
+    And in <code>broken_main.cpp</code> we again somehow include <code>&lt;string_view&gt;</code> and the whole thing works,
+    but it's messed up. Don't do that.
+</p>
+
+<h3>Angle Brackets Versus Quotes</h3>
+
+<p>
+    In the last example, we included <code>"broken.hpp"</code> with quotes. That is because it's not a separate library.
+    Library headers should be included with angle brackets and local headers in the current project should
+    be included with quotes. The only difference between the two is that including with angle brackets searches
+    the header only in system library directories and additional include directories, while including with quotes
+    searches the header also in the current working directory of the file we are including into.
+</p>
+
+<h3>The Order Of Inclusion</h3>
+
+<p>
+    To keep the includes nicely organized, I like to have them in a specific order. That is:
+</p>
+
+<pre class="code-block code-block-noheader"><code>#include "something.hpp"  // The source's header
+
+#include &lt;iostream&gt;  // Standard library headers
+#include &lt;algorithm&gt;
+#include &lt;cassert&gt;
+
+#include &lt;some_library.hpp&gt;  // Other library headers
+#include &lt;third_party_library.hpp&gt;
+
+#include "some_class_related_to_something"  // Project headers
+#include "some_definitions_related_to_something"
+</code></pre>
+
+<p>
+    Pay close attention when we use quotes and when we use angle brackets.
+</p>
+
+<p>
+    Some people like to swap the standard library headers with project headers. I personally don't like that, but it's up
+    to you. Also some people order those header groups alphabetically or in some other fashion. I don't mind it
+    that much, but it's fine.
+</p>
+
+<h3>Conclusion</h3>
+
+<p>
+    The takeaway from this article is to be cautious about which headers you are including and whether you actually
+    need to include them or not, especially in other header files. Use standard best practices like the ones presented
+    earlier. And when refactoring C++ code, when shuffling code around... I wish you luck! Be careful not to end up
+    with unnecessary, wrong or missing includes. That is indeed one of the hardest parts of C and C++.
+</p>
+
+<p>
+    I hope that you found this article useful!
+</p>

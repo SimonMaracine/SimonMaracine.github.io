@@ -59,6 +59,10 @@ main .container {
 
 /* Article helpers */
 
+code {
+    color: #470b2e;
+}
+
 .code-block {
     background-color: #2e283e;
     color: #f4e2e6;
