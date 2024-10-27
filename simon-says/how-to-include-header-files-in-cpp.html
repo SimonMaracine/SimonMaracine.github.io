@@ -117,7 +117,7 @@ public:
 private:
     std::size_t m_size;
     std::string m_string;
-    std::unique_ptr&lt;SomeCLibraryContext&gt; m_some_c_library;
+    std::shared_ptr&lt;SomeCLibraryContext&gt; m_some_c_library;
 };
 </code></pre>
 
@@ -196,7 +196,7 @@ int main() {
     Those are all definitions that the class depends on. We have to include their corresponding header files in order
     to use them. Thus every single one of those includes brings in a dependency for the class. Remember the
     three relationship types between classes: composition, aggregation and association.
-    <code>std::string</code> is a composite object, same as <code>std::unique_ptr</code> itself.
+    <code>std::string</code> is a composite object, same as <code>std::shared_ptr</code> itself.
     For this matter we must include <code>&lt;string&gt;</code> and <code>&lt;memory&gt;</code>.
     <code>std::optional</code> and <code>std::filesystem::path</code>
     are associates. They are not part of the class, but they are used as function return types and parameters.
@@ -253,13 +253,14 @@ target_link_libraries(main PRIVATE my_library)
     <code>libsome_c_library</code> a dependency not only on <code>libmy_library</code>, but also on all of its dependents
     (all libraries and executables that depend on <code>libmy_library</code>). That is because including a header
     that includes other headers and other headers recursively ends up including everything. I avoided including the
-    header library <code>&lt;some_c_library.h&gt;</code> in the header file to keep <code>libsome_c_library</code>
-    like an implementation to main.
+    library header <code>&lt;some_c_library.h&gt;</code> in the header file to keep <code>libsome_c_library</code>
+    like an implementation detail to <code>main</code>, otherwise any code that uses <code>libmy_library</code>, like <code>main</code>,
+    depended directly, instead of indirectly on <code>libsome_c_library</code>.
 </p>
 
 <p>
     If we didn't care for that side effect, then we could have made <code>SomeCLibraryContext</code> a composite,
-    which would have saved us a heap allocation, but then we had to also mark target <code>some_c_library</code>
+    which would have saved us a heap allocation. Then we had to also mark target <code>some_c_library</code>
     accessible from target <code>main</code>:
 </p>
 
@@ -271,6 +272,8 @@ target_link_libraries(my_library PUBLIC some_c_library)  # Note the `PUBLIC` her
 
 # ...
 </code></pre>
+
+<img class="img-fluid" src="/images/dependencies.svg">
 
 <h3>Friends Aren't Hard Dependencies</h3>
 
@@ -299,13 +302,13 @@ class B {};
 <h3>To Include Or Not To Include</h3>
 
 <p>
-    See that <code>main.cpp</code> only ever includes <code>&lt;my_library.hpp&gt;</code>. That is because it only needs
+    In the first example we can see that <code>main.cpp</code> only ever includes <code>&lt;my_library.hpp&gt;</code>. That is because it only needs
     <code>&lt;my_library.hpp&gt;</code>! Even though we use <code>std::optional</code> and <code>std::filesystem::path</code>
     in <code>main()</code>, we don't have to include <code>&lt;optional&gt;</code> and <code>&lt;filesystem&gt;</code>,
     because those are already included im <code>&lt;my_library.hpp&gt;</code>. A rule of thumb is that if we only use
     <code>std::optional</code> and <code>std::filesystem::path</code> in the context of <code>&lt;my_library.hpp&gt;</code>,
     then we don't include the headers again, but if we use them independent of <code>&lt;my_library.hpp&gt;</code>,
-    then we should include those headers, because if at any point in the future we get rid of <code>&lt;my_library.hpp&gt;</code>,
+    then we should include them, because if at any point in the future we get rid of <code>&lt;my_library.hpp&gt;</code>,
     we'll suddenly have compilation errors with undefined symbols.
 </p>
 
@@ -357,13 +360,13 @@ public:
 <pre class="cmd"><code>g++ -o main main.cpp</code></pre>
 
 <p>
-    We have to be careful what headers we include in other headers, for example in your library's headers.
-    Users of your library may not be happy having tons of symbols accessible within their code because of
-    your messy library header. Avoid including <code>&lt;cassert&gt;</code> or <code>&lt;iostream&gt;</code> in header files.
+    We have to be careful which headers we include in other headers, for example in our library's headers.
+    Users of our library may not be happy having tons of symbols accessible within their code because of
+    our messy library header. For example, avoid including <code>&lt;cassert&gt;</code> or <code>&lt;iostream&gt;</code> in header files.
 </p>
 
 <p>
-    What do I hear? You need to overload the &lt;&lt; operator in order to print stuff? For that you may consider including
+    What do I hear? You say that you need to overload the &lt;&lt; operator in order to print stuff? For that you may consider including
     <code>&lt;iosfwd&gt;</code> instead:
 </p>
 
@@ -406,7 +409,7 @@ int main() {
 <h3>Source/Header Pairs</h3>
 
 <p>
-    Taking again a look at <code>my_library.cpp</code>, we see that the first line is <code>#include "my_library.hpp"</code>.
+    Taking again a look at <code>my_library.cpp</code> in the first example, we see that the first line is <code>#include "my_library.hpp"</code>.
     A rule of thumb here is when we have a pair of files <code>something.hpp</code>/<code>something.cpp</code>, the first line in
     <code>something.cpp</code> should always be an include of its header. That is because the header should be a
     self-contained section of the code and being pasted at the top of the source file ensures that we do make it self-contained.
@@ -446,7 +449,7 @@ int main() {
 <pre class="cmd"><code>g++ -o broken_main broken_main.cpp broken.cpp</code></pre>
 
 <p>
-    This code compiles just fine. But can you see the problem? broken.hpp is not self-contained. We include <code>"broken.hpp"</code>
+    This code compiles just fine. But can you see the problem? <code>broken.hpp</code> is not self-contained. We include <code>"broken.hpp"</code>
     in <code>broken.cpp</code> after we include <code>&lt;string_view&gt;</code>, that shouldn't be there in the first place.
     And in <code>broken_main.cpp</code> we again somehow include <code>&lt;string_view&gt;</code> and the whole thing works,
     but it's messed up. Don't do that.
@@ -482,7 +485,7 @@ int main() {
 </code></pre>
 
 <p>
-    Pay close attention when we use quotes and when we use angle brackets.
+    Pay close attention to when we use quotes and when we use angle brackets.
 </p>
 
 <p>
@@ -494,7 +497,8 @@ int main() {
 <h3>Conclusion</h3>
 
 <p>
-    The takeaway from this article is to be cautious about which headers you are including and whether you actually
+    Now you learned how to include stuff in your code!
+    The key takeaway from this article is to be cautious about which headers you are including and whether you actually
     need to include them or not, especially in other header files. Use standard best practices like the ones presented
     earlier. And when refactoring C++ code, when shuffling code around... I wish you luck! Be careful not to end up
     with unnecessary, wrong or missing includes. That is indeed one of the hardest parts of C and C++.
