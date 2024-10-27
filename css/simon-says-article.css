@@ -59,6 +59,11 @@ main .container {
 
 /* Article helpers */
 
+h3, h4, h5 {
+    margin: 2rem 0 1rem 0;
+    color: #404040;
+}
+
 code {
     color: #470b2e;
 }

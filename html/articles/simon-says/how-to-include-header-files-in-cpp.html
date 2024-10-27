@@ -3,7 +3,7 @@
     is like an extension to the C programming language, inheriting much of C's syntax and semantics. That includes
     (non-intentional pun) the C preprocessor and the
     include system. In this article I'm going to talk about how I am including header files when I'm writing C++, what
-    conventions I use in order to maximize consistency and avoid certain issues and, the rules I follow
+    conventions I use in order to maximize consistency and to avoid certain issues, and the rules I follow
     when I have to think about dependencies between source and header files. I hope that this will help you write
     better C++.
 </p>
@@ -133,8 +133,7 @@ int main() {
 
 <h3>Binary Level Dependencies</h3>
 
-<pre class="code-block-header">Example's Directory Structure</pre>
-<pre class="code-block"><code>.
+<pre class="code-block code-block-noheader"><code>.
 ├── CMakeLists.txt
 ├── main.cpp
 ├── my_library
@@ -303,7 +302,7 @@ std::basic_ostream&lt;CharType, Traits&gt;& operator&lt;&lt;(std::basic_ostream&
 </code></pre>
 
 <pre class="code-block-header">main.cpp</pre>
-<pre class="code-block"><code>#include <iostream>
+<pre class="code-block"><code>#include &lt;iostream&gt;
 
 #include "thing.hpp"
 
@@ -341,7 +340,7 @@ struct Broken {
 </code></pre>
 
 <pre class="code-block-header">broken.cpp</pre>
-<pre class="code-block"><code>#include <string_view>
+<pre class="code-block"><code>#include &lt;string_view&gt;
 
 #include "broken.hpp"
 
@@ -351,7 +350,7 @@ void Broken::do_thing(std::string_view parameter) {
 </code></pre>
 
 <pre class="code-block-header">broken_main.cpp</pre>
-<pre class="code-block"><code>#include <string_view>
+<pre class="code-block"><code>#include &lt;string_view&gt;
 
 #include "broken.hpp"
 
@@ -381,7 +380,7 @@ int main() {
     searches the header also in the current working directory of the file we are including into.
 </p>
 
-<h3>The Order Of Inclusion</h3>
+<h3>Order Of Inclusion</h3>
 
 <p>
     To keep the includes nicely organized, I like to have them in a specific order. That is:
