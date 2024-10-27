@@ -94,7 +94,8 @@
 
 <p>
     Let's start with an example of a C++ library that we might write, that uses a C library as a dependency, and it's
-    being used by a C++ executable. We'll see all the code first, then I'll explain why I've written it this way.
+    being used by a C++ executable. We'll see all the code first, then I'll explain why I've written it this way throughout
+    the article. We will refer to this code multiple times.
 </p>
 
 <pre class="code-block-header">my_library.hpp</pre>
@@ -129,22 +130,16 @@ private:
 MyLibrary::MyLibrary(std::size_t size)
     : m_size(size), m_some_c_library(std::make_shared&lt;SomeCLibraryContext&gt;()) {}
 
-std::optional&lt;int&gt; MyLibrary::return_optional_int() const {
-    // ...
-}
+std::optional&lt;int&gt; MyLibrary::return_optional_int() const {}
 
-void MyLibrary::take_filesystem_path(const std::filesystem::path& path) {
-    // ...
-}
+void MyLibrary::take_filesystem_path(const std::filesystem::path& path) {}
 </code></pre>
 
 <pre class="code-block-header">some_c_library.h</pre>
 <pre class="code-block"><code>#ifndef SOME_C_LIBRARY_H
 #define SOME_C_LIBRARY_H
 
-typedef struct SomeCLibraryContext {
-    // ...
-} SomeCLibraryContext;
+typedef struct SomeCLibraryContext {} SomeCLibraryContext;
 
 int some_c_library_initialize(SomeCLibraryContext* ctx);
 int some_c_library_uninitialize(SomeCLibraryContext* ctx);
@@ -156,17 +151,9 @@ int some_c_library_do_thing(SomeCLibraryContext* ctx, int parameter);
 <pre class="code-block-header">some_c_library.c</pre>
 <pre class="code-block"><code>#include "some_c_library.h"
 
-int some_c_library_initialize(SomeCLibraryContext* ctx) {
-    // ...
-}
-
-int some_c_library_uninitialize(SomeCLibraryContext* ctx) {
-    // ...
-}
-
-int some_c_library_do_thing(SomeCLibraryContext* ctx, int parameter) {
-    // ...
-}
+int some_c_library_initialize(SomeCLibraryContext* ctx) {}
+int some_c_library_uninitialize(SomeCLibraryContext* ctx) {}
+int some_c_library_do_thing(SomeCLibraryContext* ctx, int parameter) {}
 </code></pre>
 
 <pre class="code-block-header">main.cpp</pre>
@@ -229,7 +216,7 @@ int main() {
 <pre class="code-block-header">CMakeLists.txt</pre>
 <pre class="code-block"><code>cmake_minimum_required(VERSION 3.20)
 
-project("how_to_include_in_cpp")
+project("how_to_include_header_files_in_cpp")
 
 add_library(some_c_library STATIC "some_c_library/some_c_library.c" "some_c_library/some_c_library.h")
 target_include_directories(some_c_library PUBLIC "some_c_library")
@@ -347,13 +334,9 @@ int main() {
 
 class DataFile {
 public:
-    explicit DataFile(std::string_view file_path) {
-        // ...
-    }
+    explicit DataFile(std::string_view file_path) {}
 
-    std::optional&lt;int&gt; get_next_data() {
-        // ...
-    }
+    std::optional&lt;int&gt; get_next_data() {}
 };
 </code></pre>
 
@@ -366,7 +349,7 @@ public:
 </p>
 
 <p>
-    What do I hear? You say that you need to overload the &lt;&lt; operator in order to print stuff? For that you may consider including
+    What do I hear? You say that you need to overload the &lt;&lt; operator in order to print stuff? For that we may consider including
     <code>&lt;iosfwd&gt;</code> instead:
 </p>
 
@@ -429,9 +412,7 @@ struct Broken {
 
 #include "broken.hpp"
 
-void Broken::do_thing(std::string_view parameter) {
-    // ...
-}
+void Broken::do_thing(std::string_view parameter) {}
 </code></pre>
 
 <pre class="code-block-header">broken_main.cpp</pre>
@@ -497,9 +478,9 @@ int main() {
 <h3>Conclusion</h3>
 
 <p>
-    Now you learned how to include stuff in your code!
-    The key takeaway from this article is to be cautious about which headers you are including and whether you actually
-    need to include them or not, especially in other header files. Use standard best practices like the ones presented
+    Now you have learned how to include stuff in your code!
+    The key takeaway from this article is to be cautious about which headers you include and whether you actually
+    need to include them or not, especially in other header files. Follow standard best practices like the ones presented
     earlier. And when refactoring C++ code, when shuffling code around... I wish you luck! Be careful not to end up
     with unnecessary, wrong or missing includes. That is indeed one of the hardest parts of C and C++.
 </p>
