@@ -280,12 +280,12 @@ public:
 #include &lt;iosfwd&gt;  // Don't include iostream here
 
 struct Thing {
-    int x {};
+    int foo {};
 };
 
 template&lt;typename CharType, typename Traits&gt;
 std::basic_ostream&lt;CharType, Traits&gt;& operator&lt;&lt;(std::basic_ostream&lt;CharType, Traits&gt;& stream, const Thing& thing) {
-    stream &lt;&lt; "Thing { " &lt;&lt; thing.x &lt;&lt; " }";
+    stream &lt;&lt; "Thing { " &lt;&lt; thing.foo &lt;&lt; " }";
     return stream;
 }
 </code></pre>
