@@ -357,6 +357,12 @@ int main() {
     but it's messed up. Don't do that.
 </p>
 
+<p>
+    Also any header we include in <code>something.hpp</code> we should not include in <code>something.cpp</code>!
+    <code>something.hpp</code> should include headers for both itself and <code>something.cpp</code>.
+    And <code>something.cpp</code> then should include headers only for itself.
+</p>
+
 <h3>Angle Brackets Versus Quotes</h3>
 
 <p>
@@ -373,7 +379,8 @@ int main() {
     To keep the includes nicely organized, I like to have them in a specific order. That is:
 </p>
 
-<pre class="code-block code-block-noheader"><code>#include "something.hpp"  // The source's header
+<pre class="code-block-header">something.cpp</pre>
+<pre class="code-block"><code>#include "something.hpp"  // The source's header
 
 #include &lt;iostream&gt;  // Standard library headers
 #include &lt;algorithm&gt;
