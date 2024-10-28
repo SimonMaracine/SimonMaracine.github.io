@@ -471,8 +471,8 @@ int main() {
 #include &lt;some_library.hpp&gt;  // Other library headers
 #include &lt;third_party_library.hpp&gt;
 
-#include "some_class_related_to_something"  // Project headers
-#include "some_definitions_related_to_something"
+#include "some_class_related_to_something.hpp"  // Project headers
+#include "some_definitions_related_to_something.hpp"
 </code></pre>
 
 <p>
@@ -481,14 +481,14 @@ int main() {
 
 <p>
     Some people like to swap the standard library headers with project headers. I personally don't like that, but it's up
-    to you. Also some people order those header groups alphabetically or in some other fashion. I don't mind it
+    to you. Also some people order those headers from each groups alphabetically or in some other fashion. I don't mind it
     that much, but it's fine.
 </p>
 
 <h3>Conclusion</h3>
 
 <p>
-    Now you have learned how to include stuff in your code!
+    Now you've learned how to include stuff in your code!
     The key takeaway from this article is to be cautious about which headers you include and whether you actually
     need to include them or not, especially in other header files. Follow standard best practices like the ones presented
     earlier. And when refactoring C++ code, when shuffling code around... I wish you luck! Be careful not to end up
