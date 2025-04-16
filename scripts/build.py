@@ -72,7 +72,7 @@ def build_index():
     with open("../articles/pages/ALL.json", "r") as file:
         articles = json.load(file)
 
-    latest_articles = list(reversed(articles[-4:]))
+    latest_articles = articles[:4]
     latest_articles_content: list[str] = []
 
     for article in latest_articles:
