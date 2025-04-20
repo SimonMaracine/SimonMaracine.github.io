@@ -91,7 +91,7 @@ def build_index():
         )
 
     make_html.make_html(
-        "../html/templates/index.html",
+        "../html/index.html",
         "../index.html",
         [
             make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
@@ -136,7 +136,7 @@ def build_pages_archive():
         pagination_content = [pages_pagination_template(i + 1, index == i) for i in range(article_pages)]
 
         make_html.make_html(
-            "../html/templates/pages-archive.html",
+            "../html/pages-archive.html",
             f"../pages-archive-{index + 1}.html",
             [
                 make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
@@ -161,7 +161,7 @@ def build_pages_articles():
         keywords = article_metadata["keywords"]
 
         make_html.make_html(
-            "../html/templates/pages-article.html",
+            "../html/pages-article.html",
             f"../pages/{article}.html",
             [
                 make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
@@ -198,7 +198,7 @@ def build_simon_says_archive():
         )
 
     make_html.make_html(
-        "../html/templates/simon-says-archive.html",
+        "../html/simon-says-archive.html",
         f"../simon-says-archive.html",
         [
             make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
@@ -222,7 +222,7 @@ def build_simon_says_articles():
         topics = article_metadata["topics"]
 
         make_html.make_html(
-            "../html/templates/simon-says-article.html",
+            "../html/simon-says-article.html",
             f"../simon-says/{article}.html",
             [
                 make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
