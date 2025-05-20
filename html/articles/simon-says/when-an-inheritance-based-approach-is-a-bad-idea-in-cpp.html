@@ -1,0 +1,871 @@
+<p>
+    Object-oriented programming has been and still is a very popular programming language paradigm. I bet that you
+    heard of it, if you studied programming for any length of time. It's popular for a good reason: It allows the
+    programmer to more easily reason about the entities and concepts they try to model, to materialize into code.
+    Put more simply, object-oriented programming, in contrast to pure procedural or functional paradigms, is mostly
+    just a different way to organize the code, which consists of logic and data. However, there are some caveats
+    to that, of course. Here is quick a reminder that we are talking about C++. Yay! What I mean is that using
+    inheritance and virtual functions to solve everything is not always a good idea.
+</p>
+
+<p>
+    This article presents a problem that could have many solutions, tries to solve it with what could be called
+    "the obvious solution" in an object-oriented language, explains why that may not be such a good idea in C++ and
+    finally proposes a new solution, a different approach. Let's jump right in!
+</p>
+
+<h3>The Problem that We Are Trying to Solve</h3>
+
+<p>
+    As programmers, our job is to solve problems. That's a fancy way of saying that we write code that accomplishes
+    something that for most normal people doesn't make any sense. But it does for us.
+</p>
+
+<p>
+    Our problem is this: We have a pretty complex graphical application that has a main infinite loop with two types
+    of business logic code:
+</p>
+
+<ul>
+    <li>Code executing every iteration of the loop and</li>
+    <li>Code executing when certain events occur, like when a key is pressed, a mouse is moved, or a window is resized.</li>
+</ul>
+
+<p>
+    Because that is not complex enough, we need yet another way of executing code: tasks and asynchronous tasks. In our
+    case, tasks are pieces of code that are run either at a certain point in time, at a certain part of the main loop,
+    or completely independently of the rest of the code, basically as threads. You'll understand better what I mean
+    by that shortly.
+</p>
+
+<p>
+    Let's start with a rough API that we would like to have, in pseudocode:
+</p>
+
+<pre class="code-block code-block-noheader"><code>class TaskObject {
+    TaskObject(Function function);
+
+    Function function;
+}
+
+class TaskManager {
+    void add_task(TaskObject task);  // Add a task to be executed at some point in time
+    void update();  // Execute current pending tasks
+    void clear();  // Discard current pending tasks
+
+    // Some container for storing pending tasks
+}
+
+// Over to application
+
+class Application {
+    void main_loop() {
+        while (true) {
+            // Update events
+            // Update graphics
+            // Business logic
+
+            task_manager.update();
+        }
+    }
+
+    TaskManager task_manager;
+}
+</code></pre>
+
+<p>
+    This is a partial outline of our solution to the problem. In our main application class, we store a task manager,
+    which in turn takes care of storing data related to tasks and executing them at the right time. We also have
+    the option to discard any current pending tasks. To fire a task some time in the future, we call the <code>add_task</code> method.
+    Tasks, for now, are objects that store the callback function.
+</p>
+
+<p>
+    So far, so good. But what I did not specify yet is that we need a few different kinds of tasks, each that run
+    in a different way. Does that sound to you like inheritance and virtual functions?
+</p>
+
+<p>
+    I already mentioned the asynchronous tasks, which do not run with the main loop, but in
+    a different thread. That means that we need to handle asynchronous tasks very differently from the other.
+    The other tasks are:
+</p>
+
+<ul>
+    <li>Immediate: tasks that run once at the very next call of <code>update</code>;</li>
+    <li>Repeatable: tasks that run indefinitely once every few seconds, or at an interval;</li>
+    <li>Delayed: tasks that run once after a certain amount of seconds, or with a delay;</li>
+    <li>Deferred: tasks that run once, skipping only one call of <code>update</code>.</li>
+</ul>
+
+<p>
+    All of these tasks need to be fired from any thread, in order to facilitate the use of the asynchronous ones.
+    That problem is easily solved with a simple mutex, but for brevity we will not talk about that any further.
+</p>
+
+<p>
+    This problem of tasks can be solved in an object-oriented fashion: We could have a base task class with a virtual
+    function <code>update</code> and with data common to all tasks, i.e. the callback function. Every type of task could then
+    derive from the base class and add their own data needed for their own overriden <code>update</code> method. The task manager
+    then could iterate over all tasks, calling their <code>update</code> method, which in turn calls their callback functions at the
+    right time. Sounds good? Let's see...
+</p>
+
+<h3>The Inheritance-Based Approach</h3>
+
+<p>
+    We'll start off with the base task class:
+</p>
+
+<pre class="code-block-header">task.hpp</pre>
+<pre class="code-block"><code>#pragma once
+
+#include &lt;functional>
+
+using TaskFunction = std::function&lt;void()>;
+
+class Task {
+public:
+    explicit Task(TaskFunction&& task_function)
+        : m_task_function(std::move(task_function)) {}
+    virtual ~Task() = default;
+
+    virtual bool update() = 0;
+protected:
+    TaskFunction m_task_function;
+};
+</code></pre>
+
+<p>
+    It contains the callback as a protected member, accessible from derived classes, as all of them essentially
+    call a specific user function. It also has a pure virtual <code>update</code> function, that returns true when the task has
+    completed and can be discarded, and false otherwise. Don't forget about the virtual destructor, even if
+    the derived classes probably won't have custom destructors.
+</p>
+
+<pre class="code-block-header">task.hpp</pre>
+<pre class="code-block"><code>class Task {
+public:
+    explicit Task(TaskFunction&& task_function)
+        : m_task_function(std::move(task_function)) {}
+    virtual ~Task() = default;
+
+    virtual bool update() = 0;
+protected:
+    TaskFunction m_task_function;
+};
+
+struct ImmediateTask : Task {
+    explicit ImmediateTask(TaskFunction&& task_function)
+        : Task(std::move(task_function)) {}
+
+    bool update() override;
+};
+
+class RepeatableTask : public Task {
+public:
+    RepeatableTask(TaskFunction&& task_function, double interval)
+        : Task(std::move(task_function)), m_interval(interval) {}
+
+    bool update() override;
+private:
+    double m_interval {};
+    double m_last_time {};
+    double m_total_time {};
+};
+
+class DelayedTask : public Task {
+public:
+    DelayedTask(TaskFunction&& task_function, double delay)
+        : Task(std::move(task_function)), m_delay(delay) {}
+
+    bool update() override;
+private:
+    double m_delay {};
+    double m_last_time {};
+    double m_total_time {};
+};
+
+class DeferredTask : public Task {
+public:
+    explicit DeferredTask(TaskFunction&& task_function)
+        : Task(std::move(task_function)) {}
+
+    bool update() override;
+private:
+    bool m_deferred {};
+};
+</code></pre>
+
+<p>
+    Then, each type of task is implemented in its own class. Each one overrides the <code>update</code> method, which will
+    be called continously every iteration of the application loop. This method decides when the callback function
+    is actually called and when the task is done or not. Quite a lot of boilerplate code too.
+</p>
+
+<p>
+    Finally, here is the actual implementation of the previous functions:
+</p>
+
+<pre class="code-block-header">task.cpp</pre>
+<pre class="code-block"><code>#include "task.hpp"
+
+double get_time();
+
+bool ImmediateTask::update() {
+    m_task_function();
+
+    return true;
+}
+
+bool RepeatableTask::update() {
+    const double current_time {get_time()};
+    const double elapsed_time {current_time - m_last_time};
+
+    m_last_time = current_time;
+    m_total_time += elapsed_time;
+
+    if (m_total_time &gt; m_interval) {
+        m_total_time = 0.0;
+        m_task_function();
+    }
+
+    return false;
+}
+
+bool DelayedTask::update() {
+    const double current_time {get_time()};
+    const double elapsed_time {current_time - m_last_time};
+
+    m_last_time = current_time;
+    m_total_time += elapsed_time;
+
+    if (m_total_time &gt; m_delay) {
+        m_task_function();
+        return true;
+    }
+
+    return false;
+}
+
+bool DeferredTask::update() {
+    if (m_deferred) {
+        m_task_function();
+        return true;
+    }
+
+    m_deferred = true;
+    return false;
+}
+</code></pre>
+
+<p>
+    The logic behind the tasks is not very relevant to the subject of the article, but to make sure we understand
+    how we are doing what we are doing, I included that code. <code>get_time</code> is a function that returns the current
+    system time in seconds.
+</p>
+
+<p>
+    It looks like we are making good progress. But right here we hit a problem. The asynchronous tasks cannot
+    be modeled after the base <code>Task</code> class that we made earlier. This type of tasks works in a fundamentally
+    different way. Asynchronous tasks run independently from other code, in a separate thread and need to
+    communicate back to the main thread when they are done or when they encounter an exception. We can try
+    at least:
+</p>
+
+<pre class="code-block-header">task.hpp</pre>
+<pre class="code-block"><code>#include &lt;thread&gt;
+#include &lt;exception&gt;
+
+class AsyncTask : public Task {
+public:
+    explicit AsyncTask(TaskFunction&& task_function)
+        : Task(std::move(task_function)), m_thread(std::move(task_function)) {}
+
+    bool update() override;
+
+    void finish();
+    void finish(std::exception_ptr exception);
+private:
+    std::exception_ptr m_exception;
+    std::jthread m_thread;
+};
+</code></pre>
+
+<pre class="code-block-header">task.cpp</pre>
+<pre class="code-block"><code>void AsyncTask::finish() {
+    m_thread.request_stop();
+}
+
+void AsyncTask::finish(std::exception_ptr exception) {
+    m_exception = exception;
+    m_thread.request_stop();
+}
+</code></pre>
+
+<p>
+    The asynchronous task needs to store a handle to a thread, that is in our case an object of type <code>jthread</code> from C++20.
+    It also stores a pointer to a generic exception, for the main thread to handle the errors that the task itself
+    couldn't handle alone. But remember how inheritance works? Yes, we also inherit a completely useless function
+    object from the base <code>Task</code> class. And there's something else too: We cannot use the <code>TaskFunction</code> defined
+    previously, because it accepts no arguments. Our <code>AsyncTask</code> needs to execute a function that accepts
+    a reference to itself, for the task thread to signal the main thread when it is done. So we need to define
+    another function type:
+</p>
+
+<pre class="code-block-header">task.hpp</pre>
+<pre class="code-block"><code>class AsyncTask;
+
+using AsyncTaskFunction = std::function&lt;void(AsyncTask&)&gt;;
+
+class AsyncTask : public Task {
+public:
+    explicit AsyncTask(AsyncTaskFunction&& task_function)
+        : Task({}), m_thread(std::move(task_function), std::ref(*this)) {}
+
+    bool update() override;
+
+    void finish();
+    void finish(std::exception_ptr exception);
+private:
+    std::exception_ptr m_exception;
+    std::jthread m_thread;
+};
+</code></pre>
+
+<p>
+    I don't like where this is going. It looks like <code>AsyncTask</code> needs to be its own class, separate from the other classes.
+    If you agree with me, then let's skip asynchronous tasks for now and switch our focus to the task manager. If you
+    don't agree, well, you'll see soon...
+</p>
+
+<p>
+    Here is our task manager class:
+</p>
+
+<pre class="code-block-header">task.hpp</pre>
+<pre class="code-block"><code>#include &lt;vector&gt;
+#include &lt;memory&gt;
+
+class TaskManager {
+public:
+    void add_task(Task&& task);
+    void update();
+    void clear();
+private:
+    std::vector&lt;Task&gt; m_incoming_tasks;
+    std::vector&lt;Task&gt; m_active_tasks;
+};
+</code></pre>
+
+<pre class="code-block-header">task.cpp</pre>
+<pre class="code-block"><code>void TaskManager::add_task(Task&& task) {
+    m_incoming_tasks.push_back(std::move(task));
+}
+
+void TaskManager::update() {
+    for (auto& task : m_active_tasks) {
+        if (task-&gt;update()) {
+            m_incoming_tasks.push_back(std::move(task));
+        }
+    }
+
+    m_active_tasks.clear();
+    std::swap(m_incoming_tasks, m_active_tasks);
+}
+
+void TaskManager::clear() {
+    m_incoming_tasks.clear();
+    m_active_tasks.clear();
+}
+</code></pre>
+
+<p>
+    This is where we hit yet another problem. In order to be able to fire different kinds of tasks, we need to store
+    an array of references or pointers to their base class. Storing objects of <code>Task</code> can't help us, because the moment
+    that we try to push a derived task to the array of base task, we simply slice off the derived object. It wouldn't
+    work anyway, because the <code>update</code> method from <code>Task</code> is pure virtual. We cannot instantiate objects of <code>Task</code>.
+    We can only refer to derived objects through <code>Task</code>.
+</p>
+
+<p>
+    All of this means that we either need to allocate tasks somewhere else on the stack and push pointers to them,
+    or to allocate them on the heap. Yikes!
+</p>
+
+<pre class="code-block-header">task.hpp</pre>
+<pre class="code-block"><code>class TaskManager {
+public:
+    void add_task(std::unique_ptr&lt;Task&gt;&& task);
+    void update();
+    void clear();
+private:
+    std::vector&lt;std::unique_ptr&lt;Task&gt;&gt; m_incoming_tasks;
+    std::vector&lt;std::unique_ptr&lt;Task&gt;&gt; m_active_tasks;
+};
+</code></pre>
+
+<pre class="code-block-header">task.cpp</pre>
+<pre class="code-block"><code>void TaskManager::add_task(std::unique_ptr&lt;Task&gt;&& task) {
+    m_incoming_tasks.push_back(std::move(task));
+}
+</code></pre>
+
+<p>
+    This works, but I'm already feeling a bit uneasy. Allocating objects on the heap with <code>new</code> is generally a very
+    heavy operation and we should strive to avoid it. We expect the tasks to be lightweight objects, easy and quick
+    to create and destroy. We want to be able to process hundreds of tasks without dragging the whole program down.
+</p>
+
+<p>
+    Now we should realize the problem with using virtual functions, a technique called dynamic dispatch, through inheritance
+    in C++. The use of virtual functions encourages heap allocation, which often is not necessary, especially in
+    this case. If you are coming from managed object-oriented languages like Java, you're probably wondering what's
+    up with all this fuss. For you, the previous solution might be the obvious choice in Java. Well, there is
+    a big difference between the two here: Allocating objects in Java (or C#, Python, JavaScript) is not the same
+    as allocating objects in C++. In Java, every object is allocated on the heap. Java utilizes a very special
+    allocator adapted for the objects in its virtual machine, that has several layers of complexity built on top
+    of the system allocator, which is <code>malloc</code>. Creating objects in Java is pretty fast.
+    C++, on the other hand, allocates every object directly with the system allocator, which is not well fit for
+    many small allocations. Yes, you can override the global allocator or
+    override the <code>new</code> operator for specific objects, but that is not easy in practice and you'll still be better
+    off avoiding <code>new</code> altogether and allocating on the stack or in-place.
+</p>
+
+<p class="text-red">
+    Allocating objects with <code>new</code> is generally slow.
+</p>
+
+<h3>A Different Approach, Avoiding Heap Allocations</h3>
+
+<p>
+    Instead of using inheritance to program different types of tasks, we could simply use just one class to represent
+    all of them! Let's see how we are going to do it.
+</p>
+
+<p>
+    We define an enumeration with a variant for every type of non-asynchronous task:
+</p>
+
+<pre class="code-block-header">task.hpp</pre>
+<pre class="code-block"><code>enum class TaskType {
+    Immediate,
+    Repeatable,
+    Delayed,
+    Deferred
+};
+</code></pre>
+
+<p>
+    We will represent asynchronous tasks using a different class, but first here is the class for all the other tasks:
+</p>
+
+<pre class="code-block-header">task.hpp</pre>
+<pre class="code-block"><code>#include &lt;functional&gt;
+
+class TaskManager;
+
+using TaskFunction = std::function&lt;void()&gt;;
+
+class Task {
+public:
+    Task(TaskFunction&& task_function, TaskType type);
+private:
+    union {
+        struct {
+            double interval;
+            double last_time;
+            double total_time;
+        } m_repeatable;
+
+        struct {
+            double delay;
+            double last_time;
+            double total_time;
+        } m_delayed;
+
+        struct {
+            bool deferred;
+        } m_deferred;
+    };
+
+    TaskFunction m_task_function;
+    TaskType m_type {};
+
+    friend class TaskManager;
+};
+</code></pre>
+
+<p>
+    Yes, unions are the solution to our problem. The enumeration defined previously tells us which type of task an
+    instance represents. We pass the callback function and, most importantly, the task type into the constructor,
+    which takes care of fully initializing all the members, including the union:
+</p>
+
+<pre class="code-block-header">task.cpp</pre>
+<pre class="code-block"><code>#include "task.hpp"
+
+double get_time();
+
+Task::Task(TaskFunction&& task_function, TaskType type)
+    : m_task_function(std::move(task_function)), m_type(type) {
+    switch (type) {
+        case TaskType::Immediate:
+            break;
+        case TaskType::Repeatable:
+            m_repeatable.interval = 0.0;
+            m_repeatable.last_time = get_time();
+            m_repeatable.total_time = 0.0;
+            break;
+        case TaskType::Delayed:
+            m_delayed.delay = 0.0;
+            m_delayed.last_time = get_time();
+            m_delayed.total_time = 0.0;
+            break;
+        case TaskType::Deferred:
+            m_deferred.deferred = false;
+            break;
+    }
+}
+</code></pre>
+
+<p>
+    We also declare the task manager to be a friend, since it is now his job to update the tasks. Thus it needs
+    access to their data.
+</p>
+
+<p>
+    The asynchronous task class, <code>AsyncTask</code>, no longer inherits from <code>Task</code> and it also declares <code>TaskManager</code> to be a friend.
+    We will soon finish its implementation.
+</p>
+
+<pre class="code-block-header">task.hpp</pre>
+<pre class="code-block"><code>#include &lt;thread&gt;
+#include &lt;exception&gt;
+
+class AsyncTask;
+
+using AsyncTaskFunction = std::function&lt;void(AsyncTask&)&gt;;
+
+class AsyncTask {
+public:
+    AsyncTask(AsyncTaskFunction&& task_function)
+        : m_thread(std::move(task_function), std::ref(*this)) {}
+
+    void finish();
+    void finish(std::exception_ptr exception);
+private:
+    std::exception_ptr m_exception;
+    std::jthread m_thread;
+
+    friend class TaskManager;
+};
+</code></pre>
+
+<pre class="code-block-header">task.cpp</pre>
+<pre class="code-block"><code>void AsyncTask::finish() {
+    m_thread.request_stop();
+}
+
+void AsyncTask::finish(std::exception_ptr exception) {
+    m_exception = exception;
+    m_thread.request_stop();
+}
+</code></pre>
+
+<p>
+    The task manager now looks different:
+</p>
+
+<pre class="code-block-header">task.hpp</pre>
+<pre class="code-block"><code>#include &lt;vector&gt;
+
+class TaskManager {
+public:
+    void add_immediate_task(TaskFunction&& task_function);
+    void add_repeatable_task(TaskFunction&& task_function, double interval);
+    void add_delayed_task(TaskFunction&& task_function, double delay);
+    void add_deferred_task(TaskFunction&& task_function);
+
+    void update();
+    void clear();
+private:
+    void update_tasks();
+
+    bool update_immediate_task(Task& task);
+    bool update_repeatable_task(Task& task);
+    bool update_delayed_task(Task& task);
+    bool update_deferred_task(Task& task);
+
+    std::vector&lt;Task&gt; m_incoming_tasks;
+    std::vector&lt;Task&gt; m_active_tasks;
+};
+</code></pre>
+
+<p>
+    We use a different <code>add_*</code> function for each type of task. We also need a function to handle each type of task
+    based on its type.
+</p>
+
+<p>
+    Let's jump in right where we had trouble last time, over to the implementations of <code>add_*</code> functions:
+</p>
+
+<pre class="code-block-header">task.cpp</pre>
+<pre class="code-block"><code>#include &lt;cassert&gt;
+
+void TaskManager::add_immediate_task(TaskFunction&& task_function) {
+    m_incoming_tasks.emplace_back(std::move(task_function), TaskType::Immediate);
+}
+
+void TaskManager::add_repeatable_task(TaskFunction&& task_function, double interval) {
+    assert(interval &gt; 0.0);
+
+    Task& task {m_incoming_tasks.emplace_back(std::move(task_function), TaskType::Repeatable)};
+    task.m_repeatable.interval = interval;
+}
+
+void TaskManager::add_delayed_task(TaskFunction&& task_function, double delay) {
+    assert(delay &gt; 0.0);
+
+    Task& task {m_incoming_tasks.emplace_back(std::move(task_function), TaskType::Delayed)};
+    task.m_delayed.delay = delay;
+}
+
+void TaskManager::add_deferred_task(TaskFunction&& task_function) {
+    m_incoming_tasks.emplace_back(std::move(task_function), TaskType::Deferred);
+}
+</code></pre>
+
+<p>
+    We construct the objects in place in order to avoid needlessly allocating them on the stack and then copying
+    them in the right place. Under the hood, the <code>placement new</code> operator is used to achieve this functionality.
+    Look at that! We got rid of dynamic allocation. We don't need to call any virtual function on a reference or pointer.
+    The rest should be self explanatory.
+</p>
+
+<p>
+    Updating the tasks is pretty much the same, just that it's done by the task manager himself:
+</p>
+
+<pre class="code-block-header">task.cpp</pre>
+<pre class="code-block"><code>void TaskManager::update() {
+    update_tasks();
+}
+
+void TaskManager::update_tasks() {
+    for (Task& task : m_active_tasks) {
+        bool(TaskManager::*update_function)(Task&) {};
+
+        switch (task.m_type) {
+            case TaskType::Immediate:
+                update_function = &TaskManager::update_immediate_task;
+                break;
+            case TaskType::Repeatable:
+                update_function = &TaskManager::update_repeatable_task;
+                break;
+            case TaskType::Delayed:
+                update_function = &TaskManager::update_delayed_task;
+                break;
+            case TaskType::Deferred:
+                update_function = &TaskManager::update_deferred_task;
+                break;
+        }
+
+        if (!(*this.*update_function)(task)) {
+            m_incoming_tasks.push_back(task);
+        }
+    }
+
+    m_active_tasks.clear();
+    std::swap(m_incoming_tasks, m_active_tasks);
+}
+</code></pre>
+
+<p>
+    We loop over all the active tasks just as before, check their type, and finally call the corresponding
+    <code>update_*</code> method on them. The syntax for function pointer variables is indeed alien, just don't mind it.
+    Look up examples from the documentation when you need to write something like this.
+</p>
+
+<p>
+    Finally, updating each task type is exactly the same. I wonder why do I bother showing you the code again:
+</p>
+
+<pre class="code-block-header">task.cpp</pre>
+<pre class="code-block"><code>bool TaskManager::update_immediate_task(Task& task) {
+    task.m_task_function();
+
+    return true;
+}
+
+bool TaskManager::update_repeatable_task(Task& task) {
+    const double current_time {get_time()};
+    const double elapsed_time {current_time - task.m_repeatable.last_time};
+
+    task.m_repeatable.last_time = current_time;
+    task.m_repeatable.total_time += elapsed_time;
+
+    if (task.m_repeatable.total_time &gt; task.m_repeatable.interval) {
+        task.m_repeatable.total_time = 0.0;
+        task.m_task_function();
+    }
+
+    return false;
+}
+
+bool TaskManager::update_delayed_task(Task& task) {
+    const double current_time {get_time()};
+    const double elapsed_time {current_time - task.m_delayed.last_time};
+
+    task.m_delayed.last_time = current_time;
+    task.m_delayed.total_time += elapsed_time;
+
+    if (task.m_delayed.total_time &gt; task.m_delayed.delay) {
+        task.m_task_function();
+        return true;
+    }
+
+    return false;
+}
+
+bool TaskManager::update_deferred_task(Task& task) {
+    if (task.m_deferred.deferred) {
+        task.m_task_function();
+        return true;
+    }
+
+    task.m_deferred.deferred = true;
+    return false;
+}
+</code></pre>
+
+<p>
+    And we are done with four out of the five tasks. The only difference between this approach and the previous
+    one is that we no longer have to allocate each task on the heap. Now, task construction and destruction
+    is incredibly cheap compared to last time. The cost of calling a virtual function is exactly the same
+    as the cost of calling a different method based on a tag, the enumeration. The advantage is not needing
+    dynamic allocation or some sort of reference or pointer.
+</p>
+
+<p>
+    Let's finish the asynchronous tasks:
+</p>
+
+<pre class="code-block-header">task.hpp</pre>
+<pre class="code-block"><code>#include &lt;forward_list&gt;
+
+class TaskManager {
+public:
+    void add_immediate_task(TaskFunction&& task_function);
+    void add_repeatable_task(TaskFunction&& task_function, double interval);
+    void add_delayed_task(TaskFunction&& task_function, double delay);
+    void add_deferred_task(TaskFunction&& task_function);
+    void add_async_task(AsyncTaskFunction&& task_function);  // &lt;--
+
+    void update();
+    void clear();
+private:
+    void update_tasks();
+    void update_async_tasks();  // &lt;--
+
+    bool update_immediate_task(Task& task);
+    bool update_repeatable_task(Task& task);
+    bool update_delayed_task(Task& task);
+    bool update_deferred_task(Task& task);
+
+    std::vector&lt;Task&gt; m_incoming_tasks;
+    std::vector&lt;Task&gt; m_active_tasks;
+    std::forward_list&lt;AsyncTask&gt; m_async_tasks;  // &lt;--
+};
+</code></pre>
+
+<p>
+    We use a singly linked list for asynchronous tasks, because we know in advance that they will be used
+    more sparingly. We don't expect ever to be more than two or three asynchronous tasks at once. If you need a lot
+    of threads, then you might want to look into thread pools. A nice property of the linked list is that
+    removing elements while iterating over the list is very easy to achieve:
+</p>
+
+<pre class="code-block-header">task.cpp</pre>
+<pre class="code-block"><code>void TaskManager::update_async_tasks() {
+    std::exception_ptr last_exception;
+
+    for (auto before_iter {m_async_tasks.before_begin()}, iter {m_async_tasks.begin()}; iter != m_async_tasks.end();) {
+        const auto& task {*iter};
+
+        if (task.m_thread.get_stop_token().stop_requested()) {
+            if (task.m_exception) {
+                last_exception = task.m_exception;
+            }
+
+            iter = m_async_tasks.erase_after(before_iter);
+
+            continue;
+        }
+
+        before_iter++, iter++;
+    }
+
+    if (last_exception) {
+        std::rethrow_exception(last_exception);
+    }
+}
+</code></pre>
+
+<p>
+    The only reason to iterate over the asynchronous tasks is to check for their completion in order to join their threads.
+    We require the asynchronous tasks to never throw and to always call the finish method upon exiting. We then
+    check if the task finished with an exception or not and if so, then we throw that exception, whatever it is,
+    in order to let the main thread handle the error. This is one correct way to handle errors in threads.
+    One small caveat is that if multiple asynchronous tasks finish with an exception at the same time, then only
+    the last exception gets a chance to be handled, which, depending on the application, might be just fine.
+</p>
+
+<p class="text-red">
+    Linked lists are often considered a niche in application programming. Use them only when their benefits outweight
+    their costs.
+</p>
+
+<p>
+    Let's not forget about the rest of the code:
+</p>
+
+<pre class="code-block-header">task.cpp</pre>
+<pre class="code-block"><code>void TaskManager::add_async_task(AsyncTaskFunction&& task_function) {
+    m_async_tasks.emplace_front(std::move(task_function));
+}
+
+void TaskManager::update() {
+    update_tasks();
+    update_async_tasks();
+}
+
+void TaskManager::clear() {
+    m_async_tasks.clear();
+    m_incoming_tasks.clear();
+    m_active_tasks.clear();
+}
+</code></pre>
+
+<p>
+    Now we are done for real. We can compile all this code with GCC and see that it works:
+</p>
+
+<pre class="cmd"><code>g++ -c task.cpp -std=c++20</code></pre>
+
+<h3>Conclusion</h3>
+
+<p>
+    The inheritance plus dynamic dispatch feature in C++ has its use. I know that it is the de facto option
+    in languages like Java or C#, but C++ is different. In C++ you have to worry about memory. That is the reason
+    why you are writing C++ in the first place! I'm not saying to never use virtual functions or to never allocate
+    objects on the heap, but to really think if using these features makes sense and is optimal. I actually
+    did use virtual functions and inheritance a lot in the same project from which I derived the problem in
+    this article. I like using virtual functions when they make sense. And inheritance has a lot of uses in C++
+    outside of "class Car extends class Vehicle".
+</p>
+
+<p>
+    I hope this article helped you or gave you some ideas or things to think about!
+</p>
