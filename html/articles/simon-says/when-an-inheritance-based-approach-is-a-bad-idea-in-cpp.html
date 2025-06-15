@@ -100,7 +100,8 @@ class Application {
 
 <p>
     All of these tasks need to be fired from any thread, in order to facilitate the use of the asynchronous ones.
-    That problem is easily solved with a simple mutex, but for brevity we will not talk about that any further.
+    This problem is easily solved with a simple mutex, but for brevity we will not talk about synchronization any further,
+    basically not making the task creation thread-safe.
 </p>
 
 <p>
@@ -144,18 +145,7 @@ protected:
 </p>
 
 <pre class="code-block-header">task.hpp</pre>
-<pre class="code-block"><code>class Task {
-public:
-    explicit Task(TaskFunction&& task_function)
-        : m_task_function(std::move(task_function)) {}
-    virtual ~Task() = default;
-
-    virtual bool update() = 0;
-protected:
-    TaskFunction m_task_function;
-};
-
-struct ImmediateTask : Task {
+<pre class="code-block"><code>struct ImmediateTask : Task {
     explicit ImmediateTask(TaskFunction&& task_function)
         : Task(std::move(task_function)) {}
 
@@ -199,7 +189,7 @@ private:
 
 <p>
     Then, each type of task is implemented in its own class. Each one overrides the <code>update</code> method, which will
-    be called continously every iteration of the application loop. This method decides when the callback function
+    be called every iteration of the application loop for the active tasks. This method decides when the callback function
     is actually called and when the task is done or not. Quite a lot of boilerplate code too.
 </p>
 
@@ -641,7 +631,7 @@ void TaskManager::add_deferred_task(TaskFunction&& task_function) {
     We construct the objects in place in order to avoid needlessly allocating them on the stack and then copying
     them in the right place. Under the hood, the <code>placement new</code> operator is used to achieve this functionality.
     Look at that! We got rid of dynamic allocation. We don't need to call any virtual function on a reference or pointer.
-    The rest should be self explanatory.
+    The rest of the above code should be self explanatory.
 </p>
 
 <p>
