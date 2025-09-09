@@ -104,6 +104,11 @@ code {
     color: #da5863;
     padding: 0.5rem;
     border-radius: 10px;
+    outline: 1px solid #da5863;
+}
+
+.text-red code {
+    color: #9e4048;
 }
 
 .text-green {
@@ -111,4 +116,9 @@ code {
     color: #6db668;
     padding: 0.5rem;
     border-radius: 5px;
+    outline: 1px solid #6db668;
+}
+
+.text-green code {
+    color: #487745;
 }

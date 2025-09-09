@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="utf-8">
+    <title>Simon Mărăcine</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Inter&family=Montserrat&family=Philosopher:wght@700&display=swap" rel="stylesheet">
+
+    <script src="https://kit.fontawesome.com/9904065f3f.js" crossorigin="anonymous"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    <link href="/css/simon-says-article.css" rel="stylesheet">
+    <link href="/css/navigation-bar.css" rel="stylesheet">
+    <link href="/css/back-to-top-button.css" rel="stylesheet">
+    <link href="/css/copyright.css" rel="stylesheet">
+
+    <script src="/js/back-to-top-button.js"></script>
+</head>
+<body>
+    <header>
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/">
+        <h1>Simon Mărăcine</h1>
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggler" aria-controls="navbarToggler" aria-expanded="false">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarToggler">
+        <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/#projects-section">Projects</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/#nine-morris-3d-section">Nine Morris 3D</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/#pages-section">Pages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/#simon-says-section">Simon Says</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/#about-section">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/#contact-section">Contact</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+    </header>
+
+    <main>
+        <div class="container">
+            <div class="article-title-container">
+                <h2 id="article-title">The Spectrum of When and Where to Use const in C++</h2>
+            </div>
+            <div class="container article-details">
+                <div class="row">
+                    <div class="col-lg-4 col-md-4 col-sm-4 article-detail">
+                        <p id="article-date">September 9, 2025</p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 article-detail">
+                        <p class="article-topics-head">Topics:</p>
+                        <p id="article-topics">programming, C++, best practices</p>
+                    </div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 article-detail">
+                        <p class="article-last-modified-head">Last modified:</p>
+                        <p id="article-last-modified">September 9, 2025</p>
+                    </div>
+                </div>
+            </div>
+            <div id="article-content">
+<p>
+    C++, among its dozens of keywords, has a funny little keyword inherited from C named <code>const</code>. It is short for constant
+    and it is a qualifier that tells the compiler that some value does not change. <code>const</code> as a concept exists only for
+    the compiler and for us writing the code. There is no such thing as a <code>const</code> variable in the machine code, that
+    the compiler generates. <code>const</code> is a tool for the programmer to help keep the code correct and manageable. That is why,
+    in this article, I would like to present to you, in order:
+</p>
+
+<ul>
+    <li>when <code>const</code> should always be used (and a similar keyword to use instead!),</li>
+    <li>when it is beneficial to use,</li>
+    <li>when using it is possible, but counter-productive,</li>
+    <li>when it might be a bad idea to use and, finally,</li>
+    <li>when to never use <code>const</code>.</li>
+</ul>
+
+<h3>Actual Constants</h3>
+
+<p>
+    Often, we find ourselves writing a piece of logic that contains some magic numbers. Let's say we're writing an update
+    function, called repeatedly, for an object that needs to smoothly bob up and down. We would write something like
+    this:
+</p>
+
+<pre class="code-block code-block-noheader"><code>void update_position() {
+    position.y += sin(elapsed_time * 2.0) * 12.0;
+}
+</code></pre>
+
+<p>
+    But we don't like magic numbers, so we go ahead and put them into variables. Here, we should not even think about
+    using <code>const</code>, because we should automatically use it without thinking!
+</p>
+
+<pre class="code-block code-block-noheader"><code>void update_position() {
+    const double SPEED {2.0};
+    const double HEIGHT {12.0};
+    position.y += sin(elapsed_time * SPEED) * HEIGHT;
+}
+</code></pre>
+
+<p>
+    That looks much better. It is clearer now what those numbers mean and it might tell us that the numbers are chosen
+    arbitrarily and that they are configurable. It is much safer now to modify the movement of the object.
+</p>
+
+<p>
+    There is no point in not making actual constants <code>const</code> and not writing them in a special case, that is
+    <code>SCREAMING_SNAKE_CASE</code>.
+</p>
+
+<h3>Pointers and References</h3>
+
+<p>
+    Another place we should definitely use <code>const</code> is with pointers and references. <code>const</code>, here, actually has a slightly
+    different meaning, because it tells us and the compiler that we can't modify the referent through that reference, but
+    the actual value, the referent, could in fact be mutable. Most often we use references as function parameters,
+    in order to pass values to functions as arguments. Often, we need to modify those objects, to read and write to them,
+    so we use a mutable reference:
+</p>
+
+<pre class="code-block code-block-noheader"><code>struct Vec2 {
+    double x, y;
+};
+
+struct Object {
+    Vec2 position {};
+};
+
+void reset_position(Object& object) {
+    object.position = {};
+}
+</code></pre>
+
+<p>
+    Other times, however, we only need to read an object, thus we use <code>const</code>!
+</p>
+
+<pre class="code-block code-block-noheader"><code>double get_position_view_space(const Object& object) {
+    return object.position - camera_position;
+}
+</code></pre>
+
+<p>
+    <code>const</code> is like a contract that promises that an object will not be modified when passed to a function, for example.
+    When I see this:
+</p>
+
+<pre class="code-block code-block-noheader"><code>void do_something_with_data(void* data);
+</code></pre>
+
+<p>
+    Without reading the function body, I immediately know that whatever I pass to data, it might get modified. If, however,
+    the parameter were <code>const</code> instead, then I could stay in peace that my data is not going to be modified. It is like
+    a promise.
+</p>
+
+<pre class="code-block code-block-noheader"><code>void do_something_with_data(const void* data);
+</code></pre>
+
+<p>
+    This is incredibly important for good APIs. <code>const</code> for references is not just aesthetics, if the intent is to not
+    modify the value! We might still find old C APIs that do not respect const correctness. We might need to pass
+    a constant value to a function that does not modify the value, but it incorrectly receives it as a mutable reference:
+</p>
+
+<pre class="code-block code-block-noheader"><code>typedef struct {
+    int x;
+    float y;
+} Object;
+
+int read_object(Object* object) {
+    return object->x;
+}
+</code></pre>
+
+<p>
+    In this case, in our C++ code, we'd have to use <code>const_cast</code> in order to remove the <code>const</code> qualifier from the pointer:
+</p>
+
+<pre class="code-block code-block-noheader"><code>int main() {
+    const Object obj {5, 3.14159f};
+
+    // read_object(&obj);  Doesn't work
+
+    read_object(const_cast&lt;Object*&gt;(&obj));
+}
+</code></pre>
+
+<p>
+    But we'd have to be very sure that the function really doesn't modify the value, otherwise it would be undefined
+    behavior.
+</p>
+
+<p class="text-green">
+    We can use <code>const_cast</code> to remove <code>const</code> from references and pointers in any way as long as we don't actually
+    try to modify any constant referent object.
+</p>
+
+<p>
+    Finally, marking reference parameters as <code>const</code> allows us to pass temporary values to those functions:
+</p>
+
+<pre class="code-block code-block-noheader"><code>void print_hello(const std::string& name) {
+    std::cout &lt;&lt; "Hello, " &lt;&lt; name &lt;&lt; "!\n";
+}
+
+int main() {
+    print_hello("Simon");  // Only allowed because name is a constant reference
+}
+</code></pre>
+
+<h3>Member Functions</h3>
+
+<p>
+    Member functions, also known as methods, can be marked as <code>const</code>. In that case, all it does is in fact to const-qualify
+    the <code>this</code> pointer:
+</p>
+
+<pre class="code-block code-block-noheader"><code>struct Object {
+    void non_const_function(int, float);
+    void const_function(int, float) const;
+};
+
+// Same as if:
+
+struct Object {
+    void non_const_function(Object* this, int, float);
+    void const_function(const Object* this, int, float);
+};
+</code></pre>
+
+<p>
+    So, we should mark member functions that do not modify the instance as <code>const</code>!
+</p>
+
+<h3>Local Variables</h3>
+
+<p>
+    Const-qualifying local variables is not as important as in the other cases previously presented, because they do not
+    form an API as functions do. They are usually short-lived and contained into small functions or scopes:
+</p>
+
+<pre class="code-block code-block-noheader"><code>std::string get_name();
+Object create_object(const std::string& description);
+
+int main() {
+    // Long line of code
+    const std::string obj_description {"Object(" + get_name() + ") is a class used to do this thing and..."};
+
+    const Object obj {create_object(obj_name)};
+}
+</code></pre>
+
+<p>
+    I personally do mark almost every local variable as <code>const</code> and strongly advice you to do the same,
+    but if you don't, it's not a disaster.
+</p>
+
+<p>
+    Not all local variables should be <code>const</code>, however... Consider an object that is non-trivial and a function that always
+    expects a temporary object:
+</p>
+
+<pre class="code-block code-block-noheader"><code>struct Object {
+    Object(int x, float y);
+    ~Object();
+
+    Object(const Object& other);
+    Object& operator=(const Object& other);
+    Object(Object&& other);
+    Object& operator=(Object&& other);
+};
+
+void do_something_with_object(Object&& object);
+
+int main() {
+    Object obj {5, 10.0f};
+
+    // Lots of code here...
+
+    do_something_with_object(std::move(obj));
+
+    // Lots of code here too...
+}
+</code></pre>
+
+<p>
+    <code>obj</code> could very well be <code>const</code>, but shouldn't, because it is moved into the function. If <code>obj</code> were const instead, it
+    would be copied into the function, which is exactly what we don't want. So, don't mark objects that are going to be
+    moved as <code>const</code>!
+</p>
+
+<h3>Function Parameters</h3>
+
+<p>
+    Function parameters are a special case of local variables, the difference being that they are usually not allocated
+    on the runtime stack, but are copied into registers. They can be <code>const</code> just as well. I personally don't do that, just
+    because it makes function declarations and definitions way too long:
+</p>
+
+<pre class="code-block code-block-noheader"><code>// Imagine, besides this, writing const five times
+// I would personally write each parameter on its own line anyway
+SomeObject some_function(const unsigned char* some_variable1, int some_variable2, float some_variable3, double some_variable4, long long some_variable5);
+</code></pre>
+
+<p>
+    Notice how <code>some_variable1</code> is not actually <code>const</code>. The referent is thought to be <code>const</code>, but the pointer variable is not!
+</p>
+
+<h3>Member Variables</h3>
+
+<p>
+    We are approaching the other end of the spectrum of when to use <code>const</code>. C++, as oppoosed to C, allows us to mark
+    individual struct member variables as <code>const</code>. While it sounds like a good idea, as often times we want to calculate
+    something and then store it in a <code>const</code> member variable, it complicates things. First, <code>const</code> member variables must
+    be initialized in the constructor's member initializer list. Second, having even a single <code>const</code> member variable
+    makes our object non-copyable and non-movable, which might not be what we want. If, however, we have an object that
+    already is non-copyable and non-movable, or that is the intent anyway, then we can benefit from <code>const</code> member
+    variables:
+</p>
+
+<pre class="code-block code-block-noheader"><code>class Object {
+public:
+    Object(int x, float y)
+        : m_x(x), m_y(y) {}
+    ~Object();
+
+    Object(const Object&) = delete;
+    Object& operator=(const Object&) = delete;
+    Object(Object&&) = delete;
+    Object& operator=(Object&&) = delete;
+private:
+    const int m_x;
+    const float m_y;
+};
+</code></pre>
+
+<h3>Temporary References</h3>
+
+<p>
+    Temporary references, also known as rvalue references, are usually seen as mutable references, but the language
+    allows them to also be <code>const</code>. <code>const</code> rvalue references are very rarely used in practice. They are used by the
+    standard library in very select places and for very specific reasons. We won't deal with them.
+</p>
+
+<pre class="code-block code-block-noheader"><code>class Object;
+
+// Reference parameter needs to be mutable
+void do_something(Object&& object);
+</code></pre>
+
+<h3>Actual Constants... Again?</h3>
+
+<p>
+    I've talked about marking constants with <code>const</code>. I kind of lied to you. While that may seem like the obvious
+    correct thing to do, in C++ we should actually use <code>constexpr</code> instead:
+</p>
+
+<pre class="code-block code-block-noheader"><code>void update_position() {
+    constexpr double SPEED {2.0};
+    constexpr double HEIGHT {12.0};
+    position.y += sin(elapsed_time * SPEED) * HEIGHT;
+}
+</code></pre>
+
+<p>
+    However, that is still not perfect. C programmers tell us to use macros in place of constants, but there is a better
+    way to do it without polluting the code with macros:
+</p>
+
+<pre class="code-block code-block-noheader"><code>void update_position() {
+    static constexpr double SPEED {2.0};
+    static constexpr double HEIGHT {12.0};
+    position.y += sin(elapsed_time * SPEED) * HEIGHT;
+}
+</code></pre>
+
+<p>
+    We should almost always use either <code>static constexpr</code> or <code>inline constexpr</code> (in C++17). In the former example, what
+    generally happens is that the literal or <code>constexpr</code> values, which get compiled in the executable as data, are copied at
+    runtime onto the stack and then used as local constant variables, which is not optimal. In the second example,
+    the constants act exactly like macros, as if they were inlined into the expression as literals. Nothing gets copied
+    onto the stack.
+</p>
+
+<p>
+    The general rule is that we want to mark <code>constexpr</code> values with <code>static</code> when they are inside functions, when they are
+    member variables and when they are global in a compilation unit (cpp file). We want to mark <code>constexpr</code> values with
+    <code>inline</code> when they are global in headers. <code>inline constexpr</code> means "compile this constant data once in the binary program,
+    even if it is defined multiple times".
+</p>
+
+<p class="text-green">
+    In C++, always prefer <code>constexpr</code> over <code>const</code> and macros. In C, <code>const</code> and macros are fine.
+</p>
+
+<h3>Function Return Values</h3>
+
+<p>
+    Finally, return values should simply never be marked as <code>const</code>, because it doesn't actually do anything besides
+    sometimes making the compiler generate worse machine code.
+</p>
+
+<pre class="code-block code-block-noheader"><code>// Non-const string
+std::string get_base_file_path();
+</code></pre>
+
+<h3>We're Stuck Using const... for Good</h3>
+
+<p>
+    I mentioned in the beginning, that <code>const</code> doesn't exist in the machine code, but only in C++. That means that
+    <code>const</code> could be optional and we could never use it, if we didn't want to (just like parameters).
+</p>
+
+<p class="text-red">
+    There is a joke saying that you don't ever need to pass arguments to functions, if every variable in your program is
+    a global variable.
+</p>
+
+<p class="text-green">
+    In machine code, <code>const</code> doesn't exist, but <code>static constexpr</code> does, as literal values and other data in the executable.
+</p>
+
+<p>
+    The reason why we should fully embrace <code>const</code> in our C++ programs is that it's too late to get rid of it. If we
+    were to start a new C++ project while trying to never ever use <code>const</code>, we would fail, because everyone else
+    more or less already uses it and it forces us to also use it. Suppose we have a big codebase where we incorrectly
+    don't use <code>const</code> in some places. If we were to mark a parameter reference as <code>const</code>, then it would require some
+    methods to be also marked as <code>const</code> and that will require more references to be marked as <code>const</code> and so on, like
+    a snowball rolling down a hill. The solution is not to avoid <code>const</code>, but to use it correctly all the time! That
+    way we keep the programmers of a big codebase sane.
+</p>
+
+<p>
+    <code>const</code> was invented by some smart programmers to help us, the programmers. We should use it for our own good.
+    With that said, I think those smart programmers that invented <code>const</code> got it wrong too. I personally believe <code>const</code>
+    should have been the default and there should have been a <code>mut</code> keyword to mark a variable mutable instead.
+</p>
+
+<p>
+    Everything that I've said in this article applies to C pointers and local variables as well.
+</p>
+
+<p>
+    Let's write good code!
+</p>
+
+            </div>
+        </div>
+    </main>
+
+    <button class="btn btn-dark btn-floating btn-lg" id="back-to-top" type="button">
+        <i class="fa-solid fa-angle-up"></i>
+    </button>
+
+    <footer>
+<p>Copyright &copy; 2022-2025 Simon Mărăcine</p>
+    </footer>
+</body>
+</html>

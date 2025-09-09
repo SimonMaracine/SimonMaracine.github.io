@@ -95,7 +95,6 @@ def build_index():
         "../index.html",
         [
             make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
-            make_html.Macro("M_BACK_TO_TOP_BUTTON", "../html/back-to-top-button.html", True),
             make_html.Macro("M_COPYRIGHT", "../html/copyright.html", True),
             make_html.Macro("M_PAGE_11", latest_articles_content[0], False),
             make_html.Macro("M_PAGE_12", latest_articles_content[1], False),
@@ -140,7 +139,6 @@ def build_pages_archive():
             f"../pages-archive-{index + 1}.html",
             [
                 make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
-                make_html.Macro("M_BACK_TO_TOP_BUTTON", "../html/back-to-top-button.html", True),
                 make_html.Macro("M_COPYRIGHT", "../html/copyright.html", True),
                 make_html.Macro("M_ARTICLES", "\n".join(articles_in_page_content), False),
                 make_html.Macro("M_PAGINATION", "\n".join(pagination_content), False)
@@ -165,7 +163,6 @@ def build_pages_articles():
             f"../pages/{article}.html",
             [
                 make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
-                make_html.Macro("M_BACK_TO_TOP_BUTTON", "../html/back-to-top-button.html", True),
                 make_html.Macro("M_COPYRIGHT", "../html/copyright.html", True),
                 make_html.Macro("M_TITLE", article_metadata["title"], False),
                 make_html.Macro("M_DATE", f"{stringify_month(date["month"])} {date["day"]}, {date["year"]}", False),
@@ -202,7 +199,6 @@ def build_simon_says_archive():
         f"../simon-says-archive.html",
         [
             make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
-            make_html.Macro("M_BACK_TO_TOP_BUTTON", "../html/back-to-top-button.html", True),
             make_html.Macro("M_COPYRIGHT", "../html/copyright.html", True),
             make_html.Macro("M_ARTICLES", "\n".join(articles_content), False)
         ]
@@ -226,7 +222,6 @@ def build_simon_says_articles():
             f"../simon-says/{article}.html",
             [
                 make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
-                make_html.Macro("M_BACK_TO_TOP_BUTTON", "../html/back-to-top-button.html", True),
                 make_html.Macro("M_COPYRIGHT", "../html/copyright.html", True),
                 make_html.Macro("M_TITLE", article_metadata["title"], False),
                 make_html.Macro("M_DATE", f"{stringify_month(date["month"])} {date["day"]}, {date["year"]}", False),
