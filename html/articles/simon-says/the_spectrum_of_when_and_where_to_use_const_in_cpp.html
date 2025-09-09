@@ -226,7 +226,7 @@ int main() {
 </code></pre>
 
 <p>
-    <code>obj</code> could very well be <code>const</code>, but shouldn't, because it is moved into the function. If <code>obj</code> were const instead, it
+    <code>obj</code> could very well be <code>const</code>, but shouldn't, because it is moved into the function. If <code>obj</code> were <code>const</code> instead, it
     would be copied into the function, which is exactly what we don't want. So, don't mark objects that are going to be
     moved as <code>const</code>!
 </p>
@@ -251,7 +251,7 @@ SomeObject some_function(const unsigned char* some_variable1, int some_variable2
 <h3>Member Variables</h3>
 
 <p>
-    We are approaching the other end of the spectrum of when to use <code>const</code>. C++, as oppoosed to C, allows us to mark
+    We are approaching the other end of the spectrum of when to use <code>const</code>. C++, as opposed to C, allows us to mark
     individual struct member variables as <code>const</code>. While it sounds like a good idea, as often times we want to calculate
     something and then store it in a <code>const</code> member variable, it complicates things. First, <code>const</code> member variables must
     be initialized in the constructor's member initializer list. Second, having even a single <code>const</code> member variable
