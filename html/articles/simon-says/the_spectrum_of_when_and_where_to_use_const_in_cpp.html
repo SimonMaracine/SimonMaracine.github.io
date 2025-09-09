@@ -90,7 +90,7 @@ void reset_position(Object& object) {
 </code></pre>
 
 <p>
-    Without reading the function body, I immediately know that whatever I pass to data, it might get modified. If, however,
+    Without reading the function body, I immediately know that whatever I pass to <code>data</code>, it might get modified. If, however,
     the parameter were <code>const</code> instead, then I could stay in peace that my data is not going to be modified. It is like
     a promise.
 </p>
@@ -99,8 +99,8 @@ void reset_position(Object& object) {
 </code></pre>
 
 <p>
-    This is incredibly important for good APIs. <code>const</code> for references is not just aesthetics, if the intent is to not
-    modify the value! We might still find old C APIs that do not respect const correctness. We might need to pass
+    This is incredibly important for good APIs. <code>const</code> for references is not just aesthetics! We might still
+    find old C APIs that do not respect const correctness. We might need to pass
     a constant value to a function that does not modify the value, but it incorrectly receives it as a mutable reference:
 </p>
 
@@ -235,7 +235,7 @@ int main() {
 
 <p>
     Function parameters are a special case of local variables, the difference being that they are usually not allocated
-    on the runtime stack, but are copied into registers. They can be <code>const</code> just as well. I personally don't do that, just
+    onto the runtime stack, but are copied into registers. They can be <code>const</code> just as well. I personally don't do that, just
     because it makes function declarations and definitions way too long:
 </p>
 
@@ -245,7 +245,7 @@ SomeObject some_function(const unsigned char* some_variable1, int some_variable2
 </code></pre>
 
 <p>
-    Notice how <code>some_variable1</code> is not actually <code>const</code>. The referent is thought to be <code>const</code>, but the pointer variable is not!
+    Notice how <code>some_variable1</code> is not actually <code>const</code>. The referent is thought to be <code>const</code>, but the pointer parameter is not!
 </p>
 
 <h3>Member Variables</h3>
@@ -256,7 +256,7 @@ SomeObject some_function(const unsigned char* some_variable1, int some_variable2
     something and then store it in a <code>const</code> member variable, it complicates things. First, <code>const</code> member variables must
     be initialized in the constructor's member initializer list. Second, having even a single <code>const</code> member variable
     makes our object non-copyable and non-movable, which might not be what we want. If, however, we have an object that
-    already is non-copyable and non-movable, or that is the intent anyway, then we can benefit from <code>const</code> member
+    already is non-copyable and non-movable, or that is the intention anyway, then we can benefit from <code>const</code> member
     variables:
 </p>
 
@@ -325,8 +325,8 @@ void do_something(Object&& object);
 </p>
 
 <p>
-    The general rule is that we want to mark <code>constexpr</code> values with <code>static</code> when they are inside functions, when they are
-    member variables and when they are global in a compilation unit (cpp file). We want to mark <code>constexpr</code> values with
+    The general rule is that we want to mark <code>constexpr</code> variables with <code>static</code> when they are inside functions, when they are
+    member variables and when they are global in a compilation unit (cpp file). We want to mark <code>constexpr</code> variables with
     <code>inline</code> when they are global in headers. <code>inline constexpr</code> means "compile this constant data once in the binary program,
     even if it is defined multiple times".
 </p>
@@ -359,7 +359,7 @@ std::string get_base_file_path();
 </p>
 
 <p class="text-green">
-    In machine code, <code>const</code> doesn't exist, but <code>static constexpr</code> does, as literal values and other data in the executable.
+    In machine code, <code>const</code> doesn't exist, but <code>constexpr</code> does, as literal values and other data in the executable.
 </p>
 
 <p>
