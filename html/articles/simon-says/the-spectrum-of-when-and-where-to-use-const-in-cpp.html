@@ -183,12 +183,17 @@ struct Object {
 
 <pre class="code-block code-block-noheader"><code>std::string get_name();
 Object create_object(const std::string& description);
+void do_something_with_object(const Object& object);
 
 int main() {
     // Long line of code
     const std::string obj_description {"Object(" + get_name() + ") is a class used to do this thing and..."};
 
-    const Object obj {create_object(obj_name)};
+    const Object obj {create_object(obj_description)};
+
+    do_something_with_object(obj);
+
+    // More code here...
 }
 </code></pre>
 
