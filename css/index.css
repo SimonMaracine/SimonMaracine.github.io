@@ -46,8 +46,6 @@ p {
     margin-bottom: 3.5rem;
 }
 
-/* First */
-
 #first-section {
     overflow: auto;
     background-image: url("/images/binary.jpg");
@@ -95,10 +93,6 @@ p {
     100% { opacity: 1.0; }
 }
 
-/* Question */
-
-/* Projects */
-
 .carousel-inner {
     min-height: 270px;
     display: flex;
@@ -118,8 +112,6 @@ p {
     font-weight: bold;
 }
 
-/* Nine Morris 3D */
-
 #nine-morris-3d-section p {
     max-width: 350px;
     margin: 0 auto 4.5rem auto;
@@ -131,8 +123,6 @@ p {
     margin-bottom: 1.5rem;
     border-radius: 6px;
 }
-
-/* Pages */
 
 #pages-section .container {
     text-align: left;
@@ -168,8 +158,6 @@ p {
     font-size: 1.6rem;
 }
 
-/* About */
-
 @media (min-width: 992px) {
     #about-section {
         padding-left: 15%;
@@ -197,8 +185,6 @@ p {
 .explanation {
     font-size: 0.9rem;
 }
-
-/* Contact */
 
 #contact-section p {
     font-size: 1.1rem;
