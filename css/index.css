@@ -9,7 +9,7 @@ section {
 }
 
 p {
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     color: #626262;
 }
 
@@ -186,6 +186,6 @@ p {
     font-size: 0.9rem;
 }
 
-#contact-section p {
+/* #contact-section p {
     font-size: 1.1rem;
-}
+} */

@@ -57,6 +57,15 @@ main .container {
     line-height: 2rem;
 }
 
+.view-all-articles {
+    text-align: center;
+}
+
+.view-all-articles a {
+    font-size: 1.6rem;
+    color: #626262;
+}
+
 h3, h4, h5 {
     margin: 2rem 0 1rem 0;
     color: #404040;
