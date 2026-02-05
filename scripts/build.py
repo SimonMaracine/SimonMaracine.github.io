@@ -168,7 +168,7 @@ def build_pages_articles():
                 make_html.Macro("M_DATE", f"{stringify_month(date["month"])} {date["day"]}, {date["year"]}", False),
                 make_html.Macro("M_KEYWORDS", ", ".join(keywords), False),
                 make_html.Macro("M_LAST_MODIFIED", f"{stringify_month(last_modified["month"])} {last_modified["day"]}, {last_modified["year"]}", False),
-                make_html.Macro("M_CONTENTS", f"../html/articles/pages/{article}.html", True)
+                make_html.Macro("M_CONTENTS", f"../html/pages/{article}.html", True)
             ]
         )
 
@@ -227,7 +227,7 @@ def build_simon_says_articles():
                 make_html.Macro("M_DATE", f"{stringify_month(date["month"])} {date["day"]}, {date["year"]}", False),
                 make_html.Macro("M_TOPICS", ", ".join(topics), False),
                 make_html.Macro("M_LAST_MODIFIED", f"{stringify_month(last_modified["month"])} {last_modified["day"]}, {last_modified["year"]}", False),
-                make_html.Macro("M_CONTENTS", f"../html/articles/simon-says/{article}.html", True)
+                make_html.Macro("M_CONTENTS", f"../html/simon-says/{article}.html", True)
             ]
         )
 
