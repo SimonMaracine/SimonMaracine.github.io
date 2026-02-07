@@ -1,7 +1,6 @@
 https://simonmaracine.github.io/pages-archive-1.html
 https://simonmaracine.github.io/pages-archive-2.html
 https://simonmaracine.github.io/simon-says-archive.html
-
 https://simonmaracine.github.io/pages/amintirile-suvenirurile-mele.html
 https://simonmaracine.github.io/pages/concert.html
 https://simonmaracine.github.io/pages/cugetare.html
@@ -21,7 +20,6 @@ https://simonmaracine.github.io/pages/speranta.html
 https://simonmaracine.github.io/pages/vantul-rece.html
 https://simonmaracine.github.io/pages/vindecare.html
 https://simonmaracine.github.io/pages/visul.html
-
 https://simonmaracine.github.io/simon-says/generative-ai-a-big-regression-for-the-humanity.html
 https://simonmaracine.github.io/simon-says/how-to-include-header-files-in-cpp.html
 https://simonmaracine.github.io/simon-says/the-spectrum-of-when-and-where-to-use-const-in-cpp.html
