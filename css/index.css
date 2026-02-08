@@ -9,7 +9,7 @@ section {
 }
 
 p {
-    font-size: 1.2rem;
+    font-size: calc(1.1rem + 0.2vw);
     color: #626262;
 }
 
@@ -103,12 +103,8 @@ p {
     padding: 0 15%;
 }
 
-.carousel-item p {
-    font-size: calc(1.1rem + 0.2vw);
-}
-
 .carousel-item .project-title {
-    font-size: 1.6rem;
+    font-size: calc(1.5rem + 0.2vw);
     font-weight: bold;
 }
 
@@ -136,12 +132,8 @@ p {
     box-shadow: 0 0 30px #bebebe;
 }
 
-.pages-article p {
-    font-size: 1.2rem;
-}
-
 .pages-article .page-title {
-    font-size: 1.6rem;
+    font-size: calc(1.5rem + 0.2vw);
     font-weight: bold;
 }
 
@@ -185,7 +177,3 @@ p {
 .explanation {
     font-size: 0.9rem;
 }
-
-/* #contact-section p {
-    font-size: 1.1rem;
-} */

@@ -1,3 +1,4 @@
 User-agent: *
 Disallow: /scripts/
 Disallow: /html/
+Sitemap: https://simonmaracine.github.io/sitemap.txt

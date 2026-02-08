@@ -63,7 +63,7 @@ def simon_says_article_template(title: str, date: str, article_name: str) -> str
     return \
 f"""
 <li>
-    <a class="outlined-link" href="/simon-says/{article_name}.html">{title} | {date}</a>
+    <a class="outlined-link" href="/simon-says/{article_name}.html">{title}</a> | {date}
 </li>
 """.strip()
 

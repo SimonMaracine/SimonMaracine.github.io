@@ -4,6 +4,7 @@ body {
 }
 
 p {
+    font-size: calc(1.1rem + 0.2vw);
     color: #626262;
 }
 
@@ -27,12 +28,11 @@ main {
 
 .quote {
     font-family: "Dancing Script", cursive;
-    font-size: calc(1.9rem + 0.9vw);
+    font-size: calc(2.1rem + 0.2vw);
     margin-bottom: 4rem;
 }
 
 .description {
-    font-size: calc(1.02rem + 0.47vw);
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
@@ -49,12 +49,8 @@ main {
     box-shadow: 0 0 30px #bebebe;
 }
 
-.pages-article p {
-    font-size: 1.2rem;
-}
-
 .pages-article .page-title {
-    font-size: 1.6rem;
+    font-size: calc(1.5rem + 0.2vw);
     font-weight: bold;
 }
 
@@ -64,7 +60,7 @@ main {
 }
 
 .read-page a {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
 }
 
 .pagination {
