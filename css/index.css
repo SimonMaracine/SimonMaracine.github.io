@@ -108,12 +108,12 @@ p {
     font-weight: bold;
 }
 
-#nine-morris-3d-section p {
+.big-project p {
     max-width: 350px;
     margin: 0 auto 4.5rem auto;
 }
 
-#nine-morris-3d-section img {
+.big-project img {
     width: 95%;
     max-width: 450px;
     margin-bottom: 1.5rem;

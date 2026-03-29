@@ -232,6 +232,17 @@ def build_simon_says_articles():
         )
 
 
+def build_guitar():
+    make_html.make_html(
+        "../html/guitar.html",
+        f"../guitar.html",
+        [
+            make_html.Macro("M_NAVIGATION_BAR", "../html/navigation-bar.html", True),
+            make_html.Macro("M_COPYRIGHT", "../html/copyright.html", True)
+        ]
+    )
+
+
 def main(args: list[str]) -> int:
     try:
         build_index()
@@ -239,6 +250,7 @@ def main(args: list[str]) -> int:
         build_pages_articles()
         build_simon_says_archive()
         build_simon_says_articles()
+        build_guitar()
     except Exception as err:
         print(f"An error occurred building the pages: {err}", file=sys.stderr)
         return 1
